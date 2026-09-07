@@ -1,0 +1,326 @@
+[
+  {
+    "id": "signature-solar",
+    "baseUrl": "https://signaturesolar.com",
+    "ucpVersion": "2026-04-08",
+    "catalogEndpoint": null,
+    "status": "catalog_not_advertised",
+    "reason": "UCP discovery is available but does not advertise both catalog search and an MCP endpoint.",
+    "checkedAt": "2026-09-07T21:08:13.649Z"
+  },
+  {
+    "id": "current-connected",
+    "baseUrl": "https://www.currentconnected.com",
+    "ucpVersion": null,
+    "catalogEndpoint": null,
+    "status": "access_denied",
+    "reason": "UCP discovery returned HTTP 403; no catalog request was attempted.",
+    "checkedAt": "2026-09-07T21:08:13.602Z"
+  },
+  {
+    "id": "shopsolar",
+    "baseUrl": "https://shopsolarkits.com",
+    "ucpVersion": "2026-08-25",
+    "catalogEndpoint": "https://shopsolarkits.myshopify.com/api/ucp/mcp",
+    "status": "catalog_discovered",
+    "reason": "Public UCP discovery advertises catalog search and an MCP endpoint. Discovery alone does not verify a successful product query.",
+    "checkedAt": "2026-09-07T21:08:13.670Z"
+  },
+  {
+    "id": "rich-solar",
+    "baseUrl": "https://richsolar.com",
+    "ucpVersion": "2026-08-25",
+    "catalogEndpoint": "https://richsolar.myshopify.com/api/ucp/mcp",
+    "status": "catalog_discovered",
+    "reason": "Public UCP discovery advertises catalog search and an MCP endpoint. Discovery alone does not verify a successful product query.",
+    "checkedAt": "2026-09-07T21:08:13.624Z"
+  },
+  {
+    "id": "watts247",
+    "baseUrl": "https://watts247.com",
+    "ucpVersion": null,
+    "catalogEndpoint": null,
+    "status": "discovery_not_found",
+    "reason": "UCP discovery returned HTTP 404; no catalog request was attempted.",
+    "checkedAt": "2026-09-07T21:08:14.067Z"
+  },
+  {
+    "id": "inverters-r-us",
+    "baseUrl": "https://invertersrus.com",
+    "ucpVersion": null,
+    "catalogEndpoint": null,
+    "status": "discovery_not_found",
+    "reason": "UCP discovery returned HTTP 404; no catalog request was attempted.",
+    "checkedAt": "2026-09-07T21:08:20.534Z"
+  },
+  {
+    "id": "portable-sun",
+    "baseUrl": "https://portablesun.com",
+    "ucpVersion": null,
+    "catalogEndpoint": null,
+    "status": "discovery_not_found",
+    "reason": "UCP discovery returned HTTP 404; no catalog request was attempted.",
+    "checkedAt": "2026-09-07T21:08:13.771Z"
+  },
+  {
+    "id": "hqst",
+    "baseUrl": "https://hqsolarpower.com",
+    "ucpVersion": "2026-08-25",
+    "catalogEndpoint": "https://hqst-test.myshopify.com/api/ucp/mcp",
+    "status": "catalog_discovered",
+    "reason": "Public UCP discovery advertises catalog search and an MCP endpoint. Discovery alone does not verify a successful product query.",
+    "checkedAt": "2026-09-07T21:08:13.860Z"
+  },
+  {
+    "id": "pecron",
+    "baseUrl": "https://www.pecron.com",
+    "ucpVersion": "2026-08-25",
+    "catalogEndpoint": "https://pecron.myshopify.com/api/ucp/mcp",
+    "status": "catalog_discovered",
+    "reason": "Public UCP discovery advertises catalog search and an MCP endpoint. Discovery alone does not verify a successful product query.",
+    "checkedAt": "2026-09-07T21:08:14.111Z"
+  },
+  {
+    "id": "oupes",
+    "baseUrl": "https://oupes.com",
+    "ucpVersion": "2026-08-25",
+    "catalogEndpoint": "https://oupes.myshopify.com/api/ucp/mcp",
+    "status": "catalog_discovered",
+    "reason": "Public UCP discovery advertises catalog search and an MCP endpoint. Discovery alone does not verify a successful product query.",
+    "checkedAt": "2026-09-07T21:08:13.873Z"
+  },
+  {
+    "id": "ecoflow",
+    "baseUrl": "https://www.ecoflow.com",
+    "ucpVersion": null,
+    "catalogEndpoint": null,
+    "status": "discovery_not_found",
+    "reason": "UCP discovery returned HTTP 404; no catalog request was attempted.",
+    "checkedAt": "2026-09-07T21:08:14.396Z"
+  },
+  {
+    "id": "eco-worthy",
+    "baseUrl": "https://www.eco-worthy.com",
+    "ucpVersion": "2026-08-25",
+    "catalogEndpoint": "https://eco-worthy.myshopify.com/api/ucp/mcp",
+    "status": "catalog_discovered",
+    "reason": "Public UCP discovery advertises catalog search and an MCP endpoint. Discovery alone does not verify a successful product query.",
+    "checkedAt": "2026-09-07T21:08:14.084Z"
+  },
+  {
+    "id": "ruixu",
+    "baseUrl": "https://www.ruixubattery.com",
+    "ucpVersion": "2026-04-08",
+    "catalogEndpoint": "https://www.wixapis.com/ecom/ucp/45b41e4b-9a99-419f-8ffc-0e3c73613bda/mcp",
+    "status": "catalog_discovered",
+    "reason": "Public UCP discovery advertises catalog search and an MCP endpoint. Discovery alone does not verify a successful product query.",
+    "checkedAt": "2026-09-07T21:08:14.174Z"
+  },
+  {
+    "id": "santan-solar",
+    "baseUrl": "https://www.santansolar.com",
+    "ucpVersion": null,
+    "catalogEndpoint": null,
+    "status": "discovery_not_found",
+    "reason": "UCP discovery returned HTTP 404; no catalog request was attempted.",
+    "checkedAt": "2026-09-07T21:08:14.249Z"
+  },
+  {
+    "id": "naz",
+    "baseUrl": "https://www.solar-electric.com",
+    "ucpVersion": null,
+    "catalogEndpoint": null,
+    "status": "discovery_not_found",
+    "reason": "UCP discovery returned HTTP 404; no catalog request was attempted.",
+    "checkedAt": "2026-09-07T21:08:14.248Z"
+  },
+  {
+    "id": "wattcycle",
+    "baseUrl": "https://www.wattcycle.com",
+    "ucpVersion": "2026-08-25",
+    "catalogEndpoint": "https://df85a4.myshopify.com/api/ucp/mcp",
+    "status": "catalog_discovered",
+    "reason": "Public UCP discovery advertises catalog search and an MCP endpoint. Discovery alone does not verify a successful product query.",
+    "checkedAt": "2026-09-07T21:08:14.341Z"
+  },
+  {
+    "id": "litime",
+    "baseUrl": "https://www.litime.com",
+    "ucpVersion": "2026-08-25",
+    "catalogEndpoint": "https://litime-us.myshopify.com/api/ucp/mcp",
+    "status": "catalog_discovered",
+    "reason": "Public UCP discovery advertises catalog search and an MCP endpoint. Discovery alone does not verify a successful product query.",
+    "checkedAt": "2026-09-07T21:08:14.382Z"
+  },
+  {
+    "id": "sungoldpower",
+    "baseUrl": "https://sungoldpower.com",
+    "ucpVersion": "2026-08-25",
+    "catalogEndpoint": "https://sungoldpower.myshopify.com/api/ucp/mcp",
+    "status": "catalog_discovered",
+    "reason": "Public UCP discovery advertises catalog search and an MCP endpoint. Discovery alone does not verify a successful product query.",
+    "checkedAt": "2026-09-07T21:08:14.456Z"
+  },
+  {
+    "id": "anker-solix",
+    "baseUrl": "https://www.anker.com/anker-solix",
+    "ucpVersion": "2026-04-08",
+    "catalogEndpoint": "https://ankerus.myshopify.com/api/ucp/mcp",
+    "status": "catalog_discovered",
+    "reason": "Public UCP discovery advertises catalog search and an MCP endpoint. Discovery alone does not verify a successful product query.",
+    "checkedAt": "2026-09-07T21:08:14.414Z"
+  },
+  {
+    "id": "redodo",
+    "baseUrl": "https://www.redodopower.com",
+    "ucpVersion": "2026-08-25",
+    "catalogEndpoint": "https://redodopower.myshopify.com/api/ucp/mcp",
+    "status": "catalog_discovered",
+    "reason": "Public UCP discovery advertises catalog search and an MCP endpoint. Discovery alone does not verify a successful product query.",
+    "checkedAt": "2026-09-07T21:08:14.591Z"
+  },
+  {
+    "id": "renogy",
+    "baseUrl": "https://www.renogy.com",
+    "ucpVersion": "2026-08-25",
+    "catalogEndpoint": "https://rvi38u-rz.myshopify.com/api/ucp/mcp",
+    "status": "catalog_discovered",
+    "reason": "Public UCP discovery advertises catalog search and an MCP endpoint. Discovery alone does not verify a successful product query.",
+    "checkedAt": "2026-09-07T21:08:14.651Z"
+  },
+  {
+    "id": "yixiang-power",
+    "baseUrl": "https://yixiangpower.com",
+    "ucpVersion": "2026-08-25",
+    "catalogEndpoint": "https://yixiangnewenergy.myshopify.com/api/ucp/mcp",
+    "status": "catalog_discovered",
+    "reason": "Public UCP discovery advertises catalog search and an MCP endpoint. Discovery alone does not verify a successful product query.",
+    "checkedAt": "2026-09-07T21:08:14.590Z"
+  },
+  {
+    "id": "practical-preppers",
+    "baseUrl": "https://practicalpreppers.com",
+    "ucpVersion": null,
+    "catalogEndpoint": null,
+    "status": "discovery_not_found",
+    "reason": "UCP discovery returned HTTP 404; no catalog request was attempted.",
+    "checkedAt": "2026-09-07T21:08:14.638Z"
+  },
+  {
+    "id": "best-solar-bundle",
+    "baseUrl": "https://bestsolarbundle.com",
+    "ucpVersion": "2026-08-25",
+    "catalogEndpoint": "https://k1gh0n-ik.myshopify.com/api/ucp/mcp",
+    "status": "catalog_discovered",
+    "reason": "Public UCP discovery advertises catalog search and an MCP endpoint. Discovery alone does not verify a successful product query.",
+    "checkedAt": "2026-09-07T21:08:14.645Z"
+  },
+  {
+    "id": "sok-battery",
+    "baseUrl": "https://www.us.sokbattery.com",
+    "ucpVersion": "2026-04-08",
+    "catalogEndpoint": "https://www.wixapis.com/ecom/ucp/706b3753-4569-4215-8130-51f38e8a4f94/mcp",
+    "status": "catalog_discovered",
+    "reason": "Public UCP discovery advertises catalog search and an MCP endpoint. Discovery alone does not verify a successful product query.",
+    "checkedAt": "2026-09-07T21:08:14.944Z"
+  },
+  {
+    "id": "gosun",
+    "baseUrl": "https://gosun.co",
+    "ucpVersion": "2026-08-25",
+    "catalogEndpoint": "https://patricksherwin.myshopify.com/api/ucp/mcp",
+    "status": "catalog_discovered",
+    "reason": "Public UCP discovery advertises catalog search and an MCP endpoint. Discovery alone does not verify a successful product query.",
+    "checkedAt": "2026-09-07T21:08:14.773Z"
+  },
+  {
+    "id": "orient-power",
+    "baseUrl": "https://www.orientpower.com",
+    "ucpVersion": null,
+    "catalogEndpoint": null,
+    "status": "discovery_fetch_failed",
+    "reason": "UCP discovery fetch failed (UNABLE_TO_VERIFY_LEAF_SIGNATURE); no catalog request was attempted.",
+    "checkedAt": "2026-09-07T21:08:14.998Z"
+  },
+  {
+    "id": "bigbattery",
+    "baseUrl": "https://bigbattery.com",
+    "ucpVersion": null,
+    "catalogEndpoint": null,
+    "status": "discovery_not_found",
+    "reason": "UCP discovery returned HTTP 404; no catalog request was attempted.",
+    "checkedAt": "2026-09-07T21:08:16.373Z"
+  },
+  {
+    "id": "lion-energy",
+    "baseUrl": "https://lionenergy.com",
+    "ucpVersion": "2026-08-25",
+    "catalogEndpoint": "https://lion-energy-staging.myshopify.com/api/ucp/mcp",
+    "status": "catalog_discovered",
+    "reason": "Public UCP discovery advertises catalog search and an MCP endpoint. Discovery alone does not verify a successful product query.",
+    "checkedAt": "2026-09-07T21:08:15.005Z"
+  },
+  {
+    "id": "callsun",
+    "baseUrl": "https://callsun.com",
+    "ucpVersion": null,
+    "catalogEndpoint": null,
+    "status": "not_ucp_document",
+    "reason": "Discovery returned HTTP 200 but no valid UCP document.",
+    "checkedAt": "2026-09-07T21:08:14.896Z"
+  },
+  {
+    "id": "dji",
+    "baseUrl": "https://www.dji.com/power-series",
+    "ucpVersion": null,
+    "catalogEndpoint": null,
+    "status": "discovery_not_found",
+    "reason": "UCP discovery returned HTTP 404; no catalog request was attempted.",
+    "checkedAt": "2026-09-07T21:08:15.251Z"
+  },
+  {
+    "id": "vatrer",
+    "baseUrl": "https://www.vatrerpower.com",
+    "ucpVersion": "2026-08-25",
+    "catalogEndpoint": "https://vatrer.myshopify.com/api/ucp/mcp",
+    "status": "catalog_discovered",
+    "reason": "Public UCP discovery advertises catalog search and an MCP endpoint. Discovery alone does not verify a successful product query.",
+    "checkedAt": "2026-09-07T21:08:15.213Z"
+  },
+  {
+    "id": "powmr",
+    "baseUrl": "https://powmr.com",
+    "ucpVersion": "2026-08-25",
+    "catalogEndpoint": "https://bc0e9e.myshopify.com/api/ucp/mcp",
+    "status": "catalog_discovered",
+    "reason": "Public UCP discovery advertises catalog search and an MCP endpoint. Discovery alone does not verify a successful product query.",
+    "checkedAt": "2026-09-07T21:08:15.259Z"
+  },
+  {
+    "id": "goal-zero",
+    "baseUrl": "https://www.goalzero.com",
+    "ucpVersion": "2026-08-25",
+    "catalogEndpoint": "https://goalzerous.myshopify.com/api/ucp/mcp",
+    "status": "catalog_discovered",
+    "reason": "Public UCP discovery advertises catalog search and an MCP endpoint. Discovery alone does not verify a successful product query.",
+    "checkedAt": "2026-09-07T21:08:15.222Z"
+  },
+  {
+    "id": "docan-energy",
+    "baseUrl": "https://www.docanpower.com",
+    "ucpVersion": null,
+    "catalogEndpoint": null,
+    "status": "discovery_not_found",
+    "reason": "UCP discovery returned HTTP 404; no catalog request was attempted.",
+    "checkedAt": "2026-09-07T21:08:15.673Z"
+  },
+  {
+    "id": "hysolis",
+    "baseUrl": "https://hysolis.com",
+    "ucpVersion": "2026-08-25",
+    "catalogEndpoint": "https://hysolis-2859.myshopify.com/api/ucp/mcp",
+    "status": "catalog_discovered",
+    "reason": "Public UCP discovery advertises catalog search and an MCP endpoint. Discovery alone does not verify a successful product query.",
+    "checkedAt": "2026-09-07T21:08:15.441Z"
+  }
+]
