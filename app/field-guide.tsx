@@ -124,13 +124,14 @@ export default function FieldGuide() {
     [savedOnly, setSavedOnly] = useState(false);
   const lesson = lessons.find((l) => l.id === active);
   const index = lessons.findIndex((l) => l.id === active);
-  function persist(next: Progress) {
+  function persist(next: Progress, bookmarkChange = false) {
     setProgress(next);
     try {
       const latest = readProgress();
       next = {
         ...next,
         completed: [...new Set([...latest.completed, ...next.completed])],
+        bookmarks: bookmarkChange ? next.bookmarks : latest.bookmarks,
       };
       localStorage.setItem("solar4u-learning-v2", JSON.stringify(next));
       setProgress(next);
@@ -222,12 +223,15 @@ export default function FieldGuide() {
     try {
       latest = readProgress();
     } catch {}
-    persist({
-      ...latest,
-      bookmarks: latest.bookmarks.includes(id)
-        ? latest.bookmarks.filter((x) => x !== id)
-        : [...latest.bookmarks, id],
-    });
+    persist(
+      {
+        ...latest,
+        bookmarks: latest.bookmarks.includes(id)
+          ? latest.bookmarks.filter((x) => x !== id)
+          : [...latest.bookmarks, id],
+      },
+      true,
+    );
   }
   const filtered = lessons.filter(
     (l) =>
