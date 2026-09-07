@@ -56,7 +56,10 @@
       "Identify whether backup is required.",
       "Sketch the main energy paths and mark unknowns."
     ],
-    "nextTool": { "label": "Start your system plan", "href": "/planner" },
+    "nextTool": {
+      "label": "Start your system plan",
+      "href": "/planner"
+    },
     "sources": [
       {
         "label": "DOE: Photovoltaics",
@@ -276,7 +279,10 @@
       "Inspect the lowest-production months.",
       "Save base and cautious scenarios with their assumptions."
     ],
-    "nextTool": { "label": "Model solar production", "href": "/calculators" },
+    "nextTool": {
+      "label": "Model solar production",
+      "href": "/calculators"
+    },
     "sources": [
       {
         "label": "NLR: PVWatts V8 model inputs and outputs",
@@ -346,7 +352,10 @@
       "Record proposed series and parallel counts.",
       "Flag missing voltage, current, or connector compatibility evidence."
     ],
-    "nextTool": { "label": "Check array calculations", "href": "/calculators" },
+    "nextTool": {
+      "label": "Check array calculations",
+      "href": "/calculators?tool=array"
+    },
     "sources": [
       {
         "label": "Victron: DC wiring and solar array considerations",
@@ -422,7 +431,7 @@
     ],
     "nextTool": {
       "label": "Estimate battery capacity",
-      "href": "/calculators"
+      "href": "/calculators?tool=battery"
     },
     "sources": [
       {
@@ -497,7 +506,10 @@
       "Mark access routes and obstructions in the layout.",
       "Collect the module and racking manuals for review."
     ],
-    "nextTool": { "label": "Explore a roof layout", "href": "/planner" },
+    "nextTool": {
+      "label": "Explore a roof layout",
+      "href": "/planner"
+    },
     "sources": [
       {
         "label": "IronRidge: Pitched-roof components and documentation",
@@ -571,7 +583,10 @@
       "Save compact and spacious placement options.",
       "Record the shadow assumptions and foundation questions."
     ],
-    "nextTool": { "label": "Plan a ground-mounted array", "href": "/planner" },
+    "nextTool": {
+      "label": "Plan a ground-mounted array",
+      "href": "/planner"
+    },
     "sources": [
       {
         "label": "IronRidge: Ground mount systems and foundation options",
@@ -647,7 +662,7 @@
     ],
     "nextTool": {
       "label": "Compare equipment for your system",
-      "href": "/products"
+      "href": "/calculators?tool=controller"
     },
     "sources": [
       {
@@ -797,7 +812,7 @@
     ],
     "nextTool": {
       "label": "Explore a savings scenario",
-      "href": "/calculators"
+      "href": "/calculators?tool=payback"
     },
     "sources": [
       {
@@ -872,7 +887,10 @@
       "Confirm owner monitoring access and service contacts.",
       "Save a dated baseline and update records after approved changes."
     ],
-    "nextTool": { "label": "Review your project record", "href": "/planner" },
+    "nextTool": {
+      "label": "Review your project record",
+      "href": "/planner"
+    },
     "sources": [
       {
         "label": "DOE: Permitting and inspection for rooftop solar",

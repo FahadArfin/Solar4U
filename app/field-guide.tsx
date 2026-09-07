@@ -17,6 +17,23 @@ import { objectInput, useAgentTools } from "./webmcp";
 type Progress = { completed: string[]; bookmarks: string[]; last: string };
 const empty: Progress = { completed: [], bookmarks: [], last: "" };
 const validIds = new Set(lessons.map((l) => l.id));
+function readProgress(): Progress {
+  const p = JSON.parse(localStorage.getItem("solar4u-learning-v2") ?? "null");
+  if (!p || !Array.isArray(p.completed) || !Array.isArray(p.bookmarks))
+    return empty;
+  const ids = (v: unknown[]) => [
+    ...new Set(
+      v.filter(
+        (id): id is string => typeof id === "string" && validIds.has(id),
+      ),
+    ),
+  ];
+  return {
+    completed: ids(p.completed),
+    bookmarks: ids(p.bookmarks),
+    last: validIds.has(p.last) ? p.last : "",
+  };
+}
 function NumbersLab({ id }: { id: string }) {
   const [a, setA] = useState(
       id === "ground-mounting" ? 30 : id === "battery-backup" ? 500 : 400,
@@ -110,7 +127,13 @@ export default function FieldGuide() {
   function persist(next: Progress) {
     setProgress(next);
     try {
+      const latest = readProgress();
+      next = {
+        ...next,
+        completed: [...new Set([...latest.completed, ...next.completed])],
+      };
       localStorage.setItem("solar4u-learning-v2", JSON.stringify(next));
+      setProgress(next);
       setSaveStatus("Progress saved on this device");
     } catch {
       setSaveStatus("Progress is temporary: browser storage is unavailable");
@@ -122,10 +145,25 @@ export default function FieldGuide() {
     setAnswer(null);
     setFeedback("");
     persist({ ...progress, last: id });
-    history.replaceState(null, "", `#${id}`);
+    history.pushState(null, "", `#${id}`);
     window.scrollTo({ top: 0, behavior: "instant" });
   }
   useEffect(() => {
+    const sync = () => {
+      const id = location.hash.slice(1);
+      setActive(validIds.has(id) ? id : "");
+      setAnswer(null);
+      setFeedback("");
+    };
+    const storage = (event: StorageEvent) => {
+      if (event.key === "solar4u-learning-v2")
+        try {
+          setProgress(readProgress());
+        } catch {}
+    };
+    window.addEventListener("popstate", sync);
+    window.addEventListener("hashchange", sync);
+    window.addEventListener("storage", storage);
     const timer = setTimeout(() => {
       try {
         const p = JSON.parse(
@@ -151,8 +189,16 @@ export default function FieldGuide() {
       const hash = location.hash.slice(1);
       if (validIds.has(hash)) setActive(hash);
     }, 0);
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("popstate", sync);
+      window.removeEventListener("hashchange", sync);
+      window.removeEventListener("storage", storage);
+    };
   }, []);
+  useEffect(() => {
+    if (active) document.getElementById("lesson-heading")?.focus();
+  }, [active]);
   function check(choice = answer) {
     if (!lesson || choice === null) return;
     setAnswer(choice);
@@ -172,11 +218,15 @@ export default function FieldGuide() {
     };
   }
   function bookmark(id: string) {
+    let latest = progress;
+    try {
+      latest = readProgress();
+    } catch {}
     persist({
-      ...progress,
-      bookmarks: progress.bookmarks.includes(id)
-        ? progress.bookmarks.filter((x) => x !== id)
-        : [...progress.bookmarks, id],
+      ...latest,
+      bookmarks: latest.bookmarks.includes(id)
+        ? latest.bookmarks.filter((x) => x !== id)
+        : [...latest.bookmarks, id],
     });
   }
   const filtered = lessons.filter(
@@ -316,7 +366,9 @@ export default function FieldGuide() {
           </div>
           <div className="s4-learning-library">
             <div className="s4-title-row">
-              <h2>Make your way through.</h2>
+              <h2 id="learning-library-heading" tabIndex={-1}>
+                Make your way through.
+              </h2>
               <span className="s4-fine">
                 About 2 hours · Go at your own pace
               </span>
@@ -413,7 +465,14 @@ export default function FieldGuide() {
               className="s4-text-link"
               onClick={() => {
                 setActive("");
-                history.replaceState(null, "", location.pathname);
+                history.pushState(null, "", location.pathname);
+                setTimeout(
+                  () =>
+                    document
+                      .getElementById("learning-library-heading")
+                      ?.focus(),
+                  0,
+                );
               }}
             >
               <ArrowLeft size={15} /> All lessons
@@ -463,7 +522,9 @@ export default function FieldGuide() {
                 LESSON {lesson.number} / {lesson.category} · {lesson.minutes}{" "}
                 MIN
               </div>
-              <h1>{lesson.title}</h1>
+              <h1 id="lesson-heading" tabIndex={-1}>
+                {lesson.title}
+              </h1>
               <p className="s4-article-intro">{lesson.summary}</p>
               <div className="s4-outcome">
                 <BookOpen size={19} />
@@ -555,7 +616,7 @@ export default function FieldGuide() {
                 {feedback && (
                   <p role="status" className="s4-feedback">
                     {feedback}
-                    {progress.completed.includes(lesson.id) && (
+                    {answer === lesson.quiz.answer && (
                       <strong> Lesson complete.</strong>
                     )}
                   </p>
