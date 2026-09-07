@@ -1,0 +1,638 @@
+.s4-calculator {
+  max-width: 1660px;
+  margin: auto;
+  padding: 34px 4% 70px;
+  color: #2c4937;
+}
+.s4-calc-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+.s4-calc-heading h1 {
+  font-size: clamp(30px, 3.8vw, 45px);
+  line-height: 1.15;
+  letter-spacing: -0.04em;
+  font-weight: 450;
+  margin: 14px 0;
+}
+.s4-calc-heading h1 em {
+  font-family: Georgia, serif;
+  font-weight: 400;
+  color: #758b5d;
+}
+.s4-calc-heading p {
+  font-size: 16px;
+  color: #66785c;
+  margin: 10px 0 0;
+}
+.s4-calc-heading > a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  white-space: nowrap;
+  margin-bottom: 5px;
+}
+.s4-calc-layout {
+  display: grid;
+  grid-template-columns: 195px minmax(0, 1fr);
+  gap: 28px;
+}
+.s4-calc-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-self: start;
+  position: sticky;
+  top: 20px;
+}
+.s4-calculator button {
+  cursor: pointer;
+  border: 1px solid #c5d1b9;
+  background: #eef2e5;
+  color: #2b4935;
+  padding: 10px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  justify-content: center;
+}
+.s4-calculator button:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+.s4-calc-nav button {
+  border-color: transparent;
+  justify-content: flex-start;
+  text-align: left;
+  min-height: 47px;
+  background: transparent;
+  line-height: 1.5;
+}
+.s4-calc-nav button span {
+  font-size: 12px;
+  color: #8c9a7e;
+  margin-right: 3px;
+}
+.s4-calc-nav button[aria-current="page"] {
+  background: #e2ebd4;
+  border-color: #cad8b9;
+  font-weight: 550;
+}
+.s4-calc-work {
+  min-width: 0;
+}
+.s4-calc-title {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 22px;
+}
+.s4-calc-title h2 {
+  font-size: 27px;
+  font-weight: 450;
+  letter-spacing: -0.03em;
+  margin: 0 0 8px;
+}
+.s4-calc-title p {
+  font-size: 15px;
+  color: #697a5f;
+  line-height: 1.7;
+  margin: 0;
+  max-width: 570px;
+}
+.s4-calc-title > button {
+  flex-shrink: 0;
+}
+.s4-calc-columns {
+  display: grid;
+  grid-template-columns: minmax(250px, 0.9fr) minmax(300px, 1.15fr);
+  gap: 25px;
+  align-items: start;
+}
+.s4-calc-inputs {
+  padding: 24px;
+  background: #fffef7;
+  border: 1px solid #d5deca;
+  border-radius: 10px;
+}
+.s4-calculator h3 {
+  font-size: 17px;
+  font-weight: 550;
+  margin: 0 0 22px;
+}
+.s4-calc-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 15px;
+}
+.s4-calc-field {
+  font-size: 14px;
+  line-height: 1.6;
+  min-width: 0;
+  display: block;
+}
+.s4-calc-field > span {
+  display: block;
+  margin-bottom: 7px;
+}
+.s4-calc-field > div {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #f5f6ec;
+  border: 1px solid #c9d3bd;
+  border-radius: 6px;
+  padding: 0 9px;
+  min-height: 45px;
+}
+.s4-calc-field input,
+.s4-calc-field select {
+  width: 100%;
+  min-width: 0;
+  font-size: 16px;
+  color: #284631;
+  border: 0;
+  background: transparent;
+  padding: 10px 0;
+  outline-offset: 4px;
+}
+.s4-calc-field input[aria-invalid="true"] {
+  outline: 2px solid #ad7d48;
+}
+.s4-calc-field small {
+  font-size: 12px;
+  white-space: nowrap;
+  color: #7a866d;
+}
+.s4-calc-field em {
+  display: block;
+  font-size: 12px;
+  color: #8f5838;
+  font-style: normal;
+  margin-top: 7px;
+}
+.s4-calc-field > select {
+  border: 1px solid #c9d3bd;
+  border-radius: 6px;
+  padding: 10px;
+  background: #f5f6ec;
+  margin-bottom: 22px;
+}
+.s4-calc-output {
+  min-width: 0;
+}
+.s4-calc-section-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+.s4-calc-section-title h3 {
+  margin: 0;
+}
+.s4-calc-stats {
+  border: 1px solid #ccd9ba;
+  background: #e8eeda;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.s4-calc-stats > div {
+  padding: 19px 21px;
+  border-bottom: 1px solid #d1dcc1;
+  display: flex;
+  gap: 14px;
+  justify-content: space-between;
+  align-items: center;
+}
+.s4-calc-stats > div:last-child {
+  border-bottom: 0;
+}
+.s4-calc-stats small {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #627753;
+  max-width: 60%;
+}
+.s4-calc-stats strong {
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.3;
+  text-align: right;
+  letter-spacing: -0.02em;
+}
+.s4-calc-stats em {
+  display: block;
+  font-size: 13px;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: 0;
+  color: #6b7f5c;
+  margin-top: 2px;
+}
+.s4-calc-stats .warning {
+  background: #f2ebca;
+}
+.s4-calc-notice {
+  font-size: 14px;
+  line-height: 1.7;
+  padding: 15px 17px;
+  background: #f0f3e7;
+  border: 1px solid #d5dec8;
+  border-radius: 7px;
+  color: #627554;
+}
+.s4-calc-notice.warning {
+  background: #f5edd1;
+  color: #7b6735;
+  border-color: #dccc9b;
+}
+.s4-calc-error {
+  font-size: 14px;
+  line-height: 1.6;
+  padding: 15px;
+  border: 1px solid #d5b184;
+  background: #f6edda;
+  border-radius: 7px;
+  color: #82512e;
+}
+.s4-calculator .s4-calc-small {
+  font-size: 13px;
+  color: #77836c;
+  line-height: 1.7;
+  margin: 14px 0;
+}
+.s4-locality-search {
+  margin-bottom: 5px;
+}
+.s4-locality-search label {
+  display: block;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+.s4-locality-search input {
+  display: block;
+  width: 100%;
+  font-size: 15px;
+  color: #294b35;
+  border: 1px solid #c9d3bd;
+  background: #f5f6ec;
+  border-radius: 6px;
+  padding: 12px;
+  margin-top: 8px;
+}
+.s4-locality-search button {
+  width: 100%;
+}
+.s4-calculator .s4-locality-result {
+  display: block;
+  text-align: left;
+  width: 100%;
+  font-size: 13px;
+  margin: 6px 0;
+}
+.s4-calc-switch {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  line-height: 1.5;
+  font-size: 14px;
+  padding: 14px 0 22px;
+}
+.s4-calc-switch input {
+  accent-color: #63804b;
+  width: 17px;
+  height: 17px;
+}
+.s4-calculator .s4-climate-button {
+  background: #dbe6c9;
+  border-color: #b3c49c;
+  width: 100%;
+  min-height: 46px;
+  justify-content: space-between;
+  margin-top: 7px;
+}
+.s4-monthly-chart {
+  height: 196px;
+  display: flex;
+  gap: 5px;
+  align-items: flex-end;
+  padding: 10px 0 0;
+  margin-top: 24px;
+  overflow-x: auto;
+}
+.s4-monthly-chart > div {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  min-width: 21px;
+  height: 100%;
+}
+.s4-monthly-chart span {
+  font-size: 10px;
+  color: #7b886c;
+  margin-bottom: 5px;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+.s4-monthly-chart i {
+  display: block;
+  width: 100%;
+  max-width: 30px;
+  background: #91ad70;
+  border-radius: 3px 3px 0 0;
+  min-height: 1px;
+}
+.s4-monthly-chart small {
+  font-size: 10px;
+  color: #697d59;
+  margin-top: 7px;
+}
+.s4-calculator .s4-calc-transfer {
+  background: transparent;
+  margin-top: 20px;
+  font-size: 13px;
+  width: 100%;
+  border-color: #cbd7bd;
+}
+.s4-calc-method {
+  border-top: 1px solid #d3dcc7;
+  padding-top: 19px;
+  margin-top: 28px;
+}
+.s4-calculator summary {
+  font-size: 14px;
+  cursor: pointer;
+  line-height: 1.7;
+  font-weight: 500;
+}
+.s4-calc-method p {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #65785a;
+}
+.s4-calc-method .s4-calc-formula {
+  padding: 14px;
+  background: #f3edce;
+  border-radius: 6px;
+  color: #736337;
+  font-family: Georgia, serif;
+  font-size: 16px;
+}
+.s4-calc-method a {
+  font-size: 13px;
+  text-decoration: underline;
+}
+.s4-calc-method small {
+  display: block;
+  font-size: 12px;
+  color: #859177;
+  margin-top: 12px;
+}
+.s4-array-groups {
+  border-top: 1px solid #d4ddc9;
+  margin-top: 26px;
+  padding-top: 23px;
+}
+.s4-array-groups details {
+  border: 1px solid #d5decb;
+  background: #f9faef;
+  border-radius: 7px;
+  padding: 14px;
+  margin-top: 12px;
+}
+.s4-array-groups .s4-calc-fields {
+  margin: 20px 0;
+}
+.s4-array-groups > div button {
+  padding: 7px;
+  font-size: 12px;
+}
+.s4-controller-results {
+  margin: 22px 0;
+}
+.s4-controller-results h4 {
+  font-size: 17px;
+  font-weight: 550;
+}
+.s4-controller-results > p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #687c5b;
+}
+.s4-controller-results article {
+  border: 1px solid #ced9c0;
+  border-radius: 7px;
+  background: #fdfef4;
+  padding: 16px;
+  margin: 12px 0;
+}
+.s4-controller-results article > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: space-between;
+}
+.s4-controller-results strong {
+  font-size: 14px;
+  font-weight: 550;
+}
+.s4-controller-results span {
+  font-size: 12px;
+  background: #e5edda;
+  padding: 4px 7px;
+  border-radius: 4px;
+}
+.s4-controller-results .rejected span {
+  background: #f0e8cc;
+  color: #826d3d;
+}
+.s4-controller-results article p {
+  font-size: 13px;
+  line-height: 1.7;
+  color: #697a60;
+  margin: 9px 0;
+}
+.s4-controller-results article a {
+  font-size: 12px;
+  text-decoration: underline;
+}
+.s4-cash-chart {
+  height: 160px;
+  display: flex;
+  gap: 4px;
+  align-items: flex-end;
+  margin: 24px 0;
+}
+.s4-cash-chart > div {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100%;
+}
+.s4-cash-chart i {
+  display: block;
+  width: 100%;
+  background: #89a96d;
+  border-radius: 2px 2px 0 0;
+  min-height: 1px;
+}
+.s4-cash-chart i.negative {
+  background: #c5ae72;
+}
+.s4-cash-chart small {
+  font-size: 11px;
+  min-height: 16px;
+  color: #728465;
+  margin-top: 5px;
+}
+.s4-calculator table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  margin: 15px 0;
+}
+.s4-calculator th,
+.s4-calculator td {
+  padding: 9px;
+  border-bottom: 1px solid #d8dfce;
+  text-align: left;
+}
+.s4-calculator td:last-child,
+.s4-calculator th:last-child {
+  text-align: right;
+}
+@media (max-width: 1320px) {
+  .s4-calc-fields {
+    grid-template-columns: 1fr;
+  }
+  .s4-calc-inputs {
+    padding: 19px;
+  }
+  .s4-calc-layout {
+    grid-template-columns: 170px minmax(0, 1fr);
+    gap: 22px;
+  }
+  .s4-calc-columns {
+    gap: 20px;
+    grid-template-columns: minmax(220px, 0.8fr) minmax(280px, 1fr);
+  }
+  .s4-calc-nav button {
+    font-size: 13px;
+  }
+  .s4-calc-stats strong {
+    font-size: 23px;
+  }
+}
+@media (max-width: 1100px) {
+  .s4-calc-layout {
+    display: block;
+  }
+  .s4-calc-nav {
+    position: static;
+    flex-direction: row;
+    overflow-x: auto;
+    margin-bottom: 26px;
+    padding-bottom: 6px;
+  }
+  .s4-calc-nav button {
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+  .s4-calc-heading > a {
+    display: none;
+  }
+  .s4-calc-columns {
+    grid-template-columns: minmax(260px, 0.9fr) minmax(320px, 1fr);
+  }
+  .s4-calc-fields {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 780px) {
+  .s4-calc-columns {
+    grid-template-columns: minmax(220px, 0.8fr) minmax(250px, 1fr);
+  }
+  .s4-calc-fields {
+    grid-template-columns: 1fr;
+  }
+  .s4-calc-stats > div {
+    padding: 15px;
+    display: block;
+  }
+  .s4-calc-stats small {
+    max-width: none;
+  }
+  .s4-calc-stats strong {
+    text-align: left;
+    display: block;
+    margin-top: 7px;
+  }
+  .s4-calc-stats em {
+    display: inline;
+    margin-left: 7px;
+  }
+  .s4-calc-stats strong {
+    font-size: 22px;
+  }
+}
+@media (max-width: 620px) {
+  .s4-calculator {
+    padding: 26px 5% 50px;
+  }
+  .s4-calc-heading {
+    margin-bottom: 20px;
+  }
+  .s4-calc-heading h1 {
+    font-size: 32px;
+  }
+  .s4-calc-heading h1 br {
+    display: none;
+  }
+  .s4-calc-heading h1 em {
+    display: block;
+  }
+  .s4-calc-columns {
+    grid-template-columns: 1fr;
+  }
+  .s4-calc-fields {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .s4-calc-stats > div {
+    display: flex;
+  }
+  .s4-calc-stats strong {
+    text-align: right;
+  }
+  .s4-calc-title h2 {
+    font-size: 25px;
+  }
+  .s4-calc-title > button {
+    font-size: 12px;
+    padding: 8px;
+  }
+  .s4-calc-nav {
+    margin-bottom: 21px;
+  }
+  .s4-calc-output {
+    margin-top: 10px;
+  }
+}
+@media (max-width: 380px) {
+  .s4-calc-fields {
+    grid-template-columns: 1fr;
+  }
+}

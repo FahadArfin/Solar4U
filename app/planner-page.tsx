@@ -1015,7 +1015,7 @@ export default function PlannerPage() {
         electricityRate: rate,
         annualUsageKwh: usage,
         costPerWatt,
-        incentivePercent: incentive / 100,
+        incentivePercent: incentive,
       }),
       signal: controller.signal,
     })
