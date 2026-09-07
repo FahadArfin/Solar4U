@@ -1,0 +1,440 @@
+.s4-learn-hero {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 50px;
+  align-items: center;
+  margin-bottom: 65px;
+}
+.s4-learn-hero h1 {
+  font-size: clamp(40px, 4.7vw, 66px);
+  font-weight: 450;
+  line-height: 1.07;
+  letter-spacing: -0.05em;
+  margin: 0;
+}
+.s4-learn-hero h1 em {
+  font-family: Georgia, serif;
+  color: #667b5b;
+  font-weight: 400;
+}
+.s4-learn-hero figure {
+  margin: 0;
+  border-radius: 9px;
+  overflow: hidden;
+  background: #e7ecdf;
+}
+.s4-learn-hero img {
+  width: 100%;
+  height: auto;
+}
+.s4-learn-hero figcaption {
+  padding: 16px 20px;
+  color: #596b50;
+  font-size: 11px;
+}
+.s4-learning progress {
+  accent-color: #6f8a59;
+  width: 180px;
+  height: 6px;
+  border: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #e1e8d7;
+}
+.s4-learning progress::-webkit-progress-bar {
+  background: #e1e8d7;
+}
+.s4-learning progress::-webkit-progress-value {
+  background: #728c5a;
+}
+.s4-learning-library h2 {
+  font-size: 29px;
+  font-weight: 450;
+  letter-spacing: -0.04em;
+}
+.s4-lesson-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 28px;
+}
+.s4-lesson-card {
+  padding: 26px;
+  background: #fffef7;
+  border: 1px solid #d7decc;
+  border-radius: 7px;
+  display: flex;
+  flex-direction: column;
+}
+.s4-lesson-number {
+  font-family: Georgia, serif;
+  font-size: 37px;
+  color: #849274;
+}
+.s4-lesson-card > .s4-kicker {
+  font-size: 9px;
+  margin: 22px 0 10px;
+}
+.s4-lesson-card h3 {
+  margin: 0;
+}
+.s4-lesson-card h3 button {
+  font-size: 22px;
+  line-height: 1.3;
+  letter-spacing: -0.03em;
+  font-weight: 450;
+  color: #284b35;
+  border: 0;
+  background: none;
+  text-align: left;
+  padding: 0;
+}
+.s4-lesson-card p {
+  font-size: 12px;
+  color: #6a785f;
+  line-height: 1.8;
+  flex: 1;
+}
+.s4-lesson-card-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #dfe5d5;
+  padding-top: 20px;
+  font-size: 10px;
+  margin-top: 16px;
+}
+.s4-lesson-card-bottom span,
+.s4-lesson-card-bottom button {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.s4-lesson-card-bottom button {
+  font-size: 11px;
+  color: #2d5139;
+  border: 0;
+  background: none;
+  font-weight: 600;
+  padding: 4px;
+}
+.s4-reader-bar {
+  padding-bottom: 25px;
+  border-bottom: 1px solid #d8dfcd;
+  margin-bottom: 40px;
+}
+.s4-reader-bar > button:first-child {
+  border: 0;
+  background: none;
+  color: #365843;
+}
+.s4-reader-bar > span {
+  font-size: 10px;
+  color: #6f7e64;
+}
+.s4-reader-layout {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 760px);
+  gap: 65px;
+  justify-content: center;
+}
+.s4-course-nav {
+  align-self: start;
+  position: sticky;
+  top: 25px;
+}
+.s4-course-nav h2 {
+  font-size: 13px;
+  font-weight: 600;
+}
+.s4-course-nav > p {
+  font-size: 11px;
+  color: #687b5d;
+}
+.s4-course-nav nav {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+.s4-course-nav nav button {
+  display: flex;
+  text-align: left;
+  gap: 12px;
+  font-size: 11px;
+  padding: 12px;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: #6b795f;
+  line-height: 1.5;
+}
+.s4-course-nav nav button[aria-current="step"] {
+  background: #e5ecd9;
+  color: #2c4d34;
+  font-weight: 650;
+}
+.s4-course-nav nav small {
+  width: 18px;
+  flex-shrink: 0;
+  padding-top: 1px;
+  font-size: 10px;
+}
+.s4-article h1 {
+  font-size: clamp(34px, 3.7vw, 52px);
+  letter-spacing: -0.045em;
+  font-weight: 450;
+  line-height: 1.1;
+  margin: 0;
+}
+.s4-article-intro {
+  font-size: 17px !important;
+  line-height: 1.7 !important;
+  color: #6a7b60;
+  margin-bottom: 28px !important;
+}
+.s4-article p,
+.s4-article li {
+  font-size: 15px;
+  line-height: 1.9;
+  color: #4f644e;
+}
+.s4-article p {
+  margin: 15px 0;
+}
+.s4-article ul {
+  padding-left: 24px;
+}
+.s4-article li {
+  margin: 12px 0;
+}
+.s4-article h2 {
+  font-size: 25px;
+  line-height: 1.3;
+  letter-spacing: -0.035em;
+  font-weight: 500;
+  margin: 0 0 20px;
+  color: #2d4d35;
+}
+.s4-article > section {
+  margin: 40px 0;
+}
+.s4-outcome {
+  display: flex;
+  gap: 17px;
+  align-items: center;
+  background: #e7eddc;
+  border-radius: 6px;
+  padding: 20px 24px;
+}
+.s4-outcome p {
+  font-size: 13px;
+  margin: 0;
+  line-height: 1.7;
+}
+.s4-outcome strong {
+  display: block;
+  font-size: 11px;
+  margin-bottom: 5px;
+}
+.s4-article-image {
+  margin: 32px 0 40px;
+}
+.s4-article-image img {
+  width: 100%;
+  height: auto;
+  max-height: 380px;
+  object-fit: cover;
+  border-radius: 7px;
+}
+.s4-article-image figcaption {
+  font-size: 10px;
+  color: #6e7d63;
+  margin-top: 10px;
+}
+.s4-worked-example,
+.s4-numbers-lab {
+  border-radius: 7px;
+  padding: 28px;
+  background: #f5edd0;
+  border: 1px solid #dfd5ad;
+}
+.s4-worked-example code {
+  display: block;
+  white-space: pre-wrap;
+  background: #fff9e7;
+  border: 1px solid #e5dcbe;
+  padding: 18px;
+  color: #5b5734;
+  font-size: 13px;
+  line-height: 1.8;
+  border-radius: 4px;
+  overflow-wrap: anywhere;
+}
+.s4-numbers-lab {
+  background: #e5edda;
+  border-color: #cbdab9;
+}
+.s4-numbers-lab h3 {
+  font-size: 21px;
+  font-weight: 500;
+}
+.s4-numbers-lab label {
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.s4-numbers-lab input[type="range"] {
+  width: 100%;
+  accent-color: #5a7844;
+}
+.s4-numbers-lab output {
+  font-size: 38px;
+  color: #355435;
+  display: block;
+  margin-top: 24px;
+}
+.s4-numbers-lab output small {
+  font-size: 12px;
+}
+.s4-numbers-lab .s4-fine {
+  font-size: 12px;
+}
+.s4-checklist p {
+  display: flex;
+  align-items: baseline;
+  gap: 15px;
+  font-size: 13px;
+}
+.s4-knowledge {
+  background: #fffef7;
+  border: 1px solid #d3dec5;
+  border-radius: 7px;
+  padding: 30px;
+}
+.s4-knowledge fieldset {
+  padding: 0;
+  margin: 0 0 20px;
+  border: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.s4-knowledge label {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  border: 1px solid #dce3d2;
+  border-radius: 5px;
+  padding: 15px;
+  color: #5a7052;
+  font-size: 13px;
+  line-height: 1.7;
+  cursor: pointer;
+}
+.s4-knowledge label.is-selected {
+  background: #eaf0df;
+  border-color: #9caf85;
+}
+.s4-knowledge input[type="radio"] {
+  accent-color: #4a6739;
+}
+.s4-feedback {
+  font-size: 13px !important;
+  background: #e9efdc;
+  padding: 18px;
+  border-radius: 5px;
+}
+.s4-lesson-sources {
+  border-top: 1px solid #cbd7be;
+  padding-top: 30px;
+}
+.s4-lesson-sources p {
+  font-size: 12px;
+}
+.s4-lesson-sources a {
+  font-size: 12px;
+  color: #436235;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 12px 0;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.s4-reader-next {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+  padding: 25px 0;
+}
+.s4-sr-only {
+  position: absolute;
+  clip: rect(0, 0, 0, 0);
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+@media (max-width: 1000px) {
+  .s4-reader-layout {
+    grid-template-columns: 190px minmax(0, 1fr);
+    gap: 30px;
+  }
+  .s4-lesson-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .s4-learn-hero {
+    gap: 25px;
+  }
+  .s4-lesson-card {
+    padding: 22px;
+  }
+  .s4-course-nav nav button {
+    font-size: 10px;
+  }
+}
+@media (max-width: 700px) {
+  .s4-learn-hero {
+    grid-template-columns: 1fr;
+  }
+  .s4-learn-hero figure {
+    max-height: 260px;
+  }
+  .s4-learn-hero img {
+    max-height: 220px;
+    object-fit: cover;
+  }
+  .s4-reader-layout {
+    grid-template-columns: 1fr;
+  }
+  .s4-course-nav {
+    display: none;
+  }
+  .s4-reader-bar {
+    gap: 14px;
+  }
+  .s4-reader-bar > span {
+    order: 3;
+    width: 100%;
+  }
+  .s4-article > section {
+    margin: 30px 0;
+  }
+  .s4-knowledge,
+  .s4-worked-example,
+  .s4-numbers-lab {
+    padding: 22px;
+  }
+  .s4-article h1 {
+    font-size: 38px;
+  }
+  .s4-lesson-card h3 button {
+    font-size: 20px;
+  }
+}
+@media (max-width: 480px) {
+  .s4-lesson-grid {
+    grid-template-columns: 1fr;
+  }
+}

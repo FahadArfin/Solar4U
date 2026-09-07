@@ -144,6 +144,7 @@ function Note({children,warn=false}:{children:ReactNode;warn?:boolean}){return <
 
 export default function CalculatorsPage(){
   const [active,setActive]=useState<Id>("pv");
+  useEffect(()=>{const t=setTimeout(()=>{const id=new URLSearchParams(location.search).get("tool");if(tools.some(t=>t.id===id))setActive(id as Id)},0);return()=>clearTimeout(t)},[]);
   const [v,setV]=useState<Record<string,number>>({kw:10,lat:42.9997,lon:-78.8658,sun:3.55,tilt:35,azimuth:180,loss:14,rate:.19,
     capacity:10,load:750,dod:90,eff:92,volts:48,current:30,length:40,ampacity:60,voc:49.5,vmp:41.7,isc:10.4,imp:9.6,series:8,parallel:2,minTemp:-15,coefficient:-.28,
     controllerVoc:49.5,controllerVmp:41.7,controllerIsc:10.4,controllerImp:9.6,

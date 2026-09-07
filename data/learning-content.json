@@ -1,0 +1,906 @@
+[
+  {
+    "id": "solar-energy-path",
+    "number": "01",
+    "title": "Follow the energy, from sunlight to your home",
+    "category": "Foundations",
+    "minutes": 7,
+    "summary": "Understand what the main components do and choose the kind of solar system that fits your goal.",
+    "outcome": "You can explain where electricity goes during a sunny afternoon, after sunset, and during a grid outage.",
+    "image": "/learning-system-components.png",
+    "sections": [
+      {
+        "title": "Start with a journey, not a shopping list",
+        "body": [
+          "Imagine sunlight reaching the panels on a home. Solar cells convert some of that light into electricity. Connected cells form a module, and connected modules form an array. The electricity leaving the modules is direct current, or DC. An inverter converts DC into alternating current, or AC, for ordinary household circuits. The name of each component becomes easier to remember when you connect it to a job.",
+          "A battery stores energy for later. It is optional in many grid-connected systems. A separate charge controller is common in some battery-based designs, while other equipment combines several functions. A diagram should reflect the architecture you actually choose rather than include every available box."
+        ]
+      },
+      {
+        "title": "Ask what happens when conditions change",
+        "body": [
+          "During daylight, solar production and household demand rarely match perfectly. Depending on the equipment, settings, and utility agreement, surplus energy may charge a battery, flow to the grid, or be limited. After sunset, a grid-connected home can import electricity; a suitable battery system can also supply some loads.",
+          "An outage is a separate operating condition. Ordinary grid-following solar does not guarantee backup power. Supplying a home safely without the utility requires an appropriate backup architecture, controls, and isolation. Treat a promise of backup as something the system design must demonstrate, including which circuits work and what starts them."
+        ],
+        "bullets": [
+          "Grid-connected: consider generation and your utility arrangement.",
+          "Backup-capable: identify supported circuits, power limits, and runtime.",
+          "Off-grid: plan how essential loads survive prolonged low production."
+        ]
+      },
+      {
+        "title": "Write a one-sentence project brief",
+        "body": [
+          "Before browsing products, finish this sentence: I want solar mainly to ____. Lower bills, selected-load backup, and an independent cabin are different briefs. Add one concrete success measure, such as keeping the refrigerator and communications running overnight. Then list the information you still need.",
+          "Sketch five labeled boxes: array, conversion equipment, optional storage, home, and grid or other supply. Draw the possible energy paths. This is a planning exercise, not a wiring instruction. Keep unknown connections marked as questions until a suitable equipment architecture resolves them."
+        ]
+      }
+    ],
+    "example": {
+      "title": "A sunny afternoon, in one snapshot",
+      "body": "In this hypothetical example, the inverter delivers 4 kW of AC solar power while the home uses 1.5 kW. That leaves 2.5 kW for permitted export or another available use. A full battery, export limit, or equipment constraint can change what happens next. This snapshot describes power at one moment; it does not describe a day's energy.",
+      "formula": "4 kW solar output − 1.5 kW household demand = 2.5 kW surplus"
+    },
+    "quiz": {
+      "question": "What proves that a solar installation can power selected circuits during a grid outage?",
+      "options": [
+        "A large enough panel count",
+        "A documented backup-capable architecture and supported-load design",
+        "A connection to the electricity meter"
+      ],
+      "answer": 1,
+      "explanation": "Backup depends on suitable equipment, controls, isolation, and load limits. Panel capacity alone does not establish it."
+    },
+    "checklist": [
+      "Write the main reason for your project.",
+      "Identify whether backup is required.",
+      "Sketch the main energy paths and mark unknowns."
+    ],
+    "nextTool": {
+      "label": "Start your system plan",
+      "href": "/planner"
+    },
+    "sources": [
+      {
+        "label": "DOE: Photovoltaics",
+        "url": "https://www.energy.gov/cmei/systems/photovoltaics"
+      },
+      {
+        "label": "DOE: Inverters and grid services basics",
+        "url": "https://www.energy.gov/cmei/systems/solar-integration-inverters-and-grid-services-basics"
+      },
+      {
+        "label": "DOE: Solar photovoltaic system design basics",
+        "url": "https://www.energy.gov/cmei/systems/solar-photovoltaic-system-design-basics"
+      }
+    ],
+    "reviewed": "2026-09-07"
+  },
+  {
+    "id": "load-audit",
+    "number": "02",
+    "title": "Measure what your home actually needs",
+    "category": "Foundations",
+    "minutes": 9,
+    "summary": "Build a useful load list by separating daily energy, simultaneous demand, and starting surge.",
+    "outcome": "You can turn appliance use into daily kilowatt-hours and identify the loads that matter most during an outage.",
+    "image": "/learning-system-components.png",
+    "sections": [
+      {
+        "title": "Watts describe a moment; kilowatt-hours describe use",
+        "body": [
+          "Power is the rate at which a device uses or produces energy. A watt is a unit of power; a kilowatt is one thousand watts. Energy adds up over time. A device drawing one kilowatt for two hours uses two kilowatt-hours. Keeping these units separate prevents a common mistake: comparing a battery's energy capacity directly with an appliance's power rating.",
+          "Find the kWh figure on an electricity bill and record the billing dates. Compare several months instead of multiplying one unusual month by twelve. Note heating, cooling, travel, and occupancy changes that explain seasonal differences. A bill gives context, but it cannot identify every backup load."
+        ]
+      },
+      {
+        "title": "Create a small, believable appliance schedule",
+        "body": [
+          "Start with the devices you genuinely need: refrigeration, lighting, communications, medical equipment with its own backup requirements, or a particular pump. For each item, record quantity, measured or stated watts, expected operating hours, and whether its behavior changes through the day. Mark every estimate so you know what to improve later.",
+          "Cycling equipment needs special care. A refrigerator does not normally draw its rated operating power continuously for twenty-four hours. A suitable plug-in energy monitor can measure compatible plug-connected appliances over a representative period. Existing circuit monitoring or qualified help is appropriate for fixed equipment; this exercise does not require opening a panel or measuring exposed wiring."
+        ]
+      },
+      {
+        "title": "Keep three totals instead of one",
+        "body": [
+          "Daily energy helps estimate solar production and storage needs. Simultaneous demand asks what may run together. Starting surge asks whether a motor or compressor briefly needs more power than it uses once running. A system can pass one test and fail another, so keep separate rows for all three.",
+          "Before finalizing the list, add equipment standby consumption and foreseeable changes such as an electric vehicle. Distinguish an essential overnight schedule from your ordinary household schedule. Save the date and assumptions with the worksheet so a later change in lifestyle does not look like a fault in the solar system."
+        ],
+        "bullets": [
+          "Daily kWh: energy over a chosen period.",
+          "Simultaneous kW: devices that can operate together.",
+          "Surge requirement: starting power and its duration."
+        ]
+      }
+    ],
+    "example": {
+      "title": "A small critical-load list",
+      "body": "Suppose a measured refrigerator uses 1.2 kWh per day. A laptop draws 60 W for six hours, and lights draw 40 W for six hours. Together these hypothetical loads use 1.8 kWh per day before equipment losses. The refrigerator's starting requirement still needs a separate check; the energy total cannot tell you whether an inverter will start it.",
+      "formula": "1.2 + (60 × 6 ÷ 1,000) + (40 × 6 ÷ 1,000) = 1.8 kWh/day"
+    },
+    "quiz": {
+      "question": "A device draws 500 W for four hours. How much energy does it use?",
+      "options": ["0.125 kWh", "500 kWh", "2 kWh"],
+      "answer": 2,
+      "explanation": "500 W × 4 hours is 2,000 Wh, which equals 2 kWh. Watts and watt-hours answer different questions."
+    },
+    "checklist": [
+      "Record representative monthly electricity use.",
+      "Separate critical loads from flexible loads.",
+      "Save daily energy, simultaneous demand, and surge separately."
+    ],
+    "nextTool": {
+      "label": "Calculate your energy needs",
+      "href": "/calculators"
+    },
+    "sources": [
+      {
+        "label": "Victron: Electrical theory and power",
+        "url": "https://www.victronenergy.com/media/pg/The_Wiring_Unlimited_book/en/theory.html"
+      },
+      {
+        "label": "DOE: Homeowner's guide to solar",
+        "url": "https://www.energy.gov/cmei/systems/homeowners-guide-solar"
+      }
+    ],
+    "reviewed": "2026-09-07"
+  },
+  {
+    "id": "site-survey",
+    "number": "03",
+    "title": "Read your site before placing panels",
+    "category": "Site and sunlight",
+    "minutes": 10,
+    "summary": "Build a clear site brief using roof geometry, shade, ground space, and the limits of remote imagery.",
+    "outcome": "You can distinguish a promising placement area from a site that has been measured, engineered, and approved.",
+    "image": "/solar-home.png",
+    "sections": [
+      {
+        "title": "Give each surface its own identity",
+        "body": [
+          "Treat a roof as a collection of surfaces rather than a single rectangle. Give each plane a name, such as street-facing slope or garage roof. Record its approximate length, width, slope, direction, and obvious obstructions. A sketch with consistent labels is easier to discuss than several unlabeled screenshots.",
+          "Roof condition matters alongside space. Note the covering material, approximate age, known leaks, and any planned replacement. Do not climb onto a roof to complete this lesson. Ground observations, existing records, and a professional survey can provide the missing information. Aerial imagery is a useful starting point, but it does not reveal hidden framing or prove load capacity."
+        ]
+      },
+      {
+        "title": "Map the things that compete for sunlight and space",
+        "body": [
+          "Mark chimneys, vents, skylights, nearby buildings, and trees. Record where an obstruction is, not merely that shade exists. Its height and position influence when a shadow reaches an array. A single summer image cannot describe every winter morning or afternoon. Keep image capture dates when they are available.",
+          "For a ground option, identify the area you could actually use. Include access, boundaries, buried-service uncertainty, drainage, slopes, and space needed for other activities. A neat rectangle on a map can still cross an easement or an unsuitable patch of ground. Describe those constraints before asking a layout tool to fill the area."
+        ]
+      },
+      {
+        "title": "Separate observations from assumptions",
+        "body": [
+          "Use three labels in your project notes: measured, estimated, and unknown. A documented roof dimension may be measured; a tree height inferred from a picture is estimated; framing capacity may remain unknown. This simple distinction makes a visually convincing 3D model much easier to evaluate honestly.",
+          "Compare options using the same questions. How much usable area remains? What shades it? How will equipment and people reach it? Which details need confirmation? Keep at least one alternative until those questions are answered. The useful outcome of an early survey is a better brief and a shorter list of uncertainties, not a declaration that construction is ready."
+        ],
+        "bullets": [
+          "Name each roof plane and candidate ground zone.",
+          "Mark obstructions and required access areas.",
+          "Attach a source and confidence label to dimensions."
+        ]
+      }
+    ],
+    "example": {
+      "title": "Three options for one property",
+      "body": "Imagine a clear garage roof, a larger house roof beside a tall tree, and an open garden. The garage may have less space but simpler shading. The house needs a seasonal shade assessment. The garden needs boundary, utility, soil, and foundation checks. Keep all three as candidates until the additional information changes the comparison.",
+      "formula": "Candidate area − exclusions − required access = area to investigate for placement"
+    },
+    "quiz": {
+      "question": "What can a satellite view establish on its own?",
+      "options": [
+        "A starting estimate of visible site geometry",
+        "The permitted foundation depth",
+        "The roof framing's structural capacity"
+      ],
+      "answer": 0,
+      "explanation": "Remote imagery helps identify visible surfaces and obstructions. Hidden structure, legal constraints, and field conditions require other evidence."
+    },
+    "checklist": [
+      "Name and compare at least two placement options.",
+      "Mark every known obstruction and access route.",
+      "Label geometry as measured, estimated, or unknown."
+    ],
+    "nextTool": {
+      "label": "Explore your placement options",
+      "href": "/planner"
+    },
+    "sources": [
+      {
+        "label": "DOE: Solar rooftop potential",
+        "url": "https://www.energy.gov/cmei/systems/solar-rooftop-potential"
+      },
+      {
+        "label": "DOE: Solar photovoltaic system design basics",
+        "url": "https://www.energy.gov/cmei/systems/solar-photovoltaic-system-design-basics"
+      },
+      {
+        "label": "IronRidge: Ground mount systems and design resources",
+        "url": "https://www.ironridge.com/ground-based/"
+      }
+    ],
+    "reviewed": "2026-09-07"
+  },
+  {
+    "id": "production-estimates",
+    "number": "04",
+    "title": "Turn sunlight into a realistic production estimate",
+    "category": "Site and sunlight",
+    "minutes": 10,
+    "summary": "Understand why array watts are different from annual energy and learn to read a model's assumptions.",
+    "outcome": "You can compare monthly production estimates without mistaking a model, a sunny-day peak, or an annual total for a guarantee.",
+    "image": "/solar-home.png",
+    "sections": [
+      {
+        "title": "Begin with capacity, then add conditions",
+        "body": [
+          "Array capacity starts with the sum of the modules' rated watts. Ten hypothetical 400 W modules make a 4 kW DC array. That rating describes a defined test condition; it does not promise continuous output. Weather, module temperature, orientation, shade, equipment limits, and losses influence the energy actually delivered.",
+          "Peak-sun-hours is a way to express daily solar energy as equivalent hours at a reference irradiance. It is not the number of hours between sunrise and sunset. A simplified calculation can teach the relationship between capacity and energy, but a location-aware model is more useful for comparing a real project's months and seasons."
+        ]
+      },
+      {
+        "title": "Read the inputs before trusting the headline",
+        "body": [
+          "A production estimate needs a location, capacity, array type, tilt, direction, and loss assumptions. Record the weather dataset or model source when available. If a project has differently oriented roof planes, preserve those differences rather than giving every panel the same angle. Check that dimensions and units have not been confused during entry.",
+          "Read the monthly chart next. An attractive annual total can hide a weak winter period that matters for backup or an off-grid cabin. Likewise, a large midday peak does not mean a home avoids buying energy after sunset. Energy timing and the household load schedule remain part of the design."
+        ]
+      },
+      {
+        "title": "Use scenarios to expose uncertainty",
+        "body": [
+          "Make one base case and one more cautious case. Change a clearly identified assumption, such as shading or system losses, and observe the result. Avoid changing five inputs at once: you will not know what caused the difference. Save the inputs with the output so the estimate can be reproduced later.",
+          "Treat a simple 3D shadow preview as an explanation of geometry unless the tool documents a validated energy model behind it. A production model also cannot certify roof strength or equipment compatibility. Each tool answers a particular question; combining their outputs thoughtfully is more useful than treating one precise-looking number as the final design."
+        ],
+        "bullets": [
+          "Check monthly output, especially the months that matter to your goal.",
+          "Record the model source and each loss assumption.",
+          "Keep a cautious scenario beside the base estimate."
+        ]
+      }
+    ],
+    "example": {
+      "title": "The same array in two solar-resource scenarios",
+      "body": "For teaching purposes, assume a 5 kW array and a combined performance factor of 0.8. Four peak-sun-hours gives 16 kWh for the day; two gives 8 kWh. These are hypothetical scenarios, not a forecast for your address. A proper model handles weather and equipment behavior in more detail than this shortcut.",
+      "formula": "5 kW × 4 equivalent sun-hours × 0.8 = 16 kWh; at 2 hours = 8 kWh"
+    },
+    "quiz": {
+      "question": "Why should you inspect monthly production instead of only annual generation?",
+      "options": [
+        "Annual figures always contain an error",
+        "Seasonal shortages can matter even when the annual total looks sufficient",
+        "Panels generate the same amount every month"
+      ],
+      "answer": 1,
+      "explanation": "A year's total hides the timing of generation. Winter demand and low-production periods can determine whether a particular design meets your goal."
+    },
+    "checklist": [
+      "Record location, capacity, orientation, and tilt.",
+      "Inspect the lowest-production months.",
+      "Save base and cautious scenarios with their assumptions."
+    ],
+    "nextTool": {
+      "label": "Model solar production",
+      "href": "/calculators"
+    },
+    "sources": [
+      {
+        "label": "NLR: PVWatts V8 model inputs and outputs",
+        "url": "https://developer.nlr.gov/docs/solar/pvwatts/v8/"
+      },
+      {
+        "label": "Sandia: PV performance modeling guide",
+        "url": "https://pvpmc.sandia.gov/modeling-guide/"
+      }
+    ],
+    "reviewed": "2026-09-07"
+  },
+  {
+    "id": "panels-and-strings",
+    "number": "05",
+    "title": "Read a panel label and understand strings",
+    "category": "System design",
+    "minutes": 12,
+    "summary": "Decode the electrical values that determine whether modules fit an inverter or charge controller.",
+    "outcome": "You can distinguish operating values from limits and explain how series, parallel, and temperature change a proposed array.",
+    "image": "/learning-system-components.png",
+    "sections": [
+      {
+        "title": "Five label values, five different jobs",
+        "body": [
+          "A module's watt rating is useful, but it is not a complete compatibility check. Vmp and Imp describe voltage and current near the maximum-power operating point under the stated test conditions. Voc is open-circuit voltage. Isc is short-circuit current. Do not multiply Voc by Isc and treat the result as usable module power.",
+          "Save the exact model datasheet, including its revision. Record dimensions, mass, connector family, electrical values, temperature coefficients, and maximum series-fuse rating. Product names can cover several wattage variants, so a matching brand or photograph does not establish that two listings describe identical modules."
+        ]
+      },
+      {
+        "title": "Series adds voltage; parallel adds current",
+        "body": [
+          "In a simplified string of matched modules connected in series, voltages add while the current is approximately that of one module. Parallel matched strings operate at approximately the same voltage while their currents add. A 2S2P description means two modules in each series string and two such strings in parallel.",
+          "These relationships help you describe an array on paper. They are not instructions to assemble or energize it. Shade, mismatch, bypass devices, connector ratings, and the equipment's separate input limits complicate the real design. Keep differently oriented surfaces identifiable so the designer can decide how to allocate maximum-power-point-tracking inputs, commonly called MPPT inputs."
+        ]
+      },
+      {
+        "title": "Check the cold limit and the operating window",
+        "body": [
+          "PV open-circuit voltage generally rises as cells become colder. The proposed string must remain within the receiving equipment's absolute voltage limit under the required cold-design conditions. Operating voltage must also suit the equipment's MPPT range. Meeting an advertised wattage allowance does not resolve either check.",
+          "For a planning shortlist, record the source of every limit and leave a missing value unresolved. Apply the selected manufacturer's calculation method, required design temperature, and applicable rules before approval. Do not improvise a universal safety multiplier or assume two look-alike connectors are approved to mate. A complete review considers voltage, current, protection, and physical compatibility together."
+        ],
+        "bullets": [
+          "Use the exact module variant and datasheet revision.",
+          "Separate maximum-voltage checks from MPPT operating checks.",
+          "Keep connector and current limits in the compatibility record."
+        ]
+      }
+    ],
+    "example": {
+      "title": "A cold-voltage calculation on fictional modules",
+      "body": "Assume four fictional modules, each with 40 V Voc at 25°C and a Voc coefficient of −0.28% per °C. Assuming a cell temperature of −10°C, a simple linear correction increases the four-module string voltage from 160 V to 175.68 V. This demonstrates the direction and arithmetic; an actual design must use the manufacturer's required method and temperature assumptions.",
+      "formula": "4 × 40 V × [1 + 0.0028 × (25 − (−10))] = 175.68 V"
+    },
+    "quiz": {
+      "question": "What happens to voltage when four matched modules are connected in series?",
+      "options": [
+        "Their voltages add",
+        "Their voltage becomes one quarter of one module",
+        "Only their current adds"
+      ],
+      "answer": 0,
+      "explanation": "Series connections add module voltages. Parallel matched strings add current. Temperature and equipment limits still require separate checks."
+    },
+    "checklist": [
+      "Save the exact module datasheet.",
+      "Record proposed series and parallel counts.",
+      "Flag missing voltage, current, or connector compatibility evidence."
+    ],
+    "nextTool": {
+      "label": "Check array calculations",
+      "href": "/calculators?tool=array"
+    },
+    "sources": [
+      {
+        "label": "Victron: DC wiring and solar array considerations",
+        "url": "https://www.victronenergy.com/media/pg/The_Wiring_Unlimited_book/en/dc-wiring.html"
+      },
+      {
+        "label": "Sandia: PV performance modeling guide",
+        "url": "https://pvpmc.sandia.gov/modeling-guide/"
+      },
+      {
+        "label": "DOE: Photovoltaics",
+        "url": "https://www.energy.gov/cmei/systems/photovoltaics"
+      }
+    ],
+    "reviewed": "2026-09-07"
+  },
+  {
+    "id": "battery-backup",
+    "number": "06",
+    "title": "Choose backup duration, then battery size",
+    "category": "System design",
+    "minutes": 10,
+    "summary": "Translate a critical-load schedule into storage needs without confusing energy capacity with output power.",
+    "outcome": "You can estimate a first-pass runtime and identify the separate battery, inverter, temperature, and recharge limits that need review.",
+    "image": "/learning-system-components.png",
+    "sections": [
+      {
+        "title": "Decide what must remain on",
+        "body": [
+          "Start with a particular outage, not a battery advertisement. Write when it begins, how long you want essential loads to operate, and what you are willing to turn off. A refrigerator, lights, and communications create a different requirement from electric cooking, water heating, and whole-home cooling. Equipment supporting health needs requires a separately appropriate backup plan.",
+          "Use the load schedule from lesson two. Mark daytime and overnight operation, then total the energy needed during the selected period. Decide whether the estimate assumes no solar contribution. That conservative scenario makes the battery's own contribution clear before you consider possible daytime recharging."
+        ]
+      },
+      {
+        "title": "Energy capacity and power capability are separate",
+        "body": [
+          "Battery capacity describes stored energy, usually in kWh. Its output power describes how quickly it can supply that energy. Both the battery and inverter must support the required load, including relevant startup demands. A larger energy reservoir does not automatically provide a higher output rating.",
+          "Read whether a capacity figure is nominal or usable. Allow for the specified operating limits, your chosen reserve, and conversion losses, but do not subtract the same reserve twice. A runtime estimate should state those assumptions explicitly. Battery-management-system limits, approved equipment combinations, and permitted operating temperatures also matter; a BMS does not replace the rest of a protected system design."
+        ]
+      },
+      {
+        "title": "Plan the recovery as well as the outage",
+        "body": [
+          "After an outage, the battery must recharge while the household may still be consuming energy. Consider what source does that job, what charging power is available, and whether another poor-weather day follows. A battery that lasts overnight is not necessarily a system that can repeat the same performance indefinitely.",
+          "Compare two practical strategies: reducing the critical-load list or increasing storage. Record the cost and comfort implications of each. Ask the equipment supplier which functions are available at low state of charge, during cold weather, and after a complete shutdown. Keep runtime estimates as scenarios until the actual equipment and operating conditions are established."
+        ],
+        "bullets": [
+          "Specify the supported loads and target duration.",
+          "Check energy, continuous power, and surge separately.",
+          "Document the planned recharge source and recovery period."
+        ]
+      }
+    ],
+    "example": {
+      "title": "Nine hours under stated assumptions",
+      "body": "A fictional 5 kWh nominal battery with an 80% usable fraction and 90% delivery efficiency provides 3.6 kWh to loads in this simplified example. At a steady 400 W, that is about nine hours. Additional inverter idle consumption, changing appliance demand, temperature, and aging can reduce the actual duration. This example assumes no solar input.",
+      "formula": "5 kWh × 0.80 × 0.90 ÷ 0.40 kW = 9 hours"
+    },
+    "quiz": {
+      "question": "Can a battery have enough stored energy for a motor but still fail to start it?",
+      "options": [
+        "No, sufficient kWh guarantees startup",
+        "Yes, the battery or inverter can have an insufficient output or surge rating",
+        "Only if the battery is fully charged"
+      ],
+      "answer": 1,
+      "explanation": "Energy capacity controls potential duration. Battery and inverter power limits determine which loads can operate or start."
+    },
+    "checklist": [
+      "Save an essential-load outage schedule.",
+      "Record usable capacity and output limits separately.",
+      "Include reserve, losses, temperature, and recharge assumptions."
+    ],
+    "nextTool": {
+      "label": "Estimate battery capacity",
+      "href": "/calculators?tool=battery"
+    },
+    "sources": [
+      {
+        "label": "DOE: Solar energy and storage basics",
+        "url": "https://www.energy.gov/cmei/systems/solar-integration-solar-energy-and-storage-basics"
+      },
+      {
+        "label": "Victron: Battery bank design considerations",
+        "url": "https://www.victronenergy.com/media/pg/The_Wiring_Unlimited_book/en/battery-bank-wiring.html"
+      },
+      {
+        "label": "DOE: Inverters and grid services basics",
+        "url": "https://www.energy.gov/cmei/systems/solar-integration-inverters-and-grid-services-basics"
+      }
+    ],
+    "reviewed": "2026-09-07"
+  },
+  {
+    "id": "roof-mounting",
+    "number": "07",
+    "title": "Understand how a roof array stays attached",
+    "category": "Placement",
+    "minutes": 11,
+    "summary": "Learn the relationships between modules, mounting hardware, roof covering, structure, and required access.",
+    "outcome": "You can discuss a roof layout with an installer and distinguish panel fit from structural and installation approval.",
+    "image": "/learning-roof-mounting.png",
+    "sections": [
+      {
+        "title": "Follow the load into the building",
+        "body": [
+          "A rooftop array is a system of connected parts. Modules attach through approved clamps or another specified interface. Rails or other mounting members connect those interfaces to roof attachments. The attachments transfer loads into an approved part of the building. Following that path explains why a panel arrangement cannot be evaluated only by its appearance.",
+          "Mounting products specify their own allowable combinations and design conditions. Module clamp zones, rail spans, attachment placement, and the supporting structure must work together. A plan that fits panels neatly inside a roof outline establishes a geometric possibility; it does not establish the building's capacity to carry that installation."
+        ]
+      },
+      {
+        "title": "Treat weatherproofing as part of the design",
+        "body": [
+          "A roof covering manages water, and an array must respect how it does that job. Asphalt shingles, tile, and standing-seam metal roofs use different attachment approaches. A detail suited to one covering should not be copied onto another because the hardware looks similar. The selected roofing and mounting instructions control the actual detail.",
+          "Record the roof material, approximate age, known repairs, and remaining-life questions before purchasing equipment. If replacement is approaching, compare the sequence and costs with the installer and roofer. A new array can make later roofing work more involved, so this discussion belongs near the beginning of the project."
+        ]
+      },
+      {
+        "title": "Reserve space for people and equipment",
+        "body": [
+          "Usable roof area excludes more than chimneys and skylights. Layouts must account for applicable access and fire requirements, roof edges, equipment clearances, drainage features, and maintenance needs. Those requirements vary with jurisdiction and the chosen system; a universal setback number is not a substitute for checking your project.",
+          "In your planning model, identify each exclusion separately and record its reason. Keep an overhead view and a perspective view: one makes dimensions easier to inspect, while the other helps explain slopes and obstructions. Take the resulting layout to qualified reviewers with its dimensions and unknowns. Do not use this lesson as a roof-access or installation procedure."
+        ],
+        "bullets": [
+          "Identify the roof covering and supporting structure questions.",
+          "Use the chosen module and racking documentation together.",
+          "Mark access, obstructions, and project-specific exclusions."
+        ]
+      }
+    ],
+    "example": {
+      "title": "One panel pattern, two different roofs",
+      "body": "Imagine the same twelve-panel pattern on an asphalt-shingle roof and a standing-seam metal roof. Its visual arrangement may look identical, but the roof interface and supporting checks can differ. Even the suitable clamp or attachment can depend on the exact product and roof profile. Reusing the panel pattern does not justify reusing an unverified attachment detail.",
+      "formula": "Panel fit + verified mounting system + structural review + local requirements = a reviewable roof proposal"
+    },
+    "quiz": {
+      "question": "What does an automatic twelve-panel roof layout demonstrate?",
+      "options": [
+        "That no permit is required",
+        "That every racking product will work",
+        "A geometric proposal that still needs mounting, structural, and local review"
+      ],
+      "answer": 2,
+      "explanation": "Automatic placement can help explore space. It cannot establish hidden structural conditions or approve a particular installation."
+    },
+    "checklist": [
+      "Record roof covering, age, and condition questions.",
+      "Mark access routes and obstructions in the layout.",
+      "Collect the module and racking manuals for review."
+    ],
+    "nextTool": {
+      "label": "Explore a roof layout",
+      "href": "/planner"
+    },
+    "sources": [
+      {
+        "label": "IronRidge: Pitched-roof components and documentation",
+        "url": "https://www.ironridge.com/pitched-roofs/xr-flush-mount-for-pitched-roofs/"
+      },
+      {
+        "label": "DOE: Permitting and inspection for rooftop solar",
+        "url": "https://www.energy.gov/cmei/systems/permitting-and-inspection-rooftop-solar"
+      },
+      {
+        "label": "DOE: Solar rooftop potential",
+        "url": "https://www.energy.gov/cmei/systems/solar-rooftop-potential"
+      }
+    ],
+    "reviewed": "2026-09-07"
+  },
+  {
+    "id": "ground-mounting",
+    "number": "08",
+    "title": "Give a ground array room for shadows",
+    "category": "Placement",
+    "minutes": 12,
+    "summary": "Explore panel tilt, row spacing, usable land, and the foundation questions behind a ground-mounted array.",
+    "outcome": "You can explain the difference between a row's footprint, its clear gap, and its pitch, and recognize the limits of a shadow preview.",
+    "image": "/solar-home.png",
+    "sections": [
+      {
+        "title": "Draw the usable ground first",
+        "body": [
+          "Begin with the area available to the project, then mark what must remain clear. Consider boundaries, access, other structures, drainage, slope, and uncertainty about buried services. Preserve room for maintenance and the activities that will still happen around the array. Ground mounting moves some constraints away from the roof but introduces its own site questions.",
+          "A layout tool can explore panel patterns inside a defined zone. Foundations, soil suitability, wind and snow loads, and local approvals need separate evidence. Manufacturer design systems may support particular foundation types and site conditions; do not assume a post or ground screw is suitable because it appears in a convincing 3D scene."
+        ]
+      },
+      {
+        "title": "Distinguish the footprint from the row pitch",
+        "body": [
+          "Tilting a panel raises one edge and changes the horizontal space it occupies. The footprint is its projection onto the ground. The clear gap is the open distance between adjacent row footprints. Row pitch is the distance between equivalent points on neighboring rows, so it includes both the footprint and the gap.",
+          "Those distinctions matter when you compare plans. A denser arrangement may fit more modules but allow one row to shade another at some sun positions. Label exactly which spacing a control changes. Compare the same module dimensions, tilt, and orientation so a larger panel count does not hide a different set of assumptions."
+        ]
+      },
+      {
+        "title": "Use shadows as a question to investigate",
+        "body": [
+          "The sun's elevation and direction change through the day and year. Lower sun angles make longer shadows in a simple cross-section, but the shadow direction also matters. Terrain, uneven row heights, and other obstructions add complexity. One noon view cannot prove that an array is unshaded all winter.",
+          "Try a spacious layout and a compact layout, then save both. Compare panel count, access, visible shade, and the production model's documented assumptions. A simple shadow animation is useful for understanding geometry. Only describe it as an energy-loss calculation when the tool actually models that relationship and states its method and limits."
+        ],
+        "bullets": [
+          "Label footprint, clear gap, and row pitch separately.",
+          "Inspect more than one sun position.",
+          "Keep soil, foundations, and buried-service checks unresolved until verified."
+        ]
+      }
+    ],
+    "example": {
+      "title": "A deliberately simplified shadow calculation",
+      "body": "A fictional 2 m panel tilted 30° has a 1 m rise and a 1.73 m horizontal footprint. At 20° sun elevation, that rise casts about 2.75 m of shadow in an aligned, level-ground cross-section. Adding footprint and gap gives 4.48 m row pitch. This is an illustrative geometric calculation, not an all-day shading design or a foundation specification.",
+      "formula": "Rise = 2 sin(30°) = 1 m; gap = 1 ÷ tan(20°) ≈ 2.75 m; pitch ≈ 1.73 + 2.75 = 4.48 m"
+    },
+    "quiz": {
+      "question": "What does row pitch include?",
+      "options": [
+        "Only the open gap between panels",
+        "The row footprint plus the clear gap to the next row",
+        "Only the height of the highest panel edge"
+      ],
+      "answer": 1,
+      "explanation": "Pitch measures between equivalent points on adjacent rows. It includes the horizontal footprint and the intervening gap."
+    },
+    "checklist": [
+      "Define the usable ground and all exclusions.",
+      "Save compact and spacious placement options.",
+      "Record the shadow assumptions and foundation questions."
+    ],
+    "nextTool": {
+      "label": "Plan a ground-mounted array",
+      "href": "/planner"
+    },
+    "sources": [
+      {
+        "label": "IronRidge: Ground mount systems and foundation options",
+        "url": "https://www.ironridge.com/ground-based/"
+      },
+      {
+        "label": "IronRidge: Ground screw compatibility and site conditions",
+        "url": "https://www.ironridge.com/ground-based/ground-screws/"
+      },
+      {
+        "label": "Sandia: PV performance modeling guide",
+        "url": "https://pvpmc.sandia.gov/modeling-guide/"
+      }
+    ],
+    "reviewed": "2026-09-07"
+  },
+  {
+    "id": "equipment-compatibility",
+    "number": "09",
+    "title": "Build a compatible equipment shortlist",
+    "category": "System design",
+    "minutes": 12,
+    "summary": "Evaluate the connections between products before treating a collection of good components as a complete system.",
+    "outcome": "You can build a compatibility record that distinguishes confirmed matches, clear conflicts, and missing evidence.",
+    "image": "/learning-system-components.png",
+    "sections": [
+      {
+        "title": "Compare the interfaces, not just the headline ratings",
+        "body": [
+          "Begin with the architecture and loads you have already chosen. For each proposed connection, write down what one device supplies and what the other accepts. PV equipment has voltage and current limits. Batteries have operating ranges and charge/discharge limits. Inverters have supported input arrangements, output capabilities, and environmental requirements.",
+          "Use exact model numbers, manuals, and compatibility lists. A family name or a large advertised watt rating is not enough. Some combinations also require particular communications, firmware, or control arrangements. Record the evidence that supports the match rather than assuming that a product is compatible because another owner used something with a similar name."
+        ]
+      },
+      {
+        "title": "Make missing information visible",
+        "body": [
+          "Give every check one of three states: confirmed, incompatible, or unknown. Unknown is useful information. It identifies the question to ask before buying. For example, a retailer may publish battery capacity but omit the continuous discharge limit. That entry should remain unresolved even when its price is attractive.",
+          "Keep protection, disconnects, conductors, enclosures, grounding, and required clearances in the system conversation. A battery's internal BMS does not establish the complete circuit protection arrangement. These details depend on the selected equipment and applicable rules. Planning software can organize the evidence, but a generic diagram should not invent universal fuse sizes, bonding rules, or installation procedures."
+        ]
+      },
+      {
+        "title": "Produce a brief someone else can review",
+        "body": [
+          "A useful shortlist contains more than links to products. Include quantities, exact models, the role of each component, known limits, unresolved questions, and the manual revision used. Add a conceptual one-line diagram that identifies the main energy paths. Keep dimensions and intended equipment locations alongside the electrical overview.",
+          "Ask a qualified reviewer to resolve the remaining design questions before purchase or installation. When a component changes, revisit its neighboring connections instead of changing only the shopping total. Date each revision. This makes substitutions, future expansion, and troubleshooting easier because the final record explains why each part was selected."
+        ],
+        "bullets": [
+          "Match voltage, current, power, environment, and controls.",
+          "Keep unknown compatibility checks visible.",
+          "Recheck adjacent components whenever a model changes."
+        ]
+      }
+    ],
+    "example": {
+      "title": "Enough power, wrong battery interface",
+      "body": "Suppose a fictional inverter meets the household's 4 kW continuous-load target, but its approved battery interface is incompatible with the battery on your shortlist. The advertised output rating does not resolve that conflict. Mark the combination incompatible, retain the supporting documentation, and choose a documented alternative before comparing final package prices.",
+      "formula": "A power-rating match does not imply a voltage, battery, communication, or protection match"
+    },
+    "quiz": {
+      "question": "How should a missing battery discharge-current specification appear in your shortlist?",
+      "options": [
+        "Confirmed because the capacity is large",
+        "Ignored until installation day",
+        "Unknown, with a request for authoritative documentation"
+      ],
+      "answer": 2,
+      "explanation": "Missing evidence is not evidence of compatibility. Keep the check unresolved until the exact product documentation answers it."
+    },
+    "checklist": [
+      "Record exact model numbers and manual revisions.",
+      "Classify every critical interface as confirmed, incompatible, or unknown.",
+      "Save a reviewable component list and conceptual diagram."
+    ],
+    "nextTool": {
+      "label": "Compare equipment for your system",
+      "href": "/calculators?tool=controller"
+    },
+    "sources": [
+      {
+        "label": "Victron: DC wiring, protection, and solar considerations",
+        "url": "https://www.victronenergy.com/media/pg/The_Wiring_Unlimited_book/en/dc-wiring.html"
+      },
+      {
+        "label": "Victron: Battery bank design considerations",
+        "url": "https://www.victronenergy.com/media/pg/The_Wiring_Unlimited_book/en/battery-bank-wiring.html"
+      },
+      {
+        "label": "DOE: Inverters and grid services basics",
+        "url": "https://www.energy.gov/cmei/systems/solar-integration-inverters-and-grid-services-basics"
+      }
+    ],
+    "reviewed": "2026-09-07"
+  },
+  {
+    "id": "price-comparison",
+    "number": "10",
+    "title": "Compare the price you will actually pay",
+    "category": "Buying and ownership",
+    "minutes": 8,
+    "summary": "Read price observations critically and compare identical products using delivered cost, availability, and dated evidence.",
+    "outcome": "You can tell the difference between a lower sticker price, a better comparable offer, and an unreliable price observation.",
+    "image": "/learning-system-components.png",
+    "sections": [
+      {
+        "title": "Confirm that the offers describe the same thing",
+        "body": [
+          "Start with the exact manufacturer and model. Check the wattage or capacity variant, condition, included accessories, and quantity. One listing may describe a single panel while another advertises a pallet. A battery cabinet may appear in a photograph even when the listed price excludes it. Save the seller's direct product page with your comparison.",
+          "Record currency, unit count, stock status, and the time the offer was observed. Distinguish a listed price from a quote-only item. Do not infer that a product is available merely because its page still exists. If a critical field is missing, label the offer incomplete rather than silently supplying a convenient assumption."
+        ]
+      },
+      {
+        "title": "Build a delivered-cost comparison",
+        "body": [
+          "For the quantity you actually need, add known shipping and other required charges. Keep tax separate when the destination or checkout amount is unknown. Normalize panels to cost per rated watt only after confirming what the package contains. For batteries, state whether any cost-per-kWh comparison uses nominal or published usable capacity.",
+          "Price is one column in the decision. Record warranty responsibility, return conditions, delivery constraints, and included equipment as separate notes. A lower normalized price does not establish equal reliability, compatibility, or service. Compare complete, documented offers before declaring a winner, and verify the final checkout or written quote before committing."
+        ]
+      },
+      {
+        "title": "Read a history chart as evidence",
+        "body": [
+          "A useful daily tracker stores observations with their dates and sources. A failed retrieval is not a price of zero, and an unavailable day should not invent a smooth downward trend. Distinguish the last successful observation from the most recent attempted check. That difference explains why a chart can be old even when the scheduler is running.",
+          "When a price changes sharply, open the source and inspect the model, quantity, condition, and stock again. A sale can be real, but a pack-size change or parsing error can look like a dramatic discount. Use a watchlist to focus on exact equipment your project could accept, then record why an observed offer is worth reviewing."
+        ],
+        "bullets": [
+          "Match exact model, condition, currency, and package quantity.",
+          "Compare delivered costs with unknown charges labeled.",
+          "Check the source date and retrieval status before acting on a price change."
+        ]
+      }
+    ],
+    "example": {
+      "title": "The cheaper sticker price loses",
+      "body": "For the same fictional 450 W module, seller A asks $180 plus $60 shipping and seller B asks $200 with free shipping. Before tax, delivered costs are $240 and $200. That is approximately $0.53/W versus $0.44/W. This arithmetic compares price only; warranty, availability, condition, and compatibility still need their own checks.",
+      "formula": "Seller A: ($180 + $60) ÷ 450 W ≈ $0.53/W; seller B: $200 ÷ 450 W ≈ $0.44/W"
+    },
+    "quiz": {
+      "question": "A scheduled price check fails to read a retailer's page. What should the tracker record?",
+      "options": [
+        "A failed observation, preserving the last successful price and its date",
+        "A new price of zero",
+        "The previous price with today's date as if it was verified"
+      ],
+      "answer": 0,
+      "explanation": "Failure is a data-quality event. It should not fabricate a price or make an old observation appear freshly verified."
+    },
+    "checklist": [
+      "Confirm exact model, package size, and condition.",
+      "Include shipping and identify unknown charges.",
+      "Open the dated seller source before making a purchase decision."
+    ],
+    "nextTool": {
+      "label": "Compare current equipment offers",
+      "href": "/products"
+    },
+    "sources": [
+      {
+        "label": "CFPB: Solar financing and transparent cost comparisons",
+        "url": "https://www.consumerfinance.gov/data-research/research-reports/issue-spotlight-solar-financing/"
+      },
+      {
+        "label": "DOE: Homeowner's guide to solar and consumer shopping resources",
+        "url": "https://www.energy.gov/cmei/systems/homeowners-guide-solar"
+      }
+    ],
+    "reviewed": "2026-09-07"
+  },
+  {
+    "id": "solar-economics",
+    "number": "11",
+    "title": "Estimate savings without hiding the assumptions",
+    "category": "Buying and ownership",
+    "minutes": 12,
+    "summary": "Separate self-consumption, export compensation, project costs, financing, and verified incentives in a useful financial scenario.",
+    "outcome": "You can explain why annual energy offset is different from bill savings and identify the assumptions that drive a payback estimate.",
+    "image": "/solar-home.png",
+    "sections": [
+      {
+        "title": "Give each generated kilowatt-hour the right value",
+        "body": [
+          "Begin with your actual utility tariff. Electricity used directly by the home can avoid some imported energy charges. Electricity exported to the grid may receive a different payment or credit. Fixed charges and other bill components may remain. Matching annual generation to annual consumption therefore does not guarantee a zero bill.",
+          "Estimate how much generation the home uses as it happens and how much it exports. Time-of-use rates make timing even more important. Keep import and export assumptions separate, and record the tariff source and effective date. A generic retail rate multiplied by every generated kWh can overstate the benefit when exports receive less."
+        ]
+      },
+      {
+        "title": "Keep costs and incentives explicit",
+        "body": [
+          "Use a documented installed cash price, then list financing costs separately if you plan to borrow. Compare the financed amount with the cash offer and read the payment schedule. Include stated maintenance and replacement assumptions rather than assuming that the original installation cost is the only expense for the entire study period.",
+          "As reviewed on September 7, 2026, the IRS states that the federal Residential Clean Energy Credit is unavailable for property placed in service after December 31, 2025. Do not apply an automatic 30% credit to a new 2026 residential installation. Other incentives require their own current eligibility checks. Enter only an amount you have verified for the project's location, owner, and installation timing."
+        ]
+      },
+      {
+        "title": "Compare scenarios instead of promising a payback year",
+        "body": [
+          "Create a base case with documented inputs and a cautious case with less favorable assumptions. Change export value, self-consumption, production, or costs one at a time so you can see what matters. Keep a record of what the calculator includes and excludes, especially financing, equipment replacement, and changes in electricity prices.",
+          "Simple payback is a screening measure, not a complete investment analysis. A model with annual degradation, tariff changes, financing, or replacement costs needs a cash-flow schedule to explain its result. Use the estimate to compare proposals and ask better questions; do not present a calculated year or a large lifetime savings figure as a guaranteed outcome."
+        ],
+        "bullets": [
+          "Separate self-used generation from exports.",
+          "Use current tariff and incentive evidence.",
+          "Compare cash price, financing, and ongoing-cost assumptions."
+        ]
+      }
+    ],
+    "example": {
+      "title": "Two values for the same annual generation",
+      "body": "Assume a fictional system generates 7,000 kWh yearly and the home directly uses 40% of it. At a $0.25/kWh avoided import rate, 2,800 kWh is worth $700. Exporting the remaining 4,200 kWh at $0.07 earns $294. The combined $994 is before maintenance, financing, and other bill effects. These rates are illustrative, not a tariff recommendation.",
+      "formula": "(7,000 × 0.40 × $0.25) + (7,000 × 0.60 × $0.07) = $994/year before costs"
+    },
+    "quiz": {
+      "question": "If annual solar generation equals annual household consumption, is a zero electricity bill guaranteed?",
+      "options": [
+        "Yes, the two totals always cancel",
+        "No, energy timing, export rules, and remaining charges matter",
+        "Yes, if the panels have a long warranty"
+      ],
+      "answer": 1,
+      "explanation": "Annual energy matching does not establish the value of exports or eliminate fixed charges. Savings depend on the tariff and when energy is used."
+    },
+    "checklist": [
+      "Save the current import and export tariff sources.",
+      "Verify incentives for the actual project date and owner.",
+      "Record model exclusions and compare a cautious scenario."
+    ],
+    "nextTool": {
+      "label": "Explore a savings scenario",
+      "href": "/calculators?tool=payback"
+    },
+    "sources": [
+      {
+        "label": "IRS: Residential Clean Energy Credit eligibility and cutoff",
+        "url": "https://www.irs.gov/credits-deductions/residential-clean-energy-credit"
+      },
+      {
+        "label": "CFPB: Solar financing risks and cost disclosures",
+        "url": "https://www.consumerfinance.gov/data-research/research-reports/issue-spotlight-solar-financing/"
+      },
+      {
+        "label": "DOE: Utility compensation and household solar considerations",
+        "url": "https://www.energy.gov/cmei/systems/homeowners-guide-solar"
+      }
+    ],
+    "reviewed": "2026-09-07"
+  },
+  {
+    "id": "handover-and-monitoring",
+    "number": "12",
+    "title": "Take your plan through handover and ownership",
+    "category": "Buying and ownership",
+    "minutes": 10,
+    "summary": "Know which approvals, records, operating information, and monitoring evidence should follow a solar project into daily use.",
+    "outcome": "You can assemble an owner handover folder and describe a performance concern using evidence rather than guesswork.",
+    "image": "/learning-roof-mounting.png",
+    "sections": [
+      {
+        "title": "Treat each project stage as a separate milestone",
+        "body": [
+          "A finished layout, an installed system, a passed inspection, and permission to operate are different milestones. Identify the local authority and utility requirements early, then record who is responsible for each submission and approval. Do not use a completed installation photograph as evidence that export or normal operation has been authorized.",
+          "Ask the installer what the handover will contain before work begins. Useful records include the final equipment list, as-built drawings, required approvals, documented commissioning results, warranties, and contact details. Keep the installed version of the design rather than only the attractive proposal that started the project."
+        ]
+      },
+      {
+        "title": "Make the system understandable to its owner",
+        "body": [
+          "The owner should know how to view normal status, what alarms mean at an appropriate level, who provides service, and where the approved shutdown information is stored. Have qualified personnel demonstrate the functions intended for owner use. Installation, commissioning, electrical testing, and internal repairs belong to people qualified for the particular equipment and work.",
+          "Confirm that monitoring access belongs to the correct owner account and that the displayed system matches the installation. Save model numbers, serial numbers where appropriate, warranty documents, and the maintenance schedule in a durable folder. Avoid putting passwords or private account credentials inside a public project export."
+        ]
+      },
+      {
+        "title": "Investigate a trend before diagnosing a fault",
+        "body": [
+          "Production varies with weather and season. When output looks low, first record the date, time, displayed status, recent weather, and the period being compared. Check whether the monitoring data itself is current. A missing communication update and a real generation interruption can look similar on a dashboard, but they call for different follow-up.",
+          "Use a longer baseline and the system's documented expectations to describe the concern. Share screenshots, error messages, and relevant operating conditions with the service provider. Do not open enclosures, unplug PV connectors, or improvise live measurements to investigate. After approved changes or repairs, update the drawings and maintenance record so the next person sees the actual system."
+        ],
+        "bullets": [
+          "Track installation, inspection, utility approval, and commissioning separately.",
+          "Keep an owner-controlled record of the installed system.",
+          "Document symptoms and dates before requesting service."
+        ]
+      }
+    ],
+    "example": {
+      "title": "A low-production week with two possible explanations",
+      "body": "Suppose a dashboard shows unusually low production during a cloudy week. First check whether its latest timestamp is current. Fresh data with no alarm may support a weather-related explanation that needs comparison with expectations. An old timestamp points to a monitoring problem to investigate separately. Neither observation alone proves the equipment is healthy or faulty; it helps you send a precise service request.",
+      "formula": "Useful service record = timestamp + observed status + expected behavior + relevant conditions"
+    },
+    "quiz": {
+      "question": "What is the most useful first response to a low-production dashboard?",
+      "options": [
+        "Open the inverter and inspect internal wiring",
+        "Assume the panels have failed",
+        "Check data freshness, record conditions and status, then compare with expectations"
+      ],
+      "answer": 2,
+      "explanation": "A current timestamp, clear symptom record, and relevant conditions distinguish data problems from possible performance issues without unsafe investigation."
+    },
+    "checklist": [
+      "Collect approvals, as-built drawings, and commissioning records.",
+      "Confirm owner monitoring access and service contacts.",
+      "Save a dated baseline and update records after approved changes."
+    ],
+    "nextTool": {
+      "label": "Review your project record",
+      "href": "/planner"
+    },
+    "sources": [
+      {
+        "label": "DOE: Permitting and inspection for rooftop solar",
+        "url": "https://www.energy.gov/cmei/systems/permitting-and-inspection-rooftop-solar"
+      },
+      {
+        "label": "NLR: Operation and maintenance best practices, third edition",
+        "url": "https://www.nlr.gov/docs/fy19osti/73822.pdf"
+      }
+    ],
+    "reviewed": "2026-09-07"
+  }
+]

@@ -4,6 +4,7 @@ import "./globals.css";
 import "./revamp.css";
 import "./comfortable.css";
 import "./workspaces.css";
+import "./learning.css";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
