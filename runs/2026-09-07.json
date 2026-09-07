@@ -1,7 +1,7 @@
 {
-  "id": "2026-09-07-1788816822982",
-  "startedAt": "2026-09-07T21:33:42.981Z",
-  "finishedAt": "2026-09-07T21:34:56.692Z",
+  "id": "2026-09-07-1788816935983",
+  "startedAt": "2026-09-07T21:35:35.983Z",
+  "finishedAt": "2026-09-07T21:39:23.181Z",
   "schedule": "Daily at 07:17 UTC",
   "sources": [
     {
@@ -10,9 +10,9 @@
       "url": "https://www.anker.com/anker-solix",
       "status": "partial",
       "reason": "Catalog pages limited; observed variants recorded.",
-      "checkedAt": "2026-09-07T21:34:18.602Z",
+      "checkedAt": "2026-09-07T21:37:42.919Z",
       "observations": 155,
-      "pages": 4,
+      "pages": 20,
       "coverage": "Bounded catalog search: solar, battery and inverter. This is not a complete store inventory."
     },
     {
@@ -21,9 +21,9 @@
       "url": "https://bestsolarbundle.com",
       "status": "observed",
       "reason": "Public retailer catalog returned prices.",
-      "checkedAt": "2026-09-07T21:34:31.906Z",
+      "checkedAt": "2026-09-07T21:38:27.979Z",
       "observations": 111,
-      "pages": 5,
+      "pages": 17,
       "coverage": "Bounded catalog search: solar, battery and inverter. This is not a complete store inventory."
     },
     {
@@ -32,7 +32,7 @@
       "url": "https://bigbattery.com",
       "status": "unavailable",
       "reason": "discovery_http_404",
-      "checkedAt": "2026-09-07T21:34:31.617Z",
+      "checkedAt": "2026-09-07T21:38:18.859Z",
       "observations": 0,
       "pages": 0,
       "coverage": "Bounded catalog search: solar, battery and inverter. This is not a complete store inventory."
@@ -43,7 +43,7 @@
       "url": "https://callsun.com",
       "status": "catalog_not_available",
       "reason": "catalog_not_advertised",
-      "checkedAt": "2026-09-07T21:34:32.047Z",
+      "checkedAt": "2026-09-07T21:38:28.173Z",
       "observations": 0,
       "pages": 0,
       "coverage": "Bounded catalog search: solar, battery and inverter. This is not a complete store inventory."
@@ -54,7 +54,7 @@
       "url": "https://www.currentconnected.com",
       "status": "unavailable",
       "reason": "discovery_http_403",
-      "checkedAt": "2026-09-07T21:33:43.264Z",
+      "checkedAt": "2026-09-07T21:35:36.200Z",
       "observations": 0,
       "pages": 0,
       "coverage": "Bounded catalog search: solar, battery and inverter. This is not a complete store inventory."
@@ -65,7 +65,7 @@
       "url": "https://www.dji.com/power-series",
       "status": "unavailable",
       "reason": "fetch failed",
-      "checkedAt": "2026-09-07T21:34:32.410Z",
+      "checkedAt": "2026-09-07T21:38:28.380Z",
       "observations": 0,
       "pages": 0,
       "coverage": "Bounded catalog search: solar, battery and inverter. This is not a complete store inventory."
@@ -75,8 +75,8 @@
       "name": "Docan Power",
       "url": "https://www.docanpower.com",
       "status": "unavailable",
-      "reason": "discovery_http_404",
-      "checkedAt": "2026-09-07T21:34:43.919Z",
+      "reason": "fetch failed",
+      "checkedAt": "2026-09-07T21:38:57.105Z",
       "observations": 0,
       "pages": 0,
       "coverage": "Bounded catalog search: solar, battery and inverter. This is not a complete store inventory."
@@ -87,9 +87,9 @@
       "url": "https://www.eco-worthy.com",
       "status": "observed",
       "reason": "Public retailer catalog returned prices.",
-      "checkedAt": "2026-09-07T21:34:07.641Z",
+      "checkedAt": "2026-09-07T21:36:57.189Z",
       "observations": 76,
-      "pages": 5,
+      "pages": 13,
       "coverage": "Bounded catalog search: solar, battery and inverter. This is not a complete store inventory."
     },
     {
@@ -98,7 +98,7 @@
       "url": "https://www.ecoflow.com",
       "status": "unavailable",
       "reason": "fetch failed",
-      "checkedAt": "2026-09-07T21:33:55.843Z",
+      "checkedAt": "2026-09-07T21:36:27.982Z",
       "observations": 0,
       "pages": 0,
       "coverage": "Bounded catalog search: solar, battery and inverter. This is not a complete store inventory."
@@ -109,9 +109,9 @@
       "url": "https://www.goalzero.com",
       "status": "partial",
       "reason": "Catalog pages limited; observed variants recorded.",
-      "checkedAt": "2026-09-07T21:34:49.428Z",
-      "observations": 89,
-      "pages": 5,
+      "checkedAt": "2026-09-07T21:39:05.042Z",
+      "observations": 91,
+      "pages": 14,
       "coverage": "Bounded catalog search: solar, battery and inverter. This is not a complete store inventory."
     },
     {
@@ -120,9 +120,9 @@
       "url": "https://gosun.co",
       "status": "observed",
       "reason": "Public retailer catalog returned prices.",
-      "checkedAt": "2026-09-07T21:34:36.889Z",
+      "checkedAt": "2026-09-07T21:38:30.172Z",
       "observations": 46,
-      "pages": 4,
+      "pages": 9,
       "coverage": "Bounded catalog search: solar, battery and inverter. This is not a complete store inventory."
     },
     {
@@ -131,9 +131,9 @@
       "url": "https://hqsolarpower.com",
       "status": "observed",
       "reason": "Public retailer catalog returned prices.",
-      "checkedAt": "2026-09-07T21:33:52.876Z",
+      "checkedAt": "2026-09-07T21:36:05.378Z",
       "observations": 89,
-      "pages": 4,
+      "pages": 13,
       "coverage": "Bounded catalog search: solar, battery and inverter. This is not a complete store inventory."
     },
     {
@@ -142,18 +142,18 @@
       "url": "https://hysolis.com",
       "status": "observed",
       "reason": "Public retailer catalog returned prices.",
-      "checkedAt": "2026-09-07T21:34:56.692Z",
+      "checkedAt": "2026-09-07T21:39:23.181Z",
       "observations": 58,
-      "pages": 6,
+      "pages": 12,
       "coverage": "Bounded catalog search: solar, battery and inverter. This is not a complete store inventory."
     },
     {
       "id": "inverters-r-us",
       "name": "Inverters R Us",
       "url": "https://invertersrus.com",
-      "status": "unavailable",
-      "reason": "discovery_http_404",
-      "checkedAt": "2026-09-07T21:33:44.806Z",
+      "status": "catalog_not_available",
+      "reason": "catalog_not_advertised",
+      "checkedAt": "2026-09-07T21:35:36.475Z",
       "observations": 0,
       "pages": 0,
       "coverage": "Bounded catalog search: solar, battery and inverter. This is not a complete store inventory."
@@ -164,9 +164,9 @@
       "url": "https://lionenergy.com",
       "status": "observed",
       "reason": "Public retailer catalog returned prices.",
-      "checkedAt": "2026-09-07T21:34:38.021Z",
+      "checkedAt": "2026-09-07T21:38:31.811Z",
       "observations": 25,
-      "pages": 3,
+      "pages": 6,
       "coverage": "Bounded catalog search: solar, battery and inverter. This is not a complete store inventory."
     },
     {
@@ -175,9 +175,9 @@
       "url": "https://www.litime.com",
       "status": "partial",
       "reason": "Catalog pages limited; observed variants recorded.",
-      "checkedAt": "2026-09-07T21:34:15.049Z",
+      "checkedAt": "2026-09-07T21:37:43.338Z",
       "observations": 291,
-      "pages": 5,
+      "pages": 25,
       "coverage": "Bounded catalog search: solar, battery and inverter. This is not a complete store inventory."
     },
     {
@@ -185,8 +185,8 @@
       "name": "NAZ Solar Electric",
       "url": "https://www.solar-electric.com",
       "status": "unavailable",
-      "reason": "discovery_http_404",
-      "checkedAt": "2026-09-07T21:33:58.153Z",
+      "reason": "discovery_http_403",
+      "checkedAt": "2026-09-07T21:36:39.873Z",
       "observations": 0,
       "pages": 0,
       "coverage": "Bounded catalog search: solar, battery and inverter. This is not a complete store inventory."
@@ -197,7 +197,7 @@
       "url": "https://www.orientpower.com",
       "status": "unavailable",
       "reason": "fetch failed",
-      "checkedAt": "2026-09-07T21:34:29.575Z",
+      "checkedAt": "2026-09-07T21:38:17.175Z",
       "observations": 0,
       "pages": 0,
       "coverage": "Bounded catalog search: solar, battery and inverter. This is not a complete store inventory."
@@ -208,9 +208,9 @@
       "url": "https://oupes.com",
       "status": "observed",
       "reason": "Public retailer catalog returned prices.",
-      "checkedAt": "2026-09-07T21:34:03.428Z",
+      "checkedAt": "2026-09-07T21:36:45.123Z",
       "observations": 113,
-      "pages": 5,
+      "pages": 17,
       "coverage": "Bounded catalog search: solar, battery and inverter. This is not a complete store inventory."
     },
     {
@@ -219,9 +219,9 @@
       "url": "https://www.pecron.com",
       "status": "observed",
       "reason": "Public retailer catalog returned prices.",
-      "checkedAt": "2026-09-07T21:33:55.528Z",
+      "checkedAt": "2026-09-07T21:36:27.948Z",
       "observations": 171,
-      "pages": 5,
+      "pages": 23,
       "coverage": "Bounded catalog search: solar, battery and inverter. This is not a complete store inventory."
     },
     {
@@ -230,7 +230,7 @@
       "url": "https://portablesun.com",
       "status": "unavailable",
       "reason": "discovery_http_404",
-      "checkedAt": "2026-09-07T21:33:44.106Z",
+      "checkedAt": "2026-09-07T21:35:36.670Z",
       "observations": 0,
       "pages": 0,
       "coverage": "Bounded catalog search: solar, battery and inverter. This is not a complete store inventory."
@@ -241,9 +241,9 @@
       "url": "https://powmr.com",
       "status": "partial",
       "reason": "Catalog pages limited; observed variants recorded.",
-      "checkedAt": "2026-09-07T21:34:49.930Z",
+      "checkedAt": "2026-09-07T21:39:08.260Z",
       "observations": 97,
-      "pages": 6,
+      "pages": 16,
       "coverage": "Bounded catalog search: solar, battery and inverter. This is not a complete store inventory."
     },
     {
@@ -252,7 +252,7 @@
       "url": "https://practicalpreppers.com",
       "status": "unavailable",
       "reason": "discovery_http_404",
-      "checkedAt": "2026-09-07T21:34:21.533Z",
+      "checkedAt": "2026-09-07T21:37:51.587Z",
       "observations": 0,
       "pages": 0,
       "coverage": "Bounded catalog search: solar, battery and inverter. This is not a complete store inventory."
@@ -263,9 +263,9 @@
       "url": "https://www.redodopower.com",
       "status": "observed",
       "reason": "Public retailer catalog returned prices.",
-      "checkedAt": "2026-09-07T21:34:25.490Z",
+      "checkedAt": "2026-09-07T21:38:10.179Z",
       "observations": 158,
-      "pages": 5,
+      "pages": 21,
       "coverage": "Bounded catalog search: solar, battery and inverter. This is not a complete store inventory."
     },
     {
@@ -274,9 +274,9 @@
       "url": "https://www.renogy.com",
       "status": "partial",
       "reason": "Catalog pages limited; observed variants recorded.",
-      "checkedAt": "2026-09-07T21:34:29.156Z",
+      "checkedAt": "2026-09-07T21:38:46.639Z",
       "observations": 390,
-      "pages": 6,
+      "pages": 26,
       "coverage": "Bounded catalog search: solar, battery and inverter. This is not a complete store inventory."
     },
     {
@@ -285,9 +285,9 @@
       "url": "https://richsolar.com",
       "status": "partial",
       "reason": "Catalog pages limited; observed variants recorded.",
-      "checkedAt": "2026-09-07T21:33:55.837Z",
+      "checkedAt": "2026-09-07T21:36:35.154Z",
       "observations": 234,
-      "pages": 6,
+      "pages": 26,
       "coverage": "Bounded catalog search: solar, battery and inverter. This is not a complete store inventory."
     },
     {
@@ -296,7 +296,7 @@
       "url": "https://www.ruixubattery.com",
       "status": "partial",
       "reason": "catalog_error: {\"content\":[{\"type\":\"text\",\"text\":\"{\\\"status\\\":\\\"invalid_request\\\",\\\"messages\\\":[{\\\"type\\\":\\\"error\\\",\\\"code\\\":\\\"invalid_request\\\",\\\"content\\\":\\\"Field 'ids' is required and must be an array\\\",\\\"severit",
-      "checkedAt": "2026-09-07T21:34:15.255Z",
+      "checkedAt": "2026-09-07T21:36:52.597Z",
       "observations": 33,
       "pages": 6,
       "coverage": "Bounded catalog search: solar, battery and inverter. This is not a complete store inventory."
@@ -307,7 +307,7 @@
       "url": "https://www.santansolar.com",
       "status": "unavailable",
       "reason": "discovery_http_404",
-      "checkedAt": "2026-09-07T21:33:57.948Z",
+      "checkedAt": "2026-09-07T21:36:39.763Z",
       "observations": 0,
       "pages": 0,
       "coverage": "Bounded catalog search: solar, battery and inverter. This is not a complete store inventory."
@@ -318,9 +318,9 @@
       "url": "https://shopsolarkits.com",
       "status": "partial",
       "reason": "Catalog pages limited; observed variants recorded.",
-      "checkedAt": "2026-09-07T21:33:57.738Z",
+      "checkedAt": "2026-09-07T21:36:39.382Z",
       "observations": 483,
-      "pages": 6,
+      "pages": 26,
       "coverage": "Bounded catalog search: solar, battery and inverter. This is not a complete store inventory."
     },
     {
@@ -329,7 +329,7 @@
       "url": "https://signaturesolar.com",
       "status": "catalog_not_available",
       "reason": "catalog_not_advertised",
-      "checkedAt": "2026-09-07T21:33:43.274Z",
+      "checkedAt": "2026-09-07T21:35:36.307Z",
       "observations": 0,
       "pages": 0,
       "coverage": "Bounded catalog search: solar, battery and inverter. This is not a complete store inventory."
@@ -340,7 +340,7 @@
       "url": "https://www.us.sokbattery.com",
       "status": "partial",
       "reason": "catalog_error: {\"content\":[{\"type\":\"text\",\"text\":\"{\\\"status\\\":\\\"invalid_request\\\",\\\"messages\\\":[{\\\"type\\\":\\\"error\\\",\\\"code\\\":\\\"invalid_request\\\",\\\"content\\\":\\\"Field 'ids' is required and must be an array\\\",\\\"severit",
-      "checkedAt": "2026-09-07T21:34:43.180Z",
+      "checkedAt": "2026-09-07T21:38:16.685Z",
       "observations": 29,
       "pages": 6,
       "coverage": "Bounded catalog search: solar, battery and inverter. This is not a complete store inventory."
@@ -351,9 +351,9 @@
       "url": "https://sungoldpower.com",
       "status": "partial",
       "reason": "Catalog pages limited; observed variants recorded.",
-      "checkedAt": "2026-09-07T21:34:21.328Z",
+      "checkedAt": "2026-09-07T21:37:51.322Z",
       "observations": 289,
-      "pages": 6,
+      "pages": 26,
       "coverage": "Bounded catalog search: solar, battery and inverter. This is not a complete store inventory."
     },
     {
@@ -362,9 +362,9 @@
       "url": "https://www.vatrerpower.com",
       "status": "observed",
       "reason": "Public retailer catalog returned prices.",
-      "checkedAt": "2026-09-07T21:34:43.497Z",
+      "checkedAt": "2026-09-07T21:39:19.981Z",
       "observations": 178,
-      "pages": 5,
+      "pages": 23,
       "coverage": "Bounded catalog search: solar, battery and inverter. This is not a complete store inventory."
     },
     {
@@ -373,9 +373,9 @@
       "url": "https://www.wattcycle.com",
       "status": "observed",
       "reason": "Public retailer catalog returned prices.",
-      "checkedAt": "2026-09-07T21:34:08.961Z",
+      "checkedAt": "2026-09-07T21:37:24.371Z",
       "observations": 150,
-      "pages": 5,
+      "pages": 20,
       "coverage": "Bounded catalog search: solar, battery and inverter. This is not a complete store inventory."
     },
     {
@@ -384,7 +384,7 @@
       "url": "https://watts247.com",
       "status": "unavailable",
       "reason": "discovery_http_404",
-      "checkedAt": "2026-09-07T21:33:43.878Z",
+      "checkedAt": "2026-09-07T21:35:36.977Z",
       "observations": 0,
       "pages": 0,
       "coverage": "Bounded catalog search: solar, battery and inverter. This is not a complete store inventory."
@@ -395,11 +395,11 @@
       "url": "https://yixiangpower.com",
       "status": "observed",
       "reason": "Public retailer catalog returned prices.",
-      "checkedAt": "2026-09-07T21:34:28.531Z",
+      "checkedAt": "2026-09-07T21:38:00.807Z",
       "observations": 36,
-      "pages": 4,
+      "pages": 8,
       "coverage": "Bounded catalog search: solar, battery and inverter. This is not a complete store inventory."
     }
   ],
-  "observations": 3301
+  "observations": 3303
 }
