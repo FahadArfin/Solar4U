@@ -1,5 +1,5 @@
 import {createHash} from 'node:crypto';
-export const AGENT_PROFILE='https://fahadarfin.github.io/Solar4U/ucp-agent.json';
+export const AGENT_PROFILE='https://cdn.jsdelivr.net/gh/FahadArfin/Solar4U@86fd0f1/ucp-agent.json';
 const safeText=v=>String(v??'').replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim().slice(0,500);
 export function safeCatalogEndpoint(value,base){const u=new URL(value);const source=new URL(base);if(u.protocol!=='https:'||u.username||u.password||!(u.hostname===source.hostname||u.hostname.endsWith('.myshopify.com')||u.hostname==='www.wixapis.com')||!u.pathname.endsWith('/mcp'))throw new Error('Unapproved catalog endpoint');return u.href}
 export function minorToMajor(amount,currency){if(!Number.isSafeInteger(amount)||amount<0)throw new Error('Invalid minor-unit price');const places=new Intl.NumberFormat('en',{style:'currency',currency}).resolvedOptions().maximumFractionDigits;return amount/10**places}
