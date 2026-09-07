@@ -28,11 +28,13 @@
     "roof-vision:test": "docker compose build roof-vision && docker run --rm solar4u-roof-vision python -m unittest -v test_algorithms.py",
     "roof-vision:logs": "docker compose logs -f roof-vision",
     "typecheck": "tsc --noEmit",
-    "test:unit": "node --test services/price-worker/tests.mjs services/solar-engine/tests.mjs services/solar-engine/model.test.mjs services/diagram-service/tests.mjs tests/regressions.test.mjs tests/catalog.test.mjs",
+    "test:unit": "node --test services/price-worker/tests.mjs services/solar-engine/tests.mjs services/solar-engine/model.test.mjs services/diagram-service/tests.mjs tests/regressions.test.mjs tests/catalog.test.mjs tests/placement.test.mjs && node --experimental-strip-types --test tests/studio.test.mjs",
     "test:hosted": "node --test tests/hosted.test.mjs"
   },
   "dependencies": {
+    "@babylonjs/core": "^8.0.0",
     "drizzle-orm": "0.45.2",
+    "earcut": "^3.2.3",
     "geotiff": "^3.0.5",
     "lucide-react": "^0.468.0",
     "next": "^16.3.4",
@@ -44,6 +46,7 @@
     "@cloudflare/vite-plugin": "1.37.1",
     "@cloudflare/workers-types": "^4.20260702.1",
     "@tailwindcss/postcss": "4.2.1",
+    "@types/earcut": "^3.0.0",
     "@types/node": "22.19.19",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",

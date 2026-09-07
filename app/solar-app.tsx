@@ -4,7 +4,7 @@ import { SiteHeader, SiteFooter, NewHome, WorkspacePage } from "./experience";
 import InteractiveCalculatorsPage from "./calculators-page";
 import FieldGuide from "./field-guide";
 import PriceTracker from "./price-tracker";
-import PlannerPage from "./planner-page";
+import DesignStudio from "./design-studio";
 import { DiagnosticsPage, usePageTools } from "./webmcp";
 type DiagramNode={id:number;type:string;x:number;y:number};
 function DiagramsPage() {
@@ -21,9 +21,9 @@ export function SolarApp({ section, pickerSearch = "" }: { section: string; comm
   if(section==="solar-part-picker") content=<PriceTracker initialSearch={pickerSearch}/>;
   if(section==="guides") content=<FieldGuide/>;
   if(section==="calculators") content=<InteractiveCalculatorsPage/>;
-  if(section==="planner") content=<PlannerPage/>;
+  if(section==="planner") content=<DesignStudio/>;
   if(section==="diagrams") content=<DiagramsPage/>;
   if(["dashboard","community","community-test"].includes(section)) content=<WorkspacePage/>;
   if(["admin","diagnostics"].includes(section)) content=<DiagnosticsPage/>;
-  return <div className="s4-app"><a href="#main-content" className="s4-skip">Skip to content</a><SiteHeader section={section}/><div id="main-content" className={["calculators","planner","diagrams"].includes(section)?"legacy-app":""}>{content}</div><SiteFooter/></div>;
+  return <div className="s4-app"><a href="#main-content" className="s4-skip">Skip to content</a><SiteHeader section={section}/><div id="main-content" className={["calculators","diagrams"].includes(section)?"legacy-app":""}>{content}</div><SiteFooter/></div>;
 }
