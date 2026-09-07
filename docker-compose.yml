@@ -1,0 +1,182 @@
+name: solar4u
+
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: solar4u
+      POSTGRES_USER: solar4u
+      POSTGRES_PASSWORD: solar4u-local-only
+    ports: ["5434:5432"]
+    volumes:
+      - solar4u_postgres:/var/lib/postgresql/data
+      - ./infra/postgres:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U solar4u -d solar4u"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  redis:
+    image: redis:7-alpine
+    command: ["redis-server","--appendonly","yes"]
+    ports: ["6381:6379"]
+    volumes: [solar4u_redis:/data]
+    healthcheck:
+      test: ["CMD","redis-cli","ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  minio:
+    image: minio/minio:latest
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: solar4u
+      MINIO_ROOT_PASSWORD: solar4u-local-storage
+    ports: ["9000:9000","9001:9001"]
+    volumes: [solar4u_minio:/data]
+    healthcheck:
+      test: ["CMD","curl","-f","http://localhost:9000/minio/health/live"]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+
+  platform-api:
+    build:
+      context: .
+      dockerfile: services/platform-api/Dockerfile
+    environment:
+      PORT: 4000
+      DATABASE_URL: postgresql://solar4u:solar4u-local-only@postgres:5432/solar4u
+      CORS_ORIGIN: http://localhost:3000
+      AUTH_MODE: local
+      FORUM_INTERNAL_TOKEN: solar4u-local-forum
+    ports: ["4000:4000"]
+    depends_on:
+      postgres: { condition: service_healthy }
+    healthcheck:
+      test: ["CMD","wget","-qO-","http://127.0.0.1:4000/healthz"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+
+  solar-engine:
+    build:
+      context: .
+      dockerfile: services/solar-engine/Dockerfile
+    environment:
+      PORT: 4001
+      GOOGLE_SOLAR_API_KEY: ${GOOGLE_SOLAR_API_KEY:-}
+      GOOGLE_GEOCODING_API_KEY: ${GOOGLE_GEOCODING_API_KEY:-}
+      GOOGLE_MAPS_API_KEY: ${GOOGLE_MAPS_API_KEY:-}
+      GOOGLE_MAP_TILES_API_KEY: ${GOOGLE_MAP_TILES_API_KEY:-}
+      NREL_API_KEY: ${NREL_API_KEY:-}
+      ROOF_VISION_URL: http://roof-vision:4005
+    ports: ["4001:4001"]
+    healthcheck:
+      test: ["CMD","wget","-qO-","http://127.0.0.1:4001/healthz"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+    depends_on:
+      roof-vision: { condition: service_healthy }
+
+  roof-vision:
+    build:
+      context: .
+      dockerfile: services/roof-vision/Dockerfile
+      target: ${ROOF_VISION_TARGET:-local}
+    environment:
+      CORS_ORIGIN: http://localhost:3000
+      ROOF_VISION_MAX_UPLOAD_BYTES: ${ROOF_VISION_MAX_UPLOAD_BYTES:-83886080}
+      SAMGEO_MODEL_TYPE: ${SAMGEO_MODEL_TYPE:-vit_b}
+      SAMGEO_CHECKPOINT: ${SAMGEO_CHECKPOINT:-}
+    ports: ["4005:4005"]
+    healthcheck:
+      test: ["CMD","python","-c","import urllib.request; urllib.request.urlopen('http://127.0.0.1:4005/healthz', timeout=2)"]
+      interval: 10s
+      timeout: 4s
+      retries: 15
+
+  diagram-service:
+    build:
+      context: .
+      dockerfile: services/diagram-service/Dockerfile
+    environment: { PORT: 4002 }
+    ports: ["4002:4002"]
+    healthcheck:
+      test: ["CMD","wget","-qO-","http://127.0.0.1:4002/healthz"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+
+  notification-worker:
+    build:
+      context: .
+      dockerfile: services/notification-worker/Dockerfile
+    environment:
+      PORT: 4003
+      DATABASE_URL: postgresql://solar4u:solar4u-local-only@postgres:5432/solar4u
+    ports: ["4003:4003"]
+    depends_on:
+      postgres: { condition: service_healthy }
+    healthcheck:
+      test: ["CMD","wget","-qO-","http://127.0.0.1:4003/healthz"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+
+  price-worker:
+    build:
+      context: .
+      dockerfile: services/price-worker/Dockerfile
+    environment:
+      PORT: 4004
+      DATABASE_URL: postgresql://solar4u:solar4u-local-only@postgres:5432/solar4u
+      SIGNATURE_SOLAR_ARCHIVE: /imports/SignatureSolar.7z
+      MAX_PAGES_PER_RETAILER: ${MAX_PAGES_PER_RETAILER:-500}
+      SCRAPER_CONTACT: ${SCRAPER_CONTACT:-local-operator}
+      SCRAPER_PAGE_DELAY_MS: ${SCRAPER_PAGE_DELAY_MS:-60000}
+      SCRAPER_DISCOVERY_DELAY_MS: ${SCRAPER_DISCOVERY_DELAY_MS:-3000}
+      SCRAPER_RETAILER_CONCURRENCY: ${SCRAPER_RETAILER_CONCURRENCY:-12}
+      ADMIN_TOKEN: ${ADMIN_TOKEN:-solar4u-local-admin}
+      CORS_ORIGIN: http://localhost:3000
+    ports: ["4004:4004"]
+    volumes:
+      - type: bind
+        source: C:\Users\fahad\Documents\Codex\SignatureSolar.7z
+        target: /imports/SignatureSolar.7z
+        read_only: true
+    depends_on:
+      postgres: { condition: service_healthy }
+    healthcheck:
+      test: ["CMD","wget","-qO-","http://127.0.0.1:4004/healthz"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+
+  web:
+    build:
+      context: .
+      target: local
+    environment:
+      PLATFORM_API_URL: http://platform-api:4000
+      SOLAR_ENGINE_URL: http://solar-engine:4001
+      ROOF_VISION_URL: http://roof-vision:4005
+      DIAGRAM_SERVICE_URL: http://diagram-service:4002
+      FORUM_INTERNAL_TOKEN: solar4u-local-forum
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET:-}
+      AUTH_SECRET: ${AUTH_SECRET:-}
+      AUTH_URL: ${AUTH_URL:-http://localhost:3000}
+    ports: ["3000:3000"]
+    depends_on:
+      platform-api: { condition: service_healthy }
+      solar-engine: { condition: service_healthy }
+      diagram-service: { condition: service_healthy }
+
+volumes:
+  solar4u_postgres:
+  solar4u_redis:
+  solar4u_minio:

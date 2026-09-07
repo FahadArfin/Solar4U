@@ -1,0 +1,11 @@
+{
+  "name": "@solar4u/platform-api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node --test forum.test.mjs"
+  },
+  "dependencies": { "pg": "8.16.3" }
+}

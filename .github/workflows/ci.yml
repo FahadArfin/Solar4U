@@ -1,0 +1,36 @@
+name: CI
+on:
+  pull_request:
+  push:
+    branches: [main]
+jobs:
+  web:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run build
+  services:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - run: npm install --prefix services/price-worker
+      - run: npm run test --prefix services/price-worker
+      - run: npm run test --prefix services/solar-engine
+      - run: npm run test --prefix services/diagram-service
+      - run: docker compose config --quiet
+  containers:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        service: [platform-api, price-worker, solar-engine, diagram-service, notification-worker]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - run: docker build -f services/${{ matrix.service }}/Dockerfile -t solar4u/${{ matrix.service }}:ci .

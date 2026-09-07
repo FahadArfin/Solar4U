@@ -1,0 +1,16 @@
+{
+  "name": "@solar4u/price-worker",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server.mjs",
+    "scrape": "node run.mjs",
+    "import": "node import-history.mjs",
+    "test": "node --test tests.mjs"
+  },
+  "dependencies": {
+    "csv-parse": "6.1.0",
+    "pg": "8.16.3"
+  }
+}

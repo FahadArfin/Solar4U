@@ -1,0 +1,28 @@
+name: Protected Environment Uninstall
+on:
+  workflow_dispatch:
+    inputs:
+      environment: { type: choice, options: [staging, production], required: true }
+      confirmation: { description: "Type uninstall-<environment>", required: true }
+permissions: { contents: read, id-token: write }
+jobs:
+  destroy:
+    environment: ${{ inputs.environment }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Confirm
+        run: test "${{ inputs.confirmation }}" = "uninstall-${{ inputs.environment }}"
+      - uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.GCP_DEPLOY_SERVICE_ACCOUNT }}
+      - uses: google-github-actions/setup-gcloud@v2
+      - name: Final backup
+        run: gcloud sql backups create --instance "solar4u-${{ inputs.environment }}-postgres" --description="pre-uninstall-${{ github.run_id }}"
+      - uses: hashicorp/setup-terraform@v3
+      - name: Destroy
+        working-directory: infra/terraform
+        run: |
+          terraform init
+          terraform destroy -auto-approve -var="project_id=${{ vars.GCP_PROJECT_ID }}" -var="environment=${{ inputs.environment }}"

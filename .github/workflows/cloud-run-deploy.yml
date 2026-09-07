@@ -1,0 +1,70 @@
+name: Deploy to Cloud Run
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        type: choice
+        options: [staging, production]
+        required: true
+      ref:
+        description: Git ref to deploy
+        required: true
+        default: main
+permissions:
+  contents: read
+  id-token: write
+env:
+  REGION: us-east4
+jobs:
+  build:
+    environment: ${{ inputs.environment }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - { name: web, dockerfile: Dockerfile }
+          - { name: platform-api, dockerfile: services/platform-api/Dockerfile }
+          - { name: price-worker, dockerfile: services/price-worker/Dockerfile }
+          - { name: solar-engine, dockerfile: services/solar-engine/Dockerfile }
+          - { name: diagram-service, dockerfile: services/diagram-service/Dockerfile }
+          - { name: notification-worker, dockerfile: services/notification-worker/Dockerfile }
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: "${{ inputs.ref }}" }
+      - uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.GCP_DEPLOY_SERVICE_ACCOUNT }}
+      - uses: google-github-actions/setup-gcloud@v2
+      - run: gcloud auth configure-docker "$REGION-docker.pkg.dev" --quiet
+      - run: |
+          IMAGE="$REGION-docker.pkg.dev/${{ vars.GCP_PROJECT_ID }}/solar4u-${{ inputs.environment }}/${{ matrix.name }}:${{ github.sha }}"
+          docker build -f "${{ matrix.dockerfile }}" -t "$IMAGE" .
+          docker push "$IMAGE"
+  deploy:
+    needs: build
+    environment: ${{ inputs.environment }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.GCP_DEPLOY_SERVICE_ACCOUNT }}
+      - uses: google-github-actions/setup-gcloud@v2
+      - name: Deploy APIs in dependency order
+        run: |
+          for SERVICE in platform-api solar-engine diagram-service notification-worker web; do
+            IMAGE="$REGION-docker.pkg.dev/${{ vars.GCP_PROJECT_ID }}/solar4u-${{ inputs.environment }}/$SERVICE:${{ github.sha }}"
+            gcloud run deploy "solar4u-${{ inputs.environment }}-$SERVICE" --image "$IMAGE" --region "$REGION" --project "${{ vars.GCP_PROJECT_ID }}" --quiet
+          done
+      - name: Deploy scheduled price job
+        run: |
+          IMAGE="$REGION-docker.pkg.dev/${{ vars.GCP_PROJECT_ID }}/solar4u-${{ inputs.environment }}/price-worker:${{ github.sha }}"
+          gcloud run jobs deploy "solar4u-${{ inputs.environment }}-price-worker" --image "$IMAGE" --region "$REGION" --project "${{ vars.GCP_PROJECT_ID }}" --command node --args run.mjs --quiet
+      - name: Smoke test
+        run: |
+          for SERVICE in platform-api solar-engine diagram-service notification-worker; do
+            URL="$(gcloud run services describe "solar4u-${{ inputs.environment }}-$SERVICE" --region "$REGION" --format='value(status.url)')"
+            curl --fail --retry 5 "$URL/healthz"
+          done

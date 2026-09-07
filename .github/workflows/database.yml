@@ -1,0 +1,29 @@
+name: Database Operations
+on:
+  workflow_dispatch:
+    inputs:
+      environment: { type: choice, options: [staging, production], required: true }
+      action: { type: choice, options: [status, start, stop, restart, backup], required: true }
+permissions: { contents: read, id-token: write }
+jobs:
+  database:
+    environment: ${{ inputs.environment }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.GCP_DEPLOY_SERVICE_ACCOUNT }}
+      - uses: google-github-actions/setup-gcloud@v2
+      - name: Operate database
+        run: |
+          INSTANCE="solar4u-${{ inputs.environment }}-postgres"
+          ACTION="${{ inputs.action }}"
+          if [ "$ACTION" = status ]; then gcloud sql instances describe "$INSTANCE"
+          elif [ "$ACTION" = start ]; then gcloud sql instances patch "$INSTANCE" --activation-policy=ALWAYS --quiet
+          elif [ "$ACTION" = stop ]; then
+            test "${{ inputs.environment }}" != production
+            gcloud sql instances patch "$INSTANCE" --activation-policy=NEVER --quiet
+          elif [ "$ACTION" = restart ]; then gcloud sql instances restart "$INSTANCE" --quiet
+          else gcloud sql backups create --instance "$INSTANCE" --description="manual-${{ github.run_id }}"
+          fi

@@ -1,0 +1,3 @@
+# Installed only by the optional `samgeo` Docker target. This image is much
+# larger and is intended for a CUDA-capable workstation or a GPU cloud job.
+segment-geospatial[samgeo]==1.4.1

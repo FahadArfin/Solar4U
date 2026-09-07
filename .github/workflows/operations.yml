@@ -1,0 +1,44 @@
+name: Cloud Run Operations
+on:
+  workflow_dispatch:
+    inputs:
+      environment: { type: choice, options: [staging, production], required: true }
+      action: { type: choice, options: [status, start, stop, restart], required: true }
+      target: { description: "all or one service name", required: true, default: all }
+permissions: { contents: read, id-token: write }
+env: { REGION: us-east4 }
+jobs:
+  operate:
+    environment: ${{ inputs.environment }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.GCP_DEPLOY_SERVICE_ACCOUNT }}
+      - uses: google-github-actions/setup-gcloud@v2
+      - name: Operate
+        shell: bash
+        run: |
+          set -euo pipefail
+          PREFIX="solar4u-${{ inputs.environment }}"
+          SERVICES=(platform-api solar-engine diagram-service notification-worker web)
+          [[ "${{ inputs.target }}" == "all" ]] || SERVICES=("${{ inputs.target }}")
+          if [[ "${{ inputs.action }}" == "status" ]]; then
+            gcloud run services list --region "$REGION" --filter="metadata.name:$PREFIX"
+          elif [[ "${{ inputs.action }}" == "stop" ]]; then
+            gcloud scheduler jobs pause "$PREFIX-price-daily" --location "$REGION" || true
+            for SERVICE in "${SERVICES[@]}"; do
+              gcloud run services remove-iam-policy-binding "$PREFIX-$SERVICE" --region "$REGION" --member=allUsers --role=roles/run.invoker --quiet || true
+              gcloud run services update "$PREFIX-$SERVICE" --region "$REGION" --min=0 --quiet
+            done
+          elif [[ "${{ inputs.action }}" == "start" ]]; then
+            for SERVICE in "${SERVICES[@]}"; do
+              gcloud run services add-iam-policy-binding "$PREFIX-$SERVICE" --region "$REGION" --member=allUsers --role=roles/run.invoker --quiet
+            done
+            gcloud scheduler jobs resume "$PREFIX-price-daily" --location "$REGION" || true
+          else
+            for SERVICE in "${SERVICES[@]}"; do
+              gcloud run services update "$PREFIX-$SERVICE" --region "$REGION" --update-env-vars="RESTART_TOKEN=${{ github.run_id }}-$(date +%s)" --quiet
+            done
+          fi
