@@ -2,8 +2,9 @@
 import type { D1Database } from "@cloudflare/workers-types";
 import { handleImageOptimization, DEFAULT_DEVICE_SIZES, DEFAULT_IMAGE_SIZES } from "vinext/server/image-optimization";
 import handler from "vinext/server/app-router-entry";
+import { withRuntimeEnvironment, type ServerKeys } from '../lib/runtime-env';
 
-interface Env {
+interface Env extends ServerKeys {
   ASSETS: { fetch(request: Request): Promise<Response> };
   DB: D1Database;
   IMAGES: {
@@ -48,7 +49,7 @@ const worker = {
       }, allowedWidths);
     }
 
-    return handler.fetch(request, env, ctx);
+    return withRuntimeEnvironment(env, () => handler.fetch(request, env, ctx));
   },
 };
 

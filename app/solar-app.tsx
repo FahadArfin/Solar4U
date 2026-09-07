@@ -5,6 +5,7 @@ import InteractiveCalculatorsPage from "./calculators-page";
 import FieldGuide from "./field-guide";
 import PriceTracker from "./price-tracker";
 import DesignStudio from "./design-studio";
+import AerialRoof from "./aerial-roof";
 import { DiagnosticsPage, usePageTools } from "./webmcp";
 type DiagramNode={id:number;type:string;x:number;y:number};
 function DiagramsPage() {
@@ -22,6 +23,7 @@ export function SolarApp({ section, pickerSearch = "" }: { section: string; comm
   if(section==="guides") content=<FieldGuide/>;
   if(section==="calculators") content=<InteractiveCalculatorsPage/>;
   if(section==="planner") content=<DesignStudio/>;
+  if(section==="roof-analysis") content=<AerialRoof/>;
   if(section==="diagrams") content=<DiagramsPage/>;
   if(["dashboard","community","community-test"].includes(section)) content=<WorkspacePage/>;
   if(["admin","diagnostics"].includes(section)) content=<DiagnosticsPage/>;
