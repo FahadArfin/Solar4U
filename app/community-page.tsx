@@ -36,7 +36,7 @@ const LOCAL_MEMBER = {
   role: "admin",
 };
 
-type ForumGroup = "General discussion" | "News & promotions" | "Solar systems" | "Marketplace" | "Off-topic";
+type ForumGroup = "Design & equipment" | "General discussion" | "News & promotions" | "Solar systems" | "Marketplace" | "Off-topic";
 type SortMode = "latest" | "top" | "unanswered" | "following" | "bookmarked";
 type TimeRange = "1d" | "7d" | "30d" | "6m" | "1y" | "all";
 type TopicType = "question" | "discussion" | "build" | "product" | "deal" | "sale";

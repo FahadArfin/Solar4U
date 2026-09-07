@@ -5,6 +5,10 @@ type RouteContext = {
 };
 
 async function proxyCommunityRequest(request: Request, context: RouteContext) {
+  // The seeded local profile must never become a shared production identity.
+  if (process.env.AUTH_MODE !== "local" || process.env.ENABLE_LOCAL_FORUM !== "true") {
+    return Response.json({ error: "forum_not_enabled", message: "The development forum is disabled. No shared development identity is available on the hosted site." }, { status: 403 });
+  }
   const { path } = await context.params;
   const upstreamBase = process.env.PLATFORM_API_URL || "http://127.0.0.1:4000";
   const upstream = new URL(`/v1/${path.map(encodeURIComponent).join("/")}`, upstreamBase);

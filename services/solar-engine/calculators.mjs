@@ -178,7 +178,7 @@ export function cableSizing(input) {
 
 export function payback(input) {
   const grossCost = clamp(input.grossCost || 0, 0, 250000);
-  const incentivePercent = Math.min(100, Math.max(0, Number(input.incentivePercent ?? 30)));
+  const incentivePercent = Math.min(100, Math.max(0, Number(input.incentivePercent ?? 0)));
   const annualProductionKwh = clamp(input.annualProductionKwh || 0, 0, 1000000);
   const electricityRate = clamp(input.electricityRate || 0, 0, 2);
   const escalationPercent = clamp(input.escalationPercent ?? 2.5, 0, 10);

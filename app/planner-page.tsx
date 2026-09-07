@@ -200,7 +200,7 @@ function loadCesiumRuntime() {
   return cesiumRuntimePromise;
 }
 
-const engine = "http://localhost:4001";
+const engine = "/api/engine";
 // The live Solar data-layer request uses a 30 m radius. Keeping this frame
 // explicit prevents the UI from treating a tightly cropped 60 m image as the
 // old 100 m neighborhood view when converting roof coordinates to percentages.
@@ -942,7 +942,7 @@ export default function PlannerPage() {
   const [manualEditorOpen, setManualEditorOpen] = useState(false);
   const [draftRoofPoints, setDraftRoofPoints] = useState<Array<{ x: number; y: number }>>([]);
   const [manualRoofName, setManualRoofName] = useState("Custom roof plane");
-  const [manualRoofPitch, setManualRoofPitch] = useState(30);
+  const [manualRoofPitch, setManualRoofPitch] = useState(0);
   const [manualRoofAzimuth, setManualRoofAzimuth] = useState(180);
   const [visionPanelOpen, setVisionPanelOpen] = useState(false);
   const [visionFile, setVisionFile] = useState<File | null>(null);
@@ -956,7 +956,7 @@ export default function PlannerPage() {
   const [usage, setUsage] = useState(10000);
   const [rate, setRate] = useState(0.19);
   const [costPerWatt, setCostPerWatt] = useState(3);
-  const [incentive, setIncentive] = useState(30);
+  const [incentive, setIncentive] = useState(0);
   const [estimate, setEstimate] = useState<Estimate | null>(null);
   const [saved, setSaved] = useState(false);
 

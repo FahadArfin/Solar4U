@@ -1,0 +1,1 @@
+export function GET(){return Response.json({status:"ok",application:"Solar4U",runtime:"hosted",version:"experience-1",productionModel:"estimate with explicit assumptions",priceData:"collection setup in progress",projectStorage:"this device + JSON export",checkedAt:new Date().toISOString()},{headers:{"cache-control":"no-store"}})}
