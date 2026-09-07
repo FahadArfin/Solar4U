@@ -28,7 +28,7 @@
     "roof-vision:test": "docker compose build roof-vision && docker run --rm solar4u-roof-vision python -m unittest -v test_algorithms.py",
     "roof-vision:logs": "docker compose logs -f roof-vision",
     "typecheck": "tsc --noEmit",
-    "test:unit": "node --test services/price-worker/tests.mjs services/solar-engine/tests.mjs services/solar-engine/model.test.mjs services/diagram-service/tests.mjs tests/regressions.test.mjs",
+    "test:unit": "node --test services/price-worker/tests.mjs services/solar-engine/tests.mjs services/solar-engine/model.test.mjs services/diagram-service/tests.mjs tests/regressions.test.mjs tests/catalog.test.mjs",
     "test:hosted": "node --test tests/hosted.test.mjs"
   },
   "dependencies": {
