@@ -127,7 +127,7 @@ export default function ProductDetailPage({ productId, returnTo = "/catalog" }: 
   const [voteStatus, setVoteStatus] = useState("");
 
   useEffect(() => {
-    fetch(`http://localhost:4000/v1/products/${encodeURIComponent(productId)}`)
+    fetch(`/api/platform/v1/products/${encodeURIComponent(productId)}`)
       .then(response => response.ok ? response.json() : Promise.reject())
       .then(payload => setProduct(payload.data))
       .catch(() => setProduct({ ...fallback, id: productId }))
@@ -180,7 +180,7 @@ export default function ProductDetailPage({ productId, returnTo = "/catalog" }: 
   const submitCategoryVote = async () => {
     if (!categoryVote) return;
     setVoteStatus("Saving…");
-    const response = await fetch(`http://localhost:4000/v1/products/${encodeURIComponent(current.id)}/classification-votes`, {
+    const response = await fetch(`/api/platform/v1/products/${encodeURIComponent(current.id)}/classification-votes`, {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ pickerCategory: categoryVote }),

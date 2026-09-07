@@ -148,7 +148,7 @@ export default function CalculatorsPage(){
     capacity:10,load:750,dod:90,eff:92,volts:48,current:30,length:40,ampacity:60,voc:49.5,vmp:41.7,isc:10.4,imp:9.6,series:8,parallel:2,minTemp:-15,coefficient:-.28,
     controllerVoc:49.5,controllerVmp:41.7,controllerIsc:10.4,controllerImp:9.6,
     batteryVolts:48,dailyUsage:30,onShare:35,midShare:30,peakRate:.38,midRate:.22,offRate:.12,reserve:20,autonomy:2,roundTrip:90,cableDrop:2,
-    cost:30000,incentive:30,production:11000,escalation:2.5,maintenance:100,degradation:.5});
+    cost:30000,incentive:0,production:11000,escalation:2.5,maintenance:100,degradation:.5});
   const set=(key:string)=>(value:number)=>setV(old=>({...old,[key]:value}));
   const [gauge,setGauge]=useState("6 AWG"),[material,setMaterial]=useState<"Copper"|"Aluminum">("Copper");
   const [manualOverride,setManualOverride]=useState(false),[remote,setRemote]=useState<PvResult|null>(null),[loading,setLoading]=useState(false);
@@ -170,14 +170,14 @@ export default function CalculatorsPage(){
   async function updatePv(){
     setRemote(null); if(manualOverride)return; setLoading(true);
     try{
-      const response=await fetch("http://localhost:4001/v1/solar/estimates",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({provider:"pvgis",capacityKw:v.kw,latitude:v.lat,longitude:v.lon,tilt:v.tilt,azimuth:v.azimuth,lossesPercent:v.loss,electricityRate:v.rate,arrays:advanced?arrays:undefined})});
+      const response=await fetch("/api/engine/v1/solar/estimates",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({provider:"pvgis",capacityKw:v.kw,latitude:v.lat,longitude:v.lon,tilt:v.tilt,azimuth:v.azimuth,lossesPercent:v.loss,electricityRate:v.rate,arrays:advanced?arrays:undefined})});
       if(!response.ok)throw new Error(); const payload=await response.json(); setRemote(payload.data);
     }catch{setRemote({...local,warnings:["Live PVGIS was unavailable, so this result uses the local seasonal model."]});}
     finally{setLoading(false)}
   }
   async function searchLocation(){
     if(locationQuery.trim().length<2)return; setLocationLoading(true);
-    try{const response=await fetch(`http://localhost:4001/v1/locations/search?q=${encodeURIComponent(locationQuery.trim())}`);const payload=await response.json();setLocationResults(payload.data||[])}catch{setLocationResults([])}finally{setLocationLoading(false)}
+    try{const response=await fetch(`/api/engine/v1/locations/search?q=${encodeURIComponent(locationQuery.trim())}`);const payload=await response.json();setLocationResults(payload.data||[])}catch{setLocationResults([])}finally{setLocationLoading(false)}
   }
   function chooseLocationResult(location:LocationResult){
     setV(old=>({...old,lat:location.latitude,lon:location.longitude}));setLocationQuery(location.label);setLocationResults([]);setRemote(null);setOverrideLabels(old=>old.filter(label=>label!=="latitude"&&label!=="longitude"));
@@ -192,7 +192,7 @@ export default function CalculatorsPage(){
   function changeClimateSource(value:string){const manual=value==="manual";setManualOverride(manual);setRemote(null);setOverrideLabels(old=>manual?(old.includes("climate source")?old:[...old,"climate source"]):old.filter(label=>label!=="climate source"))}
 
   useEffect(()=>{void (async()=>{
-    try{const response=await fetch("http://localhost:4001/v1/solar/estimates",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({provider:"pvgis",capacityKw:10,latitude:42.9997,longitude:-78.8658,tilt:35,azimuth:180,lossesPercent:14,electricityRate:.19})});if(response.ok){const payload=await response.json();setRemote(payload.data)}}catch{/* The local seasonal preview remains available. */}
+    try{const response=await fetch("/api/engine/v1/solar/estimates",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({provider:"pvgis",capacityKw:10,latitude:42.9997,longitude:-78.8658,tilt:35,azimuth:180,lossesPercent:14,electricityRate:.19})});if(response.ok){const payload=await response.json();setRemote(payload.data)}}catch{/* The local seasonal preview remains available. */}
   })()},[]);
 
   let content:ReactNode;

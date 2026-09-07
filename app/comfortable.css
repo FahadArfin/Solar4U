@@ -1,0 +1,24 @@
+/* Solar4U has one comfortable light theme. No system or saved dark-mode override. */
+:root{color-scheme:light}
+.s4-feature-green{background:#dfe8d4;color:#264032;border-color:#d5dfcb}
+.legacy-app{background:#f5f4ec;color:#294232}
+.legacy-app :is(section,article,aside,header,nav,[class*="-panel"],[class*="-card"],[class*="-reference"],[class*="lesson-"],[class*="learn-"],[class*="-toolbar"],[class*="-summary"],[class*="-results"],[class*="-head"],[class*="-row"],[class*="-figure"],[class*="-layout"]){background-color:#fffef7!important;background-image:none!important;color:#294232!important;border-color:#d7decd!important;box-shadow:none!important}
+.legacy-app :is(h1,h2,h3,h4,b,strong,th){color:#294232!important}
+.legacy-app :is(p,small,label,td,li,figcaption){color:#64745e!important}
+.legacy-app :is(button,input,select,textarea){color:#294232!important;background:#f4f6ec!important;border-color:#c4d0b8!important;border-radius:5px}
+.legacy-app :is(button.active,button[aria-selected=true],button[aria-pressed=true],.primary-button,.learn-hero-actions a:first-child){background:#e0e9d3!important;color:#203c30!important;border-color:#acbd99!important}
+.legacy-app :is(.eyebrow,.learn-sidebar h2,.lesson-meta,.lesson-pager,.professional-reference small){color:#63794f!important}
+.legacy-app :is(.formula,.safety-banner,.calculator-warning,.lesson-warning,.method-note,.source-note){background:#f4edcf!important;color:#625932!important;border-color:#ddd2a7!important;border-radius:5px}
+.legacy-app :is(.learn-page,.page-main,.part-picker-page,.planner-page){background:#f5f4ec!important}
+.legacy-app :is(.learn-toolbar,.learn-sidebar,.learn-reference){background:#eaf0e0!important}
+.legacy-app .learn-hero{padding-top:35px;padding-bottom:35px;background:#f5f4ec!important}
+.legacy-app .learn-hero h1{font-size:clamp(34px,4vw,52px);line-height:1.1}
+.legacy-app .learn-hero p{font-size:14px;line-height:1.7;max-width:640px}
+.legacy-app .learn-sidebar button{font-size:12px;line-height:1.5;padding-top:12px;padding-bottom:12px}
+.legacy-app .learn-reader{font-size:15px;line-height:1.8}
+.legacy-app .learn-reader p,.legacy-app .learn-reader li{font-size:14px;line-height:1.85}
+.legacy-app .lesson-pager button{min-height:42px}
+.legacy-app :is(a:hover,button:hover){color:#294b30!important}
+.legacy-app :is(.cashflow-bar,.month-column>div,.month-column>span){background:#8aab70!important}
+.legacy-app .world-map{background:#e8eddf!important}
+.s4-app :is(.mode-dark,.community-dark,.picker-dark){color-scheme:light}

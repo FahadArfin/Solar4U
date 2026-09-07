@@ -237,7 +237,7 @@ export default function SolarPartPicker({ initialSearch = "" }: { initialSearch?
     };
     hydrate(pickerParts);
     Promise.all(categoryDefinitions.map(category =>
-      fetch(`http://localhost:4000/v1/products?pickerCategory=${encodeURIComponent(category.id)}&limit=300`)
+      fetch(`/api/platform/v1/products?pickerCategory=${encodeURIComponent(category.id)}&limit=300`)
         .then(response => response.ok ? response.json() : Promise.reject()),
     ))
       .then(payloads => {

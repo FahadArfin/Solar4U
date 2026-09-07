@@ -1,0 +1,11 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import worker from '../dist/server/index.js';
+const env={ASSETS:{fetch:async()=>new Response('Not found',{status:404})}};
+const ctx={waitUntil(){},passThroughOnException(){}};
+const render=path=>worker.fetch(new Request(`https://solar4u.example${path}`,{headers:{accept:'text/html'}}),env,ctx);
+test('home exposes real journeys without fabricated market totals',async()=>{const r=await render('/');assert.equal(r.status,200);const html=await r.text();assert.match(html,/Your place/);assert.match(html,/\/planner/);assert.match(html,/\/guides/);assert.doesNotMatch(html,/18,420|1\.2M|126.*Price drops/);assert.doesNotMatch(html,/localhost:400[0-9]/)});
+test('primary routes render without server failures',async()=>{for(const path of ['/planner','/products','/guides','/calculators','/dashboard','/diagnostics','/solar-part-picker']){const r=await render(path);assert.equal(r.status,200,path);const html=await r.text();assert.match(html,/Main navigation/,path);assert.doesNotMatch(html,/http:\/\/localhost:400[0-9]/,path)}});
+test('health responds with a timestamp and device storage disclosure',async()=>{const r=await render('/api/health');assert.equal(r.status,200);const data=await r.json();assert.equal(data.status,'ok');assert.ok(Date.parse(data.checkedAt));assert.match(data.projectStorage,/device/)});
+test('shared local forum identity cannot be used through hosted proxy',async()=>{const r=await worker.fetch(new Request('https://solar4u.example/api/community/threads',{method:'POST',headers:{'content-type':'application/json'},body:'{}'}),env,ctx);assert.equal(r.status,403)});
+test('engine rejects invalid input and computes zero capacity honestly',async()=>{for(const [body,status] of [[{capacityKw:-1},400],[{capacityKw:0,provider:'manual'},200]]){const r=await worker.fetch(new Request('https://solar4u.example/api/engine/v1/solar/estimates',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)}),env,ctx);assert.equal(r.status,status);if(status===200)assert.equal((await r.json()).data.annualKwh,0)}});

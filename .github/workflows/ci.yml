@@ -12,7 +12,16 @@ jobs:
         with: { node-version: 22, cache: npm }
       - run: npm ci
       - run: npm run lint
+      - run: npm run typecheck
+      - run: npm run test:unit
       - run: npm run build
+      - run: npm run test:hosted
+      - uses: actions/upload-artifact@v4
+        with:
+          name: validated-site
+          path: dist/
+          include-hidden-files: true
+          retention-days: 7
   services:
     runs-on: ubuntu-latest
     steps:

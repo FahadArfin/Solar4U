@@ -14,6 +14,7 @@ const validSections = new Set([
   "community-test",
   "dashboard",
   "admin",
+  "diagnostics",
 ]);
 
 export default async function SectionPage({

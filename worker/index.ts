@@ -1,9 +1,10 @@
 /** Cloudflare Worker entry point for the vinext-starter template. */
+import type { D1Database } from "@cloudflare/workers-types";
 import { handleImageOptimization, DEFAULT_DEVICE_SIZES, DEFAULT_IMAGE_SIZES } from "vinext/server/image-optimization";
 import handler from "vinext/server/app-router-entry";
 
 interface Env {
-  ASSETS: Fetcher;
+  ASSETS: { fetch(request: Request): Promise<Response> };
   DB: D1Database;
   IMAGES: {
     input(stream: ReadableStream): {
@@ -30,6 +31,13 @@ const worker = {
     const url = new URL(request.url);
 
     if (url.pathname === "/_vinext/image") {
+      if (!env.ASSETS?.fetch || !env.IMAGES?.input) {
+        const source = new URL(url.searchParams.get("url") || "/", url.origin);
+        if (source.origin !== url.origin || !/\.(png|jpe?g|webp|gif|avif|svg)$/i.test(source.pathname)) {
+          return new Response("Unsupported image source", { status: 400 });
+        }
+        return Response.redirect(source.href, 302);
+      }
       const allowedWidths = [...DEFAULT_DEVICE_SIZES, ...DEFAULT_IMAGE_SIZES];
       return handleImageOptimization(request, {
         fetchAsset: (path) => env.ASSETS.fetch(new Request(new URL(path, request.url))),

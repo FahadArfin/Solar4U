@@ -6,7 +6,7 @@ const rules = [
   { category: "charge_controller", pickerCategory: "controllers", confidence: .98, pattern: /\b(?:charge controller|\bmppt\b|\bpwm controller\b)\b/i },
   { category: "monitoring", pickerCategory: "monitoring", confidence: .96, pattern: /\b(?:cerbo|gateway|smartshunt|battery shunt|energy monitor|ct clamp|rs485|can bus|communication cable)\b/i },
   { category: "tools", pickerCategory: "tools", confidence: .96, pattern: /\b(?:crimper|multimeter|clamp meter|insulated glove|arc flash|wire stripper|mc4 wrench|eye protection|\bppe\b)\b/i },
-  { category: "battery", pickerCategory: "storage", confidence: .94, pattern: /\b(?:lifepo4|lithium iron|powerwall|server rack battery|battery module|battery pack|battery cell|\bbms\b|active balancer)\b/i },
+  { category: "battery", pickerCategory: "storage", confidence: .94, pattern: /\b(?:lifepo4|lithium iron|powerwall|server rack battery|battery|batteries|battery module|battery pack|battery cell|\bbms\b|active balancer)\b/i },
   { category: "power_station", pickerCategory: "inverters", confidence: .95, pattern: /\b(?:power station|solar generator)\b/i },
   { category: "inverter", pickerCategory: "inverters", confidence: .94, pattern: /\b(?:microinverter|hybrid inverter|string inverter|off[ -]?grid inverter|grid[ -]?tie inverter|\binverter\b)\b/i },
   { category: "panel", pickerCategory: "generation", confidence: .9, pattern: /\b(?:pv module|photovoltaic module|solar module|bifacial module|monofacial module|topcon module|hjt module|perc module|flexible solar panel|\d{2,4}\s*w(?:att)?\s+(?:bifacial\s+|monofacial\s+)?(?:solar\s+)?panel)\b/i },

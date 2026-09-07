@@ -2,14 +2,14 @@ const monthDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 const midMonthDays = [15, 45, 74, 105, 135, 166, 196, 227, 258, 288, 319, 349];
 
 function solarMonthWeights(latitude, tilt) {
-  const phi = Math.abs(latitude) * Math.PI / 180;
+  const phi = latitude * Math.PI / 180;
   const tiltRadians = Math.max(0, Math.min(90, tilt)) * Math.PI / 180;
   const raw = midMonthDays.map((dayOfYear, index) => {
     const declination = 23.45 * Math.sin(2 * Math.PI * (284 + dayOfYear) / 365) * Math.PI / 180;
     const sunsetAngle = Math.acos(Math.max(-1, Math.min(1, -Math.tan(phi) * Math.tan(declination))));
     const daylightHours = 24 * sunsetAngle / Math.PI;
     const noonElevation = Math.max(0.04, Math.sin(Math.PI / 2 - Math.abs(phi - declination)));
-    const tiltedIncidence = Math.max(0.08, Math.cos(Math.abs(phi - declination - tiltRadians)));
+    const tiltedIncidence = Math.max(0.08, Math.cos(Math.abs(phi - declination - Math.sign(latitude || 1) * tiltRadians)));
     return monthDays[index] * daylightHours * noonElevation * (0.55 + 0.45 * tiltedIncidence);
   });
   const total = raw.reduce((sum, value) => sum + value, 0);
@@ -21,7 +21,7 @@ function compassDifference(a, b) {
 }
 
 export function localEstimate(input) {
-  const capacityKw = Math.max(0.05, Number(input.capacityKw || 0));
+  const capacityKw = Math.max(0, Number(input.capacityKw ?? 0));
   const losses = Math.min(99, Math.max(-5, Number(input.lossesPercent ?? 14)));
   const latitude = Math.max(-66, Math.min(66, Number(input.latitude ?? 43)));
   const absoluteLatitude = Math.abs(latitude);
@@ -39,13 +39,15 @@ export function localEstimate(input) {
   const annualUsage = Number(input.annualUsageKwh ?? 10000);
   const yearlyBillValue = annualKwh * rate;
   const installedCost = capacityKw * Number(input.costPerWatt ?? 3) * 1000;
-  const incentive = installedCost * Number(input.incentivePercent ?? 0.3);
+  const incentive = installedCost * Math.min(1, Math.max(0, Number(input.incentivePercent ?? 0)));
   const netCost = installedCost - incentive;
+  let cumulative = -netCost;
   const cashFlow = Array.from({ length: 25 }, (_, index) => {
     const year = index + 1;
     const production = annualKwh * Math.pow(0.995, index);
     const value = production * rate * Math.pow(1.025, index);
-    return { year, productionKwh: Math.round(production), annualSavings: Math.round(value), cumulativeSavings: Math.round(-netCost + value * year) };
+    cumulative += Math.round(value);
+    return { year, productionKwh: Math.round(production), annualSavings: Math.round(value), cumulativeSavings: Math.round(cumulative) };
   });
   return {
     provider: "solar4u-local-model",
@@ -64,13 +66,15 @@ export function localEstimate(input) {
 }
 
 export function fitGroundArray(input) {
-  const areaSqM = Number(input.areaSqM || 0);
-  const panelWidthM = Number(input.panelWidthM || 1.134);
-  const panelHeightM = Number(input.panelHeightM || 1.722);
-  const rowSpacingM = Number(input.rowSpacingM || 1);
-  const setbackM = Number(input.setbackM || 0.9);
+  const areaSqM = Number(input.areaSqM ?? 0);
+  const panelWidthM = Number(input.panelWidthM ?? 1.134);
+  const panelHeightM = Number(input.panelHeightM ?? 1.722);
+  const rowSpacingM = Number(input.rowSpacingM ?? 1);
+  const setbackM = Number(input.setbackM ?? 0.9);
+  if (![areaSqM,panelWidthM,panelHeightM,rowSpacingM,setbackM].every(Number.isFinite) || areaSqM<0 || areaSqM>1000000 || panelWidthM<=0 || panelHeightM<=0 || rowSpacingM<0 || setbackM<0) throw new Error("Invalid ground dimensions");
   const usableArea = Math.max(0, areaSqM - setbackM * Math.sqrt(Math.max(areaSqM, 0)) * 4);
-  const footprint = panelWidthM * (panelHeightM + rowSpacingM);
-  const panelCount = Math.floor(usableArea / Math.max(footprint, 0.1));
+
+  const side = Math.max(0, Math.sqrt(areaSqM) - 2 * setbackM);
+  const panelCount = Math.floor(side / panelWidthM) * Math.max(0, Math.floor((side + rowSpacingM) / (panelHeightM + rowSpacingM)));
   return { panelCount, usableAreaSqM: Math.round(usableArea * 10) / 10, capacityKw: panelCount * Number(input.panelWatts || 400) / 1000, assumptions: { panelWidthM, panelHeightM, rowSpacingM, setbackM } };
 }

@@ -50,3 +50,5 @@ tmp/
 /design-*.jpg
 /design-qa.md
 !/.env.example
+__pycache__/
+*.pyc
