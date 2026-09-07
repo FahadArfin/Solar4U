@@ -27,5 +27,5 @@ export function SolarApp({ section, pickerSearch = "" }: { section: string; comm
   if(section==="diagrams") content=<DiagramsPage/>;
   if(["dashboard","community","community-test"].includes(section)) content=<WorkspacePage/>;
   if(["admin","diagnostics"].includes(section)) content=<DiagnosticsPage/>;
-  return <div className="s4-app"><a href="#main-content" className="s4-skip">Skip to content</a><SiteHeader section={section}/><div id="main-content" className={["calculators","diagrams"].includes(section)?"legacy-app":""}>{content}</div><SiteFooter/></div>;
+  return <div className="s4-app"><a href="#main-content" className="s4-skip">Skip to content</a><SiteHeader section={section}/><div id="main-content" className={section==="diagrams"?"legacy-app":""}>{content}</div><SiteFooter/></div>;
 }
