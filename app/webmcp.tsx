@@ -19,7 +19,9 @@ export function useAgentTools(tools:AgentTool[]){
     return ()=>{lifecycle.abort();for(const name of registered)try{ctx.unregisterTool?.(name)}catch{}};
   },[names]);
 }
-export function usePageTools(){useAgentTools([
+export function usePageTools(){
+  useEffect(()=>{try{localStorage.removeItem("solar4u-display-mode");localStorage.removeItem("solar4u-community-display-mode")}catch{}},[]);
+  useAgentTools([
   {name:"solar4u_read_page",title:"Read Solar4U page",description:"Read the current Solar4U page title, route, and available navigation. Does not expose local project contents or account data.",inputSchema:{type:"object",properties:{},additionalProperties:false},annotations:{readOnlyHint:true},execute:input=>{objectInput(input);return {title:document.title,path:location.pathname,sections:["/planner","/products","/guides","/calculators","/dashboard","/diagnostics"]}}},
   {name:"solar4u_read_service_status",title:"Read service status",description:"Read hosted API availability and price source freshness to troubleshoot Solar4U. Does not change data.",inputSchema:{type:"object",properties:{},additionalProperties:false},annotations:{readOnlyHint:true,untrustedContentHint:true},execute:async input=>{objectInput(input);const r=await fetch("/api/health");if(!r.ok)throw new Error(`Service check failed (${r.status})`);return r.json()}},
   {name:"solar4u_start_navigation",title:"Open a Solar4U workspace",description:"Start navigation to a known Solar4U section. This opens the requested workspace; it does not create or save a project.",inputSchema:{type:"object",properties:{section:{type:"string",enum:["planner","products","guides","calculators","dashboard","diagnostics"]}},required:["section"],additionalProperties:false},annotations:{readOnlyHint:false},execute:input=>{const {section}=objectInput(input);if(typeof section!=="string"||!["planner","products","guides","calculators","dashboard","diagnostics"].includes(section))throw new Error("Unknown Solar4U section");window.setTimeout(()=>location.assign(`/${section}`),0);return {status:"navigation_requested",path:`/${section}`}}}
