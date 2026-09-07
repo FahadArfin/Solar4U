@@ -9,7 +9,7 @@ await mkdir(resolve(output,'history'),{recursive:true});await mkdir(resolve(outp
 const read=async(file,fallback)=>{try{return JSON.parse(await readFile(file,'utf8'))}catch(e){if(e.code==='ENOENT')return fallback;throw e}};
 const old=await read(resolve(output,'latest.json'),{offers:[]});const at=new Date().toISOString();const day=at.slice(0,10);const run={id:`${day}-${Date.now()}`,startedAt:at,finishedAt:null,schedule:'Daily at 07:17 UTC',sources:[],observations:0};
 const saved=new Map(old.offers.map(o=>[o.id,o]));const delay=ms=>new Promise(r=>setTimeout(r,ms));
-async function collect(source){let endpoint;const record={id:source.id,name:source.name,url:source.baseUrl,status:'checking',reason:'',checkedAt:new Date().toISOString(),observations:0,pages:0,coverage:'Bounded catalog search: solar, battery and inverter. This is not a complete store inventory.'};
+async function collect(source){const deadline=Date.now()+180000;let endpoint;const record={id:source.id,name:source.name,url:source.baseUrl,status:'checking',reason:'',checkedAt:new Date().toISOString(),observations:0,pages:0,coverage:'Bounded catalog search: solar, battery and inverter. This is not a complete store inventory.'};
 try{
   const r=await fetch(`${new URL(source.baseUrl).origin}/.well-known/ucp`,{redirect:'error',signal:AbortSignal.timeout(15000)});
   if(!r.ok)throw new Error(`discovery_http_${r.status}`);const raw=await r.text();if(raw.length>1_000_000)throw new Error('Discovery too large');let discovery;try{discovery=JSON.parse(raw)}catch{throw new Error('catalog_not_advertised')}
@@ -17,12 +17,14 @@ try{
   // Read endpoints only from a reviewed source origin; redirects are disabled.
   const services=discovery.ucp?.services?.['dev.ucp.shopping'];const candidates=(Array.isArray(services)?services:Object.values(services??{})).filter(s=>s.transport==='mcp').map(s=>s.endpoint);endpoint=candidates.find(value=>{try{return !!safeCatalogEndpoint(value,source.baseUrl)}catch{return false}});if(!endpoint)throw new Error('catalog_endpoint_unavailable');endpoint=safeCatalogEndpoint(endpoint,source.baseUrl);
   const unique=new Map();let partial=false;
-  const prior=old.offers.filter(o=>o.retailerId===source.id).slice(0,500);
+  const prior=old.offers.filter(o=>o.retailerId===source.id).sort((a,b)=>a.observedAt.localeCompare(b.observedAt)).slice(0,200);
   let stopped=false;
   if(capabilities['dev.ucp.shopping.catalog.lookup'])for(let i=0;i<prior.length;i+=10){
+    if(Date.now()>deadline){partial=true;stopped=true;record.reason='Time budget reached; remaining variants retain their older observation dates.';break}
     await delay(1500);try{const data=await catalogRequest(endpoint,'',{ids:prior.slice(i,i+10).map(o=>o.variantId),profile:process.env.UCP_AGENT_PROFILE_URL??AGENT_PROFILE});record.pages++;for(const offer of normalizeCatalog(data,source))unique.set(offer.id,offer)}catch(e){partial=true;record.reason=e.message;if(/catalog_http_(429|401|403)/.test(e.message)){stopped=true;record.reason+='; deferred to next daily run';break}}
   }
   searches: for(const query of stopped?[]:['solar','battery','inverter']){let cursor;for(let page=0;page<2;page++){
+    if(Date.now()>deadline){partial=true;record.reason='Time budget reached; remaining variants retain their older observation dates.';break searches}
     await delay(1500);
     let data;try{data=await catalogRequest(endpoint,query,{cursor,profile:process.env.UCP_AGENT_PROFILE_URL??AGENT_PROFILE})}catch(e){partial=true;record.reason=e.message;if(/catalog_http_(429|401|403)/.test(e.message)){record.reason+='; deferred to next daily run';break searches}continue}
     record.pages++;for(const offer of normalizeCatalog(data,source))unique.set(offer.id,offer);
