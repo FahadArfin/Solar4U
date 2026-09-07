@@ -755,6 +755,7 @@ export default function DesignStudio() {
         </div>
       )}
       <div className="s4-studio-disclosure">
+        <Link href="/roof-analysis">Explore your actual roof with aerial 3D data ↗</Link><br/>
         A home model from your dimensions. The starter dimensions are
         illustrative—confirm your property measurements, clearances, and
         obstacles before relying on a layout.

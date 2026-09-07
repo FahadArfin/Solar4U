@@ -1,3 +1,4 @@
+import { roofCapabilities } from "../../../../lib/runtime-env";
 import { localEstimate } from "../../../../services/solar-engine/model.mjs";
 
 type Context={params:Promise<{path:string[]}>};
@@ -20,10 +21,10 @@ export async function POST(request:Request,context:Context){try{const {path}=awa
     if(Array.isArray(input.arrays)&&input.arrays.length){if(input.arrays.length>12)throw new Error("Use at most 12 arrays");const estimates=await Promise.all(input.arrays.map((a:Record<string,unknown>)=>estimate({...input,...a,arrays:undefined})));const monthlyKwh=Array.from({length:12},(_,i)=>estimates.reduce((sum,e)=>sum+e.monthlyKwh[i],0));const annualKwh=monthlyKwh.reduce((a,b)=>a+b,0);return Response.json({data:{provider:estimates.every(e=>e.provider==="EU JRC PVGIS 5.3")?"EU JRC PVGIS 5.3 · multiple arrays":"Mixed seasonal estimates",annualKwh,monthlyKwh,yearlyBillValue:Math.round(annualKwh*numeric(input.electricityRate,0,10,.19)),warnings:estimates.flatMap(e=>"warnings" in e?e.warnings:[])}})}
     return Response.json({data:await estimate(input)});
   }
-  if(route==="v1/solar/roof-analysis")return Response.json({data:{provider:"manual",available:false,reason:"Use the measured design studio. Remote roof data requires a configured provider."}});
+  if(route==="v1/solar/roof-analysis")return Response.json({data:{provider:"manual",available:false,reason:"Use the measured design studio. Use /roof-analysis for aerial data and /api/roof for the current provider API."}});
   return Response.json({error:"Unsupported engine operation"},{status:404});
 }catch(e){return Response.json({error:e instanceof Error?e.message:"Invalid request"},{status:400})}}
-export async function GET(request:Request,context:Context){const {path}=await context.params;const route=path.join("/");if(route==="v1/solar/capabilities")return Response.json({data:{googleSolar:false,googleGeocoding:false,googlePhotorealistic3d:false,roofVision:false,manual:true}});
+export async function GET(request:Request,context:Context){const {path}=await context.params;const route=path.join("/");if(route==="v1/solar/capabilities")return Response.json({data:{...roofCapabilities(),googlePhotorealistic3d:false,roofVision:false,manual:true}});
   if(["v1/locations/search","v1/solar/geocode"].includes(route)){const q=new URL(request.url).searchParams.get("q")?.trim();if(!q||q.length<2||q.length>150)return Response.json({error:"Enter a city or postal code (2–150 characters)"},{status:400});try{const r=await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(q)}&count=5&language=en&format=json`,{signal:AbortSignal.timeout(8000)});if(!r.ok)throw new Error();const body=await r.json();return Response.json({data:(body.results??[]).map((v:{id:number;name:string;latitude:number;longitude:number;admin1?:string;country?:string})=>({...v,label:[v.name,v.admin1,v.country].filter(Boolean).join(", "),state:v.admin1,precision:"locality"})),attribution:"Open-Meteo / GeoNames. Locality matches are not measured building locations."})}catch{return Response.json({error:"Location service unavailable",data:[]},{status:503})}}
   return Response.json({error:"This imagery provider is not configured"},{status:503});
 }

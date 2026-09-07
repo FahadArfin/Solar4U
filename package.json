@@ -28,7 +28,7 @@
     "roof-vision:test": "docker compose build roof-vision && docker run --rm solar4u-roof-vision python -m unittest -v test_algorithms.py",
     "roof-vision:logs": "docker compose logs -f roof-vision",
     "typecheck": "tsc --noEmit",
-    "test:unit": "node --test services/price-worker/tests.mjs services/solar-engine/tests.mjs services/solar-engine/model.test.mjs services/diagram-service/tests.mjs tests/regressions.test.mjs tests/catalog.test.mjs tests/placement.test.mjs && node --experimental-strip-types --test tests/studio.test.mjs",
+    "test:unit": "node --test services/price-worker/tests.mjs services/solar-engine/tests.mjs services/solar-engine/model.test.mjs services/diagram-service/tests.mjs tests/regressions.test.mjs tests/catalog.test.mjs tests/placement.test.mjs && node --experimental-strip-types --test tests/studio.test.mjs tests/roof.test.mjs",
     "test:hosted": "node --test tests/hosted.test.mjs"
   },
   "dependencies": {
@@ -36,9 +36,11 @@
     "drizzle-orm": "0.45.2",
     "earcut": "^3.2.3",
     "geotiff": "^3.0.5",
+    "geotiff-geokeys-to-proj4": "^2026.8.16",
     "lucide-react": "^0.468.0",
     "next": "^16.3.4",
     "next-auth": "^5.0.0-beta.32",
+    "proj4": "^2.22.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8"
   },
