@@ -1,0 +1,793 @@
+{
+  "schemaVersion": 1,
+  "description": "Independent Solar4U metre-space placement research fixtures; expected values are hand-derived geometry or explicit trigonometric calculations, not copied from the application.",
+  "units": "metres",
+  "numericToleranceM": 1e-8,
+  "conventions": {
+    "point": "[x,y] in a local Cartesian plane",
+    "rectangle": "centre [x,y], width along local x, depth along local y, rotationDegrees counterclockwise",
+    "region": "outer and hole boundaries may be touched only when boundaryTouchAllowed=true and the required clearance is zero",
+    "setback": "Euclidean minimum distance from the complete panel footprint to finite boundary segments; no negative buffer approximation",
+    "candidateIds": "r{zeroBasedRow}c{zeroBasedColumn}"
+  },
+  "regions": {
+    "rectangle": {
+      "outer": [
+        [
+          0,
+          0
+        ],
+        [
+          8,
+          0
+        ],
+        [
+          8,
+          6
+        ],
+        [
+          0,
+          6
+        ]
+      ],
+      "holes": []
+    },
+    "concaveL": {
+      "outer": [
+        [
+          0,
+          0
+        ],
+        [
+          6,
+          0
+        ],
+        [
+          6,
+          2
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          0,
+          6
+        ]
+      ],
+      "holes": []
+    },
+    "courtyard": {
+      "outer": [
+        [
+          0,
+          0
+        ],
+        [
+          8,
+          0
+        ],
+        [
+          8,
+          6
+        ],
+        [
+          0,
+          6
+        ]
+      ],
+      "holes": [
+        [
+          [
+            3,
+            2
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            5,
+            4
+          ],
+          [
+            3,
+            4
+          ]
+        ]
+      ]
+    },
+    "offCentreCourtyard": {
+      "outer": [
+        [
+          0,
+          0
+        ],
+        [
+          8,
+          0
+        ],
+        [
+          8,
+          6
+        ],
+        [
+          0,
+          6
+        ]
+      ],
+      "holes": [
+        [
+          [
+            2,
+            2
+          ],
+          [
+            3,
+            2
+          ],
+          [
+            3,
+            3
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      ]
+    },
+    "reentrantCorner": {
+      "outer": [
+        [
+          -10,
+          -10
+        ],
+        [
+          10,
+          -10
+        ],
+        [
+          10,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          10
+        ],
+        [
+          -10,
+          10
+        ]
+      ],
+      "holes": []
+    },
+    "notch": {
+      "outer": [
+        [
+          0,
+          0
+        ],
+        [
+          10,
+          0
+        ],
+        [
+          10,
+          10
+        ],
+        [
+          6,
+          10
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          4,
+          7
+        ],
+        [
+          4,
+          10
+        ],
+        [
+          0,
+          10
+        ]
+      ],
+      "holes": []
+    },
+    "ground": {
+      "outer": [
+        [
+          0,
+          0
+        ],
+        [
+          10,
+          0
+        ],
+        [
+          10,
+          14
+        ],
+        [
+          0,
+          14
+        ]
+      ],
+      "holes": []
+    }
+  },
+  "placementCases": [
+    {
+      "id": "rectangle_exact_setback",
+      "region": "rectangle",
+      "rectangle": {
+        "centre": [
+          2,
+          2
+        ],
+        "widthM": 2,
+        "depthM": 1,
+        "rotationDegrees": 0
+      },
+      "edgeSetbackM": 1,
+      "holeClearanceM": 0,
+      "boundaryTouchAllowed": true,
+      "expected": {
+        "valid": true,
+        "minOuterDistanceM": 1,
+        "allCornersInRegion": true
+      }
+    },
+    {
+      "id": "rectangle_setback_short_by_10mm",
+      "region": "rectangle",
+      "rectangle": {
+        "centre": [
+          1.99,
+          2
+        ],
+        "widthM": 2,
+        "depthM": 1,
+        "rotationDegrees": 0
+      },
+      "edgeSetbackM": 1,
+      "holeClearanceM": 0,
+      "boundaryTouchAllowed": true,
+      "expected": {
+        "valid": false,
+        "minOuterDistanceM": 0.99,
+        "allCornersInRegion": true
+      }
+    },
+    {
+      "id": "rectangle_rotated_footprint_clearance",
+      "region": "rectangle",
+      "rectangle": {
+        "centre": [
+          1.3,
+          3
+        ],
+        "widthM": 2,
+        "depthM": 1,
+        "rotationDegrees": 45
+      },
+      "edgeSetbackM": 0.25,
+      "holeClearanceM": 0,
+      "boundaryTouchAllowed": true,
+      "expected": {
+        "valid": false,
+        "minOuterDistanceM": 0.2393398282201788,
+        "allCornersInRegion": true
+      }
+    },
+    {
+      "id": "rectangle_outside",
+      "region": "rectangle",
+      "rectangle": {
+        "centre": [
+          7.5,
+          3
+        ],
+        "widthM": 2,
+        "depthM": 1,
+        "rotationDegrees": 0
+      },
+      "edgeSetbackM": 0,
+      "holeClearanceM": 0,
+      "boundaryTouchAllowed": true,
+      "expected": {
+        "valid": false,
+        "allCornersInRegion": false
+      }
+    },
+    {
+      "id": "l_bottom_bar_boundary_touch",
+      "region": "concaveL",
+      "rectangle": {
+        "centre": [
+          4,
+          1
+        ],
+        "widthM": 4,
+        "depthM": 2,
+        "rotationDegrees": 0
+      },
+      "edgeSetbackM": 0,
+      "holeClearanceM": 0,
+      "boundaryTouchAllowed": true,
+      "expected": {
+        "valid": true,
+        "minOuterDistanceM": 0,
+        "allCornersInRegion": true
+      }
+    },
+    {
+      "id": "l_vertical_bar_boundary_touch",
+      "region": "concaveL",
+      "rectangle": {
+        "centre": [
+          1,
+          4
+        ],
+        "widthM": 2,
+        "depthM": 4,
+        "rotationDegrees": 0
+      },
+      "edgeSetbackM": 0,
+      "holeClearanceM": 0,
+      "boundaryTouchAllowed": true,
+      "expected": {
+        "valid": true,
+        "minOuterDistanceM": 0,
+        "allCornersInRegion": true
+      }
+    },
+    {
+      "id": "l_rotated_corners_inside_crosses_notch",
+      "region": "concaveL",
+      "rectangle": {
+        "centre": [
+          1.8,
+          1.8
+        ],
+        "widthM": 2,
+        "depthM": 2,
+        "rotationDegrees": 45
+      },
+      "edgeSetbackM": 0,
+      "holeClearanceM": 0,
+      "boundaryTouchAllowed": true,
+      "expected": {
+        "valid": false,
+        "allCornersInRegion": true,
+        "centreInRegion": true
+      },
+      "note": "All four corners and the centre are in the L. A rectangle edge crosses the missing upper-right quadrant."
+    },
+    {
+      "id": "l_boundary_touch_disallowed",
+      "region": "concaveL",
+      "rectangle": {
+        "centre": [
+          4,
+          1
+        ],
+        "widthM": 4,
+        "depthM": 2,
+        "rotationDegrees": 0
+      },
+      "edgeSetbackM": 0,
+      "holeClearanceM": 0,
+      "boundaryTouchAllowed": false,
+      "expected": {
+        "valid": false,
+        "minOuterDistanceM": 0,
+        "allCornersInRegion": true
+      }
+    },
+    {
+      "id": "courtyard_edge_tangent",
+      "region": "courtyard",
+      "rectangle": {
+        "centre": [
+          2,
+          3
+        ],
+        "widthM": 2,
+        "depthM": 2,
+        "rotationDegrees": 0
+      },
+      "edgeSetbackM": 0,
+      "holeClearanceM": 0,
+      "boundaryTouchAllowed": true,
+      "expected": {
+        "valid": true,
+        "minHoleDistanceM": 0,
+        "allCornersInRegion": true
+      }
+    },
+    {
+      "id": "courtyard_tangent_needs_clearance",
+      "region": "courtyard",
+      "rectangle": {
+        "centre": [
+          2,
+          3
+        ],
+        "widthM": 2,
+        "depthM": 2,
+        "rotationDegrees": 0
+      },
+      "edgeSetbackM": 0,
+      "holeClearanceM": 0.1,
+      "boundaryTouchAllowed": true,
+      "expected": {
+        "valid": false,
+        "minHoleDistanceM": 0,
+        "allCornersInRegion": true
+      }
+    },
+    {
+      "id": "courtyard_exact_hole_is_not_usable",
+      "region": "courtyard",
+      "rectangle": {
+        "centre": [
+          4,
+          3
+        ],
+        "widthM": 2,
+        "depthM": 2,
+        "rotationDegrees": 0
+      },
+      "edgeSetbackM": 0,
+      "holeClearanceM": 0,
+      "boundaryTouchAllowed": true,
+      "expected": {
+        "valid": false,
+        "allCornersInRegion": true,
+        "centreInRegion": false
+      }
+    },
+    {
+      "id": "courtyard_entire_offcentre_hole_enclosed",
+      "region": "offCentreCourtyard",
+      "rectangle": {
+        "centre": [
+          4,
+          3
+        ],
+        "widthM": 7,
+        "depthM": 5,
+        "rotationDegrees": 0
+      },
+      "edgeSetbackM": 0,
+      "holeClearanceM": 0,
+      "boundaryTouchAllowed": true,
+      "expected": {
+        "valid": false,
+        "allCornersInRegion": true,
+        "centreInRegion": true
+      },
+      "note": "The complete courtyard lies inside the panel. Testing only the panel boundary, corners and centre is insufficient."
+    },
+    {
+      "id": "euclidean_reentrant_corner_pass",
+      "region": "reentrantCorner",
+      "rectangle": {
+        "centre": [
+          -1.5,
+          -1.5
+        ],
+        "widthM": 1,
+        "depthM": 1,
+        "rotationDegrees": 0
+      },
+      "edgeSetbackM": 1.4,
+      "holeClearanceM": 0,
+      "boundaryTouchAllowed": true,
+      "expected": {
+        "valid": true,
+        "minOuterDistanceM": 1.4142135623730951,
+        "allCornersInRegion": true
+      }
+    },
+    {
+      "id": "euclidean_reentrant_corner_fail",
+      "region": "reentrantCorner",
+      "rectangle": {
+        "centre": [
+          -1.5,
+          -1.5
+        ],
+        "widthM": 1,
+        "depthM": 1,
+        "rotationDegrees": 0
+      },
+      "edgeSetbackM": 1.42,
+      "holeClearanceM": 0,
+      "boundaryTouchAllowed": true,
+      "expected": {
+        "valid": false,
+        "minOuterDistanceM": 1.4142135623730951,
+        "allCornersInRegion": true
+      }
+    },
+    {
+      "id": "full_edge_clearance_not_corner_clearance",
+      "region": "notch",
+      "rectangle": {
+        "centre": [
+          5,
+          5
+        ],
+        "widthM": 6,
+        "depthM": 2,
+        "rotationDegrees": 0
+      },
+      "edgeSetbackM": 1.2,
+      "holeClearanceM": 0,
+      "boundaryTouchAllowed": true,
+      "expected": {
+        "valid": false,
+        "minOuterDistanceM": 1,
+        "allCornersInRegion": true,
+        "minCornerToOuterBoundaryM": 2
+      },
+      "note": "All corners are at least 2m from boundary; the midpoint of the panel's top edge is only 1m below the notch."
+    }
+  ],
+  "gridCases": [
+    {
+      "id": "rectangle_12_modules",
+      "region": "rectangle",
+      "module": {
+        "widthM": 2,
+        "depthM": 1,
+        "watts": 400
+      },
+      "grid": {
+        "origin": [
+          1,
+          1
+        ],
+        "columns": 3,
+        "rows": 4,
+        "columnStepM": 2,
+        "rowStepM": 1
+      },
+      "edgeSetbackM": 1,
+      "holeClearanceM": 0,
+      "boundaryTouchAllowed": true,
+      "expected": {
+        "panelCount": 12,
+        "capacityKw": 4.8,
+        "acceptedColumnsByRow": [
+          [
+            0,
+            1,
+            2
+          ],
+          [
+            0,
+            1,
+            2
+          ],
+          [
+            0,
+            1,
+            2
+          ],
+          [
+            0,
+            1,
+            2
+          ]
+        ]
+      }
+    },
+    {
+      "id": "concave_l_10_modules",
+      "region": "concaveL",
+      "module": {
+        "widthM": 2,
+        "depthM": 1,
+        "watts": 400
+      },
+      "grid": {
+        "origin": [
+          0,
+          0
+        ],
+        "columns": 3,
+        "rows": 6,
+        "columnStepM": 2,
+        "rowStepM": 1
+      },
+      "edgeSetbackM": 0,
+      "holeClearanceM": 0,
+      "boundaryTouchAllowed": true,
+      "expected": {
+        "panelCount": 10,
+        "capacityKw": 4,
+        "acceptedColumnsByRow": [
+          [
+            0,
+            1,
+            2
+          ],
+          [
+            0,
+            1,
+            2
+          ],
+          [
+            0
+          ],
+          [
+            0
+          ],
+          [
+            0
+          ],
+          [
+            0
+          ]
+        ]
+      }
+    },
+    {
+      "id": "courtyard_20_modules",
+      "region": "courtyard",
+      "module": {
+        "widthM": 2,
+        "depthM": 1,
+        "watts": 400
+      },
+      "grid": {
+        "origin": [
+          0,
+          0
+        ],
+        "columns": 4,
+        "rows": 6,
+        "columnStepM": 2,
+        "rowStepM": 1
+      },
+      "edgeSetbackM": 0,
+      "holeClearanceM": 0,
+      "boundaryTouchAllowed": true,
+      "expected": {
+        "panelCount": 20,
+        "capacityKw": 8,
+        "acceptedColumnsByRow": [
+          [
+            0,
+            1,
+            2,
+            3
+          ],
+          [
+            0,
+            1,
+            2,
+            3
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            1,
+            2,
+            3
+          ],
+          [
+            0,
+            1,
+            2,
+            3
+          ]
+        ]
+      }
+    }
+  ],
+  "groundCase": {
+    "id": "ground_30deg_tilt_20deg_sun",
+    "region": "ground",
+    "module": {
+      "widthM": 1.134,
+      "slopeLengthM": 1.722,
+      "watts": 400
+    },
+    "tiltDegrees": 30,
+    "minimumDesignSunAltitudeDegrees": 20,
+    "serviceGapM": 0.5,
+    "moduleColumnGapM": 0.02,
+    "edgeSetbackM": 1,
+    "lowerEdgeHeightM": 0.6,
+    "gridOrigin": [
+      1,
+      1
+    ],
+    "candidateColumns": 7,
+    "candidateRows": 4,
+    "expected": {
+      "projectedDepthM": 1.4912957453168034,
+      "riseM": 0.8609999999999999,
+      "rowGapM": 2.3655780581504295,
+      "rowPitchM": 3.856873803467233,
+      "surfaceLengthOverPitchGcr": 0.44647558819579863,
+      "upperEdgeHeightM": 1.4609999999999999,
+      "centreHeightM": 1.0305,
+      "columnStartsM": [
+        1,
+        2.154,
+        3.308,
+        4.462,
+        5.616,
+        6.77
+      ],
+      "rowStartsM": [
+        1,
+        4.8568738034672325,
+        8.713747606934465
+      ],
+      "rowEndsM": [
+        2.4912957453168034,
+        6.3481695487840355,
+        10.205043352251268
+      ],
+      "firstRejectedRowStartM": 12.5706214104017,
+      "firstRejectedRowEndM": 14.061917155718502,
+      "firstRejectedColumnEndM": 9.058,
+      "panelCount": 18,
+      "capacityKw": 7.2,
+      "acceptedColumnsByRow": [
+        [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        []
+      ]
+    },
+    "note": "Rows are aligned perpendicular to the design sun direction. This is a selected-elevation geometric clearance rule, not annual-shading or code compliance."
+  }
+}
