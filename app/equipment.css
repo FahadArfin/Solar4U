@@ -1,0 +1,335 @@
+.s4-equipment-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 30px;
+}
+.s4-equipment button,
+.s4-equipment-dialog button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  background: #edf0e4;
+  border: 1px solid #c6d2b9;
+  color: #294f3c;
+  padding: 11px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+}
+.s4-equipment button.s4-dark,
+.s4-equipment-dialog button.s4-dark {
+  background: #365a42;
+  color: #fffdf2;
+}
+.s4-equipment button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.s4-equipment-save {
+  font-size: 13px;
+  color: #577348;
+  margin: 18px 0 28px;
+}
+.s4-equipment-summary {
+  display: flex;
+  gap: 1px;
+  background: #cfdbc1;
+  border: 1px solid #cfdbc1;
+  border-radius: 9px;
+  overflow: hidden;
+}
+.s4-equipment-summary > div {
+  flex: 1;
+  min-width: 150px;
+  background: #e7eedb;
+  padding: 23px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.s4-equipment-summary span,
+.s4-equipment-summary small {
+  font-size: 13px;
+  color: #586d4d;
+}
+.s4-equipment-summary strong {
+  font-size: 30px;
+  font-weight: 450;
+  letter-spacing: -0.03em;
+}
+.s4-equipment-list-title {
+  margin: 32px 0 22px;
+}
+.s4-equipment-list-title label {
+  font-size: 12px;
+  display: grid;
+  gap: 8px;
+  max-width: 440px;
+  width: 100%;
+}
+.s4-equipment-list-title input {
+  font-size: 21px;
+}
+.s4-equipment-item {
+  display: grid;
+  grid-template-columns: 45px minmax(0, 1fr) 175px;
+  gap: 15px;
+  border-top: 1px solid #ced8c4;
+  padding: 27px 5px;
+}
+.s4-equipment-index {
+  font-size: 14px;
+  color: #7a8c68;
+  padding-top: 3px;
+}
+.s4-equipment-description h2 {
+  font-size: 22px;
+  font-weight: 480;
+  line-height: 1.4;
+  margin: 10px 0;
+  overflow-wrap: anywhere;
+}
+.s4-equipment-description p {
+  font-size: 14px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+.s4-equipment-description small {
+  font-size: 12px;
+  line-height: 1.8;
+  color: #607055;
+}
+.s4-equipment-description a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.s4-equipment-note {
+  white-space: pre-wrap;
+  color: #647656;
+}
+.s4-equipment-amount {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  gap: 10px;
+}
+.s4-equipment-amount strong {
+  font-size: 23px;
+  font-weight: 450;
+}
+.s4-equipment-amount small {
+  font-size: 12px;
+  color: #647656;
+}
+.s4-equipment-amount > div {
+  display: flex;
+  gap: 8px;
+  margin-top: 9px;
+}
+.s4-equipment-amount button {
+  padding: 10px;
+}
+.s4-equipment-comparison {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  background: #f2ebca;
+  padding: 12px;
+  margin-top: 15px;
+  font-size: 13px;
+}
+.s4-equipment-empty {
+  padding: 60px 25px;
+  margin: 25px 0;
+  border: 1px dashed #b8c8a7;
+  border-radius: 9px;
+  text-align: center;
+  background: #fffdf4;
+}
+.s4-equipment-empty svg {
+  margin: auto;
+  color: #8ca373;
+}
+.s4-equipment-empty h2 {
+  font-size: 25px;
+  font-weight: 450;
+}
+.s4-equipment-empty p {
+  max-width: 570px;
+  margin: 16px auto 25px;
+  line-height: 1.8;
+  color: #647656;
+}
+.s4-equipment-empty a {
+  text-decoration: underline;
+}
+.s4-equipment-next {
+  background: #e9eddd;
+  border-radius: 9px;
+  padding: 25px;
+  margin-top: 35px;
+}
+.s4-equipment-next h2 {
+  font-size: 24px;
+  font-weight: 450;
+}
+.s4-equipment-next p {
+  line-height: 1.7;
+  font-size: 14px;
+}
+.s4-equipment-next a {
+  display: inline-block;
+  margin: 10px 25px 0 0;
+  text-decoration: underline;
+}
+.s4-equipment-dialog {
+  margin: auto;
+  width: min(660px, calc(100% - 28px));
+  max-height: 90vh;
+  overflow: auto;
+  border: 1px solid #becfb0;
+  border-radius: 12px;
+  background: #fffdf3;
+  color: #294d39;
+  padding: 30px;
+  box-shadow: 0 30px 100px #28493433;
+}
+.s4-equipment-dialog::backdrop {
+  background: #28493466;
+}
+.s4-equipment-dialog h2 {
+  font-size: 26px;
+  font-weight: 450;
+  margin: 0;
+}
+.s4-equipment-dialog p {
+  line-height: 1.7;
+  font-size: 14px;
+}
+.s4-equipment-dialog label {
+  display: grid;
+  gap: 8px;
+  font-size: 13px;
+  margin: 15px 0;
+}
+.s4-equipment-dialog input,
+.s4-equipment-dialog select,
+.s4-equipment-dialog textarea {
+  width: 100%;
+  background: #f5f4e9;
+  color: #294d39;
+  border: 1px solid #bfccae;
+  border-radius: 5px;
+  padding: 12px;
+  font: inherit;
+}
+.s4-equipment-dialog input:disabled {
+  opacity: 0.65;
+}
+.s4-equipment-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 18px;
+}
+.s4-equipment-dialog [role="alert"] {
+  color: #8b502d;
+  background: #f6e5d0;
+  padding: 12px;
+}
+.s4-equipment [role="alert"] button {
+  margin: 5px;
+}
+.s4-bom-add {
+  margin-top: 7px !important;
+}
+.s4-workspace-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 30px;
+}
+.s4-workspace-card {
+  background: #fffdf4;
+  border: 1px solid #cfdbc1;
+  padding: 28px;
+  border-radius: 9px;
+}
+.s4-workspace-card h2 {
+  font-size: 25px;
+  font-weight: 450;
+  margin: 10px 0;
+}
+.s4-workspace-card p {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #607454;
+}
+.s4-workspace-card strong {
+  display: block;
+  font-size: 29px;
+  font-weight: 450;
+  margin: 18px 0;
+}
+.s4-workspace-card a {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 18px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.s4-workspace-card:nth-child(2) {
+  background: #e6edd8;
+}
+.s4-workspace-card:nth-child(3) {
+  background: #f3eac3;
+}
+.s4-workspace-card:nth-child(4) {
+  background: #eeeade;
+}
+@media (max-width: 650px) {
+  .s4-equipment-summary {
+    flex-wrap: wrap;
+  }
+  .s4-equipment-summary > div {
+    min-width: 45%;
+  }
+  .s4-equipment-item {
+    grid-template-columns: 25px minmax(0, 1fr);
+    gap: 10px;
+  }
+  .s4-equipment-amount {
+    grid-column: 2;
+    align-items: start;
+    display: grid;
+    grid-template-columns: 1fr auto;
+  }
+  .s4-equipment-amount small {
+    grid-column: 1;
+  }
+  .s4-equipment-amount > div {
+    grid-column: 2;
+    grid-row: 1/3;
+    margin: 0;
+  }
+  .s4-equipment-list-title {
+    flex-wrap: wrap;
+    align-items: start;
+  }
+  .s4-equipment-dialog {
+    padding: 20px;
+  }
+  .s4-equipment-form-grid {
+    grid-template-columns: 1fr;
+  }
+  .s4-workspace-cards {
+    grid-template-columns: 1fr;
+  }
+  .s4-equipment-summary strong {
+    font-size: 25px;
+  }
+}
