@@ -3,6 +3,7 @@ import { useState } from "react";
 import { SiteHeader, SiteFooter, NewHome } from "./experience";
 import WorkspacePage from "./workspace-page";
 import EquipmentList from "./equipment-list";
+import SolarBuilder from "./solar-builder";
 import InteractiveCalculatorsPage from "./calculators-page";
 import FieldGuide from "./field-guide";
 import PriceTracker from "./price-tracker";
@@ -160,7 +161,8 @@ export function SolarApp({
     ].includes(section)
   )
     content = <PriceTracker />;
-  if (section === "solar-part-picker") content = <EquipmentList />;
+  if (section === "solar-part-picker" || section === "build") content = <SolarBuilder />;
+  if (section === "equipment") content = <EquipmentList />;
   if (section === "guides") content = <FieldGuide />;
   if (section === "calculators") content = <InteractiveCalculatorsPage />;
   if (section === "planner") content = <DesignStudio />;

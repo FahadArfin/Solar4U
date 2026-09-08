@@ -5,6 +5,8 @@ const validSections = new Set([
   "catalog",
   "deals",
   "solar-part-picker",
+  "build",
+  "equipment",
   "recommendations",
   "guides",
   "calculators",

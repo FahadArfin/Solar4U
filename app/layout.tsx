@@ -9,6 +9,7 @@ import "./studio.css";
 import "./aerial.css";
 import "./calculators.css";
 import "./equipment.css";
+import "./builder.css";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });

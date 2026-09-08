@@ -228,7 +228,7 @@ export default function WorkspacePage() {
               ? "Saved " + new Date(summary.bom.updatedAt).toLocaleString()
               : "Start with a retailer offer or a part you still need to price."}
           </p>
-          <Link href="/solar-part-picker">
+          <Link href="/equipment">
             Open equipment list <ArrowUpRight size={16} />
           </Link>
         </section>
