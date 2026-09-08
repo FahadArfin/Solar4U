@@ -38,6 +38,7 @@ export const shoppingGroups = [
       ["disconnect", "PV disconnects"],
       ["transfer", "Transfer switches"],
       ["isolator", "Battery isolators"],
+      ["battery-switch", "Battery switches"],
       ["enclosure", "Boxes & enclosures"],
       ["unknown", "Other / unspecified"],
     ],
@@ -148,7 +149,17 @@ export function classifyOffer(offer) {
       ),
     panel = /\bsolar panels?\b|\bphotovoltaic\b|\bbifacial\b/.test(t);
   const controller = /\b(?:mppt|charge controller)\b/.test(t);
+  const principalTitle = name
+    .toLowerCase()
+    .split(/\b(?:with|including)\b|\bw\//)[0]
+    .replace(/\b\d+[- ]?busbars?\b/g, "");
+  const principalInverter =
+    inverter &&
+    !/\b(?:cables?|wires?|remotes?|remote control|adapters?|covers?|bags?)\b/.test(
+      principalTitle,
+    );
   const complete =
+    (principalInverter && /\+.{0,50}\b(?:transfer switch|ats)\b/.test(t)) ||
     /\bcomplete\b.{0,35}\bsolar (?:kit|system)\b|\bsolar power system\b/.test(
       t,
     ) ||
@@ -165,10 +176,44 @@ export function classifyOffer(offer) {
   const principalPanel =
     panel &&
     !/\b(?:mount|mounting|brackets?|rack|rails?|tile.hook|cable for|cables for|connector for|connectors for)\b/.test(
-      t,
+      principalTitle,
     ) &&
-    /solar panels?\b/.test(name.toLowerCase());
-  if (complete) {
+    !/\b(?:cables?|wires?|connectors?|adapters?|couplers?|splitters?|plugs?)\b/.test(
+      principalTitle,
+    ) &&
+    /solar panels?\b/.test(principalTitle);
+  if (
+    /^(?:\d+\s*[x×]\s*)?(?:control box only|parallel kit|hub|battery server rack|battery bracket for single battery)\s*$/i.test(
+      variant.trim(),
+    ) ||
+    (/\bbattery (?:monitor|temperature sensor|equalizer|lifting strap|brackets?|rack|cabinet|stand|trolley|cart|charger|accessor(?:y|ies))\b/.test(
+      principalTitle,
+    ) &&
+      !/\bbattery rack.?mount/.test(principalTitle)) ||
+    /\b(?:mount|mounting) (?:kit|brackets?)\b.{0,45}\bbattery\b/.test(
+      principalTitle,
+    ) ||
+    (battery &&
+      /\b(?:accessories|accessory|fire extinguisher|insect net)\b/.test(
+        principalTitle,
+      ))
+  ) {
+    group = "batteries";
+    subtype = "accessories";
+  } else if (
+    /^(?:upgraded\s+)?\d+\s*a\s*(?:pwm|mppt)\s*solar charge controller$/i.test(
+      variant.trim(),
+    )
+  ) {
+    group = "inverters";
+    subtype = "controller";
+  } else if (
+    battery &&
+    /\b(?:battery box|vertical box)\b/.test(principalTitle)
+  ) {
+    group = "batteries";
+    subtype = "enclosure";
+  } else if (complete) {
     group = "bundles";
     subtype = "system";
   } else if (
@@ -179,7 +224,10 @@ export function classifyOffer(offer) {
   ) {
     group = "bundles";
     subtype = "power-station";
-  } else if (inverter && /\binverter\b.{0,40}\b(?:with|w\/|built.in)/.test(t)) {
+  } else if (
+    principalInverter &&
+    /\binverter\b.{0,40}\b(?:with|w\/|built.in)/.test(t)
+  ) {
     group = "inverters";
     subtype = /hybrid/.test(t)
       ? "hybrid"
@@ -196,7 +244,7 @@ export function classifyOffer(offer) {
     group = "batteries";
     subtype = "enclosure";
   } else if (
-    /\b(?:glands?|combiner box|pv combiner|transfer switch|pv disconnect|solar disconnect|disconnect switch|electrical box|junction box|enclosure|battery isolator)\b/.test(
+    /\b(?:glands?|combiner box|pv combiner|transfer switch|pv disconnect|solar disconnect|disconnect switch|electrical box|junction box|enclosure|battery isolator|battery switch)\b/.test(
       t,
     )
   ) {
@@ -207,39 +255,44 @@ export function classifyOffer(offer) {
         ? /\bac\b/.test(t)
           ? "ac-combiner"
           : "combiner"
-        : /battery isolator/.test(t)
-          ? "isolator"
-          : /transfer switch/.test(t)
-            ? "transfer"
-            : /(?:pv|solar) disconnect|disconnect switch/.test(t)
-              ? "disconnect"
-              : /battery isolator/.test(t)
-                ? "isolator"
-                : "enclosure";
+        : /battery switch/.test(t)
+          ? "battery-switch"
+          : /battery isolator/.test(t)
+            ? "isolator"
+            : /transfer switch/.test(t)
+              ? "transfer"
+              : /(?:pv|solar) disconnect|disconnect switch/.test(t)
+                ? "disconnect"
+                : /battery isolator/.test(t)
+                  ? "isolator"
+                  : "enclosure";
   } else if (
-    /\b(?:cables?|wires?|fuses?|terminals?|lugs?|connectors?|mc4|busbars?|breaker)\b/.test(
+    /\b(?:cables?|wires?|fuses?|terminals?|lugs?|connectors?|mc4|bus[ -]?bars?|breaker)\b/.test(
       t,
     ) &&
     !principalPanel
   ) {
     group = "wiring";
-    subtype = /\b(?:dc|pv|battery|solar) (?:power )?cables?\b/.test(t)
-      ? "dc-cable"
-      : /\bac cables?\b/.test(t)
-        ? "ac-cable"
-        : /\bfuse/.test(t)
-          ? "fuses"
-          : /\bbreaker/.test(t)
-            ? "breakers"
-            : /\bterminal|\blug/.test(t)
-              ? "terminals"
-              : /\bconnector|\bmc4|\bbusbar/.test(t)
-                ? "connectors"
-                : /\bac\b|alternating current|\bextension cord/.test(t)
-                  ? "ac-cable"
-                  : /\bdc\b|\bpv\b|battery cable|solar cable/.test(t)
-                    ? "dc-cable"
-                    : "cable";
+    subtype =
+      /\b(?:dc|pv|battery|solar) (?:panel )?(?:power |extension )?cables?\b/.test(
+        t,
+      )
+        ? "dc-cable"
+        : /\bac cables?\b/.test(t)
+          ? "ac-cable"
+          : /\bfuse/.test(t)
+            ? "fuses"
+            : /\bbreaker/.test(t)
+              ? "breakers"
+              : /\bterminal|\blug/.test(t)
+                ? "terminals"
+                : /\bconnector|\bmc4|\bbus[ -]?bar/.test(t)
+                  ? "connectors"
+                  : /\bac\b|alternating current|\bextension cord/.test(t)
+                    ? "ac-cable"
+                    : /\bdc\b|\bpv\b|battery cable|solar cable/.test(t)
+                      ? "dc-cable"
+                      : "cable";
   } else if (
     /\b(?:ground mount|roof mount|mounting|racking|solar rack|top rack|tile.hooks?|rail.less|rail.base|z.brackets?|end clamps?|mid clamps?|solar rails?|mounting rails?|tilt mounts?)\b/.test(
       t,
@@ -261,7 +314,7 @@ export function classifyOffer(offer) {
   ) {
     group = "batteries";
     subtype = "accessories";
-  } else if (inverter) {
+  } else if (principalInverter) {
     group = "inverters";
     subtype = /\bhybrid\b/.test(t)
       ? "hybrid"
@@ -305,7 +358,7 @@ export function classifyOffer(offer) {
             ? "rigid"
             : "unknown";
   }
-  const condition = /\b(?:refurbished|refurb)\b/.test(t)
+  const condition = /\b(?:refurbished|refurb|recertified)\b/.test(t)
     ? "refurbished"
     : /\b(?:used|pre.?owned|second.?hand)\b/.test(t)
       ? "used"
@@ -388,9 +441,19 @@ export function classifyOffer(offer) {
     watts,
     powerW: group === "inverters" ? power : null,
     nominalVoltage:
-      group === "batteries" || group === "inverters" ? nominalVoltage : null,
-    energyKwh: group === "batteries" ? energyKwh : null,
-    capacityAh: group === "batteries" ? capacityAh : null,
+      (group === "batteries" &&
+        !["accessories", "enclosure"].includes(subtype)) ||
+      group === "inverters"
+        ? nominalVoltage
+        : null,
+    energyKwh:
+      group === "batteries" && !["accessories", "enclosure"].includes(subtype)
+        ? energyKwh
+        : null,
+    capacityAh:
+      group === "batteries" && !["accessories", "enclosure"].includes(subtype)
+        ? capacityAh
+        : null,
     packCount,
     voltageClass,
     condition,
