@@ -409,7 +409,7 @@ export default function PriceTracker({
             {v === "prices" ? "Browse equipment" : "Retailer coverage"}
           </button>
         ))}
-        <Link href="/solar-part-picker">My equipment list ↗</Link>
+        <Link href="/equipment">My equipment list ↗</Link>
         <span role="status">{saved}</span>
       </div>
       {error && (

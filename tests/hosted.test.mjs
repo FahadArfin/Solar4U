@@ -32,6 +32,8 @@ test("primary routes render without server failures", async () => {
     "/dashboard",
     "/diagnostics",
     "/solar-part-picker",
+    "/build",
+    "/equipment",
   ]) {
     const r = await render(path);
     assert.equal(r.status, 200, path);
