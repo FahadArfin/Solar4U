@@ -11,6 +11,7 @@ import "./calculators.css";
 import "./equipment.css";
 import "./builder.css";
 import "./builder-workbench.css";
+import "./component-offers.css";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
