@@ -2,6 +2,13 @@
 
 import Link from "next/link";
 
+import {
+  COMPONENT_LIBRARY_KEY,
+  emptyComponentLibrary,
+  validateComponentLibrary,
+  rememberComponent,
+} from "../lib/component-library";
+import ComponentOffers from "./component-offers";
 import BuilderWorkbench from "./builder-workbench";
 
 import { replaceBuildOffer } from "../lib/builder";
@@ -22,7 +29,6 @@ import {
   Search,
   ArrowUpRight,
   Scale,
-  Check,
   ClipboardList,
   ArrowLeft,
   ArrowRight,
@@ -47,7 +53,7 @@ import {
   type RetailOffer,
 } from "../lib/equipment";
 
-import { useDeviceDocument } from "../lib/device-store";
+import { useDeviceDocument, downloadFile } from "../lib/device-store";
 
 import { objectInput, useAgentTools } from "./webmcp";
 
@@ -168,6 +174,12 @@ export default function SolarBuilder() {
     [adding, setAdding] = useState(false),
     [shown, setShown] = useState(40);
 
+  const library = useDeviceDocument(
+    COMPONENT_LIBRARY_KEY,
+    emptyComponentLibrary,
+    validateComponentLibrary,
+  );
+  const [savedOnly, setSavedOnly] = useState(false);
   const [filtersOpen, setFiltersOpen] = useState(false);
   const header = useRef<HTMLHeadingElement>(null);
 
@@ -287,10 +299,20 @@ export default function SolarBuilder() {
     setTimeout(() => header.current?.focus(), 0);
   }
 
+  const catalogOffers = useMemo(
+    () =>
+      savedOnly
+        ? library.data.records.map((r) => ({
+            ...r.offer,
+            classification: classifyOffer(r.offer),
+          }))
+        : offers,
+    [savedOnly, library.data.records, offers],
+  );
   const filtered = useMemo(() => {
     const q = query.toLowerCase();
 
-    return offers
+    return catalogOffers
 
       .filter((o) => {
         const c = o.classification,
@@ -333,7 +355,7 @@ export default function SolarBuilder() {
                   (unitWatts(b) ? b.minorAmount / unitWatts(b)! : Infinity),
       );
   }, [
-    offers,
+    catalogOffers,
 
     group,
 
@@ -362,7 +384,11 @@ export default function SolarBuilder() {
     totals = equipmentTotals(store.data.items),
     comparison = compare
 
-      .map((id) => offers.find((o) => o.id === id))
+      .map(
+        (id) =>
+          offers.find((o) => o.id === id) ??
+          catalogOffers.find((o) => o.id === id),
+      )
 
       .filter((o): o is Choice => !!o),
     inBuild = new Set(
@@ -371,7 +397,7 @@ export default function SolarBuilder() {
 
   const retailers = [
     ...new Map(
-      offers
+      catalogOffers
 
         .filter((o) => o.classification.group === group)
 
@@ -645,7 +671,7 @@ export default function SolarBuilder() {
         return {
           group: o.group,
 
-          availableOffers: offers.filter(
+          availableOffers: catalogOffers.filter(
             (v) => v.classification.group === o.group,
           ).length,
         };
@@ -705,7 +731,7 @@ export default function SolarBuilder() {
 
       execute: async (input) => {
         const o = objectInput(input),
-          offer = offers.find((v) => v.id === o.offerId);
+          offer = catalogOffers.find((v) => v.id === o.offerId);
 
         if (
           !offer ||
@@ -852,9 +878,10 @@ export default function SolarBuilder() {
                   {g.name}
 
                   <small>
-                    {loaded
-                      ? offers.filter((o) => o.classification.group === g.id)
-                          .length
+                    {savedOnly || loaded
+                      ? catalogOffers.filter(
+                          (o) => o.classification.group === g.id,
+                        ).length
                       : "—"}
                   </small>
                 </button>
@@ -958,7 +985,12 @@ export default function SolarBuilder() {
                     value={currency}
                     onChange={(e) => setCurrency(e.target.value)}
                   >
-                    {[...new Set(["USD", ...offers.map((o) => o.currency)])]
+                    {[
+                      ...new Set([
+                        "USD",
+                        ...catalogOffers.map((o) => o.currency),
+                      ]),
+                    ]
 
                       .sort()
 
@@ -1108,171 +1140,97 @@ export default function SolarBuilder() {
                 differ in quantity, condition or included equipment.
               </p>
 
-              <div className="s4-shopping-offers">
-                {browseRows.map((o) => {
-                  const c = o.classification,
-                    skuPeers =
-                      o.sku.length >= 4
-                        ? offers.filter(
-                            (v) =>
-                              v.sku === o.sku &&
-                              v.retailerId !== o.retailerId &&
-                              v.classification.group === group &&
-                              v.currency === currency,
-                          ).length
-                        : 0;
-
-                  return (
-                    <article key={o.id} className="s4-shopping-offer">
-                      <label className="s4-compare-choice">
-                        <input
-                          type="checkbox"
-                          checked={compare.includes(o.id)}
-                          onChange={() => toggleCompare(o.id)}
-                          aria-label={`Compare ${o.name}, ${o.variant}, from ${o.retailer}`}
-                        />
-
-                        <span>Compare</span>
-                      </label>
-
-                      <div className="s4-shopping-offer-main">
-                        <div className="s4-kicker">
-                          {subName(c)} · {o.retailer}
-                        </div>
-
-                        <h3>
-                          <a href={o.url} target="_blank" rel="noreferrer">
-                            {o.name}
-
-                            <ArrowUpRight size={15} />
-                          </a>
-                        </h3>
-
-                        <p>
-                          {o.variant && o.variant !== "Default Title"
-                            ? o.variant
-                            : "Listed variant"}
-
-                          {o.sku ? ` · SKU ${o.sku}` : ""}
-                        </p>
-
-                        <div className="s4-shopping-specs">{specText(o)}</div>
-
-                        <small>{c.packageNote}</small>
-
-                        {skuPeers > 0 && (
-                          <button
-                            className="s4-sku-link"
-                            onClick={() => {
-                              resetFilters();
-
-                              setQuery(o.sku);
-
-                              setRetailer("all");
-
-                              setSubtype("all");
-                            }}
-                          >
-                            {skuPeers} other retailer offer
-                            {skuPeers === 1 ? "" : "s"} in this category and
-                            currency share this SKU · verify variant ↗
-                          </button>
-                        )}
-                      </div>
-
-                      <div className="s4-shopping-price">
-                        <strong>
-                          {formatMinor(o.minorAmount, o.currency)}
-                        </strong>
-
-                        <span>{o.currency} / listed variant</span>
-
-                        {unitWatts(o) !== null && (
-                          <small>
-                            {formatMinor(
-                              Math.round(o.minorAmount / unitWatts(o)!),
-
-                              o.currency,
-                            )}{" "}
-                            / stated W
-                          </small>
-                        )}
-
-                        <span
-                          className={o.available === true ? "s4-stock-in" : ""}
-                        >
-                          {stock(o.available)}
-                        </span>
-
-                        <small>
-                          Observed {new Date(o.observedAt).toLocaleDateString()}
-                        </small>
-
-                        <label>
-                          Purchase quantity
-                          <input
-                            type="number"
-                            aria-label={`Purchase quantity for ${o.name}, ${o.variant}, from ${o.retailer}`}
-                            min={1}
-                            max={10000}
-                            step={1}
-                            value={quantities[o.id] ?? "1"}
-                            onChange={(e) =>
-                              setQuantities({
-                                ...quantities,
-
-                                [o.id]: e.target.value,
-                              })
-                            }
-                          />
-                        </label>
-
-                        <button
-                          className="s4-add-component"
-                          aria-label={`${replacing ? "Replace with" : "Add"} ${o.name}, ${o.variant}, from ${o.retailer} to build`}
-                          disabled={
-                            adding || !store.ready || store.needsRecovery
-                          }
-                          onClick={() => void pickSelection(o)}
-                        >
-                          {inBuild.has(o.id) ? (
-                            <Check size={15} />
-                          ) : (
-                            <Plus size={15} />
-                          )}{" "}
-                          {replacing
-                            ? "Use this replacement"
-                            : inBuild.has(o.id)
-                              ? "Add another"
-                              : "Add to build"}
-                        </button>
-
-                        {Number.isInteger(Number(quantities[o.id] ?? 1)) &&
-                          Number(quantities[o.id] ?? 1) >= 1 &&
-                          Number(quantities[o.id] ?? 1) <= 10000 && (
-                            <small className="wb-offer-impact">
-                              {formatMinor(
-                                (totals[o.currency]?.minorAmount ?? 0) -
-                                  (replacing?.currency === o.currency
-                                    ? (replacing.unitMinorAmount ?? 0) *
-                                      replacing.quantity
-                                    : 0) +
-                                  o.minorAmount * Number(quantities[o.id] ?? 1),
-                                o.currency,
-                              )}{" "}
-                              {o.currency} build subtotal with this choice ·
-                              excludes unpriced parts
-                            </small>
-                          )}
-
-                        <a href={o.url} target="_blank" rel="noreferrer">
-                          Shop retailer ↗
-                        </a>
-                      </div>
-                    </article>
-                  );
-                })}
+              <div className="co-catalog-controls">
+                <button
+                  aria-pressed={!savedOnly}
+                  onClick={() => setSavedOnly(false)}
+                >
+                  Retailer catalog
+                </button>
+                <button
+                  aria-pressed={savedOnly}
+                  onClick={() => setSavedOnly(true)}
+                >
+                  Saved on this device ({library.data.records.length})
+                </button>
+                <button
+                  disabled={!library.ready}
+                  onClick={() =>
+                    downloadFile(
+                      "solar4u-product-catalog.json",
+                      JSON.stringify(library.data, null, 2),
+                    )
+                  }
+                >
+                  Export catalog
+                </button>
               </div>
+              <p className="co-note" role="status">
+                {savedOnly
+                  ? "Your saved product records and dated prices. Open a product to refresh its history."
+                  : "Opening a product saves its listing, specification clues and dated prices on this device."}{" "}
+                {library.status}
+              </p>
+              {library.error && (
+                <p role="alert" className="s4-banner">
+                  {library.error}
+                </p>
+              )}
+              <ComponentOffers
+                library={library.data}
+                libraryError={library.error}
+                remember={(o, points) =>
+                  library.commit((c) => rememberComponent(c, o, points))
+                }
+                forget={(o) =>
+                  library.commit((c) => ({
+                    ...c,
+                    records: c.records.filter(
+                      (r) =>
+                        !(
+                          r.offer.id === o.id && r.offer.currency === o.currency
+                        ),
+                    ),
+                  }))
+                }
+                rows={browseRows}
+                panelMode={group === "panels"}
+                compare={compare}
+                inBuild={inBuild}
+                quantities={quantities}
+                disabled={adding || !store.ready || store.needsRecovery}
+                replacing={!!replacing}
+                saveError={store.error}
+                setQuantity={(id, value) =>
+                  setQuantities((c) => ({ ...c, [id]: value }))
+                }
+                toggleCompare={toggleCompare}
+                add={pickSelection}
+                specText={specText}
+                subName={subName}
+                unitWatts={unitWatts}
+                impact={(o) => {
+                  const n = Number(quantities[o.id] ?? 1);
+                  return Number.isInteger(n) && n >= 1 && n <= 10000
+                    ? `${formatMinor((totals[o.currency]?.minorAmount ?? 0) - (replacing?.currency === o.currency ? (replacing.unitMinorAmount ?? 0) * replacing.quantity : 0) + o.minorAmount * n, o.currency)} ${o.currency}`
+                    : null;
+                }}
+                peers={(o) =>
+                  o.sku.length >= 4
+                    ? offers.filter(
+                        (v) =>
+                          v.sku === o.sku &&
+                          v.retailerId !== o.retailerId &&
+                          v.classification.group === group &&
+                          v.currency === currency,
+                      ).length
+                    : 0
+                }
+                findPeers={(o) => {
+                  resetFilters();
+                  setQuery(o.sku);
+                }}
+              />
 
               {!filtered.length && (
                 <div className="s4-shopping-empty">
